@@ -6,6 +6,12 @@
     <title>Ecotec - Energía limpia</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+      <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
 <body>
 
     <header>
@@ -117,6 +123,33 @@
             </article>
         </section>
     </footer>
+<button onclick="obtenerUbicacion()">Mostrar mi ubicación</button>
+  <div id="map"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoHI7ebF_B-vYDY5fItyhDCYbnalNR1Yw"></script>
+<script>
+  let map;
+
+  function initMap() {
+    // Coordenadas fijas
+    const ubicacion = new google.maps.LatLng(-34.756083, -58.208930);
+
+    const opciones = {
+      center: ubicacion,
+      zoom: 15
+    };
+
+    map = new google.maps.Map(document.getElementById('map'), opciones);
+
+    new google.maps.Marker({
+      position: ubicacion,
+      map: map,
+      title: "Ecotec - Buenos Aires"
+    });
+  }
+
+  // Cargar el mapa cuando la página esté lista
+  window.onload = initMap;
+</script>
 
 </body>
 </html>

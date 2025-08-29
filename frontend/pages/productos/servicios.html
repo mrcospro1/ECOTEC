@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecotec - Servicios</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    .hero {
+      height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      background: url('https://res.cloudinary.com/dkumwjgth/image/upload/v1756426127/paneles_uxeqag.png') center/cover no-repeat;
+      position: relative;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+    .card-servicio {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .card-servicio:hover {
+      transform: translateY(-5px);
+    }
+    .card-img-fixed {
+      width: 100%;
+      height: 220px; /* todas las imágenes del mismo tamaño */
+      object-fit: cover;
+    }
+    .call-to-action {
+      background: linear-gradient(to right, #004dff, #0080ff);
+      color: white;
+      border-radius: 12px;
+      padding: 40px 20px;
+      text-align: center;
+      margin: 40px 0;
+    }
+    footer {
+      background: #003c71;
+      color: white;
+      padding: 40px 0;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark px-3" style="background-color: #01579B;">
+  <a class="navbar-brand fw-bold" href="#">Ecotec <small class="text-warning">Alternativas</small></a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="menuNav">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item"><a class="nav-link" href="proyectos.html">Proyectos</a></li>
+      <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
+      <li class="nav-item"><a class="nav-link active" href="servicios.html">Servicios</a></li>
+      <li class="nav-item"><a class="nav-link" href="#historia">Nuestra Historia</a></li>
+    </ul>
+    <a href="#contacto" class="btn btn-light">Contactate</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1 class="display-5 fw-bold">Servicios</h1>
+    <p class="lead">Brindamos soluciones solares confiables y sostenibles</p>
+  </div>
+</section>
+
+<!-- Servicios -->
+<main class="container my-5">
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card-servicio bg-white">
+        <img src="https://res.cloudinary.com/dkumwjgth/image/upload/v1756424498/Rectangle_113_zayqyu.png" class="card-img-fixed" alt="Energía fotovoltaica">
+        <div class="p-3">
+          <h5 class="fw-bold text-primary">Energía fotovoltaica</h5>
+          <p>Diseño e instalación de sistemas solares de generación eléctrica.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card-servicio bg-white">
+        <img src="https://res.cloudinary.com/dkumwjgth/image/upload/v1755874057/Rectangle_17_nmucjx.png" class="card-img-fixed" alt="Energía convencional">
+        <div class="p-3">
+          <h5 class="fw-bold text-primary">Energía convencional</h5>
+          <p>Soluciones integrales para complementar tu sistema eléctrico.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card-servicio bg-white">
+        <img src="https://res.cloudinary.com/dkumwjgth/image/upload/v1756422274/Rectangle_64_p1ubq5.png" class="card-img-fixed" alt="Termotanques solares">
+        <div class="p-3">
+          <h5 class="fw-bold text-primary">Termotanques solares</h5>
+          <p>Agua caliente limpia y eficiente todo el año.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card-servicio bg-white">
+        <img src="https://res.cloudinary.com/dkumwjgth/image/upload/v1756424687/Rectangle_122_f18w30.png" class="card-img-fixed" alt="Climatización solar">
+        <div class="p-3">
+          <h5 class="fw-bold text-primary">Climatización solar</h5>
+          <p>Piscinas y espacios climatizados con energía renovable.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Call to Action -->
+  <div class="call-to-action">
+    <h4 class="fw-bold">Confía en Ecotec para hacer tu transición a la energía solar.</h4>
+    <a href="#contacto" class="btn btn-light btn-lg mt-3">Hace tu proyecto</a>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer id="contacto">
+  <div class="container">
+    <div class="row text-center text-md-start">
+      <div class="col-md-3 mb-3">
+        <h5>Redes Sociales</h5>
+        <p>
+          <a href="#"><i class="bi bi-facebook"></i> Facebook</a><br>
+          <a href="#"><i class="bi bi-linkedin"></i> LinkedIn</a><br>
+          <a href="#"><i class="bi bi-instagram"></i> Instagram</a><br>
+          <a href="#"><i class="bi bi-twitter"></i> Twitter</a>
+        </p>
+      </div>
+      <div class="col-md-3 mb-3">
+        <h5>Dirección</h5>
+        <p>AV. MITRE 1007 CP: 1880 Berazategui</p>
+      </div>
+      <div class="col-md-3 mb-3">
+        <h5>Horarios</h5>
+        <p>Lunes a viernes: 10:00 a 18:00<br>Sábados: 9:00 a 13:00</p>
+      </div>
+      <div class="col-md-3 mb-3">
+        <h5>Datos de contacto</h5>
+        <p>
+          correo electrónico: <a href="mailto:ecotecalternativa@gmail.com">ecotecalternativa@gmail.com</a><br>
+          WhatsApp: <a href="https://wa.me/5491122334455" target="_blank">+54 9 11 2233 4455</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

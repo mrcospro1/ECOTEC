@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
+:root {
+    --color-header-footer: #01579B;
+    --color-ecotec: #1F193D;
+    --color-alternativas: #F0BC00;
+    --color-card-background: #ffffff;
+    --color-cta-start: #1F193D;
+    --color-cta-end: #003CFF;
+    --color-btn-start: #00B0FF;
+    --color-btn-end: #006A99;
+    --color-text-dark: #333;
+    --color-text-muted: #6c757d;
+}
+
+/* Base */
+body {
+    font-family: Montserrat, arial;
+}
+
+/* Header */
+header {
+    background-color: var(--color-header-footer);
+}
+
+.navbar-brand .logo-ecotec {
+    color: var(--color-ecotec);
+    font-weight: bold;
+}
+
+.logo-alternativos {
+    color:var(--color-alternativas);
+}
+
+.nav-link {
+    color: white;
+}
+
+.btn-contactate, .btn-contactanos {
+    background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end) 100%);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: transform 0.2s ease;
+}
+
+.btn-contactate:hover, .btn-contactanos:hover {
+    transform: scale(1.05);
+}
+
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/fondo-panel.jpg') no-repeat center center;
+    background-size: cover;
+    height: 70vh;
+    padding-top: 56px; /* Asegura que el contenido no quede debajo del header fijo */
+}
+
+.icon img {
+    height: 50px;
+    width: 50px;
+}
+
+/* Features Section */
+.feature-card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.col-12 img {
+    height: 400px;
+    width: 800px;
+    object-fit: cover;
+}
+
+/* Cards Section */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card:hover {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn-card {
+    background-color: #00B0FF;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-card:hover {
+    background-color: #008fcc;
+    transform: scale(1.05);
+}
+
+/* Partners Section */
+.partner-logo {
+    background-color: #e9ecef;
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    background-color: var(--color-header-footer);
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: var(--color-alternativas);
+}

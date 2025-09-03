@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecotec - Nuestra Historia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="frontend/index/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        :root {
+            --ecotec-blue: #0A3C6B;
+            --ecotec-light-blue: #007bff;
+            --ecotec-bg-light: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: var(--ecotec-blue) !important;
+        }
+
+        .navbar-brand .logo-ecotec,
+        .navbar-brand .logo-alternativos,
+        .nav-link,
+        .btn-contactate {
+            color: white !important;
+        }
+        
+        .navbar-brand .logo-alternativos {
+            font-weight: bold;
+        }
+
+        .btn-contactate {
+            background-color: var(--ecotec-blue);
+            border: 1px solid white;
+            border-radius: 20px;
+            padding: 8px 20px;
+        }
+        
+        .nav-link.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .main-content {
+            padding: 4rem 0;
+            background-color: var(--ecotec-bg-light);
+            color: #343a40;
+        }
+        
+        .main-content h1 {
+            color: var(--ecotec-blue);
+            font-weight: bold;
+            font-size: 2.5rem;
+        }
+
+        .mission-vision-section {
+            padding: 3rem 0;
+        }
+        
+        .mission-vision-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 2rem;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mission-vision-card h3 {
+            color: var(--ecotec-blue);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .footer {
+            background-color: var(--ecotec-blue) !important;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<header class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+            <span class="logo-ecotec">Ecotec</span>
+            <span class="logo-alternativos">Alternativos</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                <li class="nav-item"><a class="nav-link" href="frontend/proyectos/proyectos.html">Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" href="frontend/productos.html">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="frontend/pages/servicios.html">Servicios</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Nuestra Historia</a></li>
+            </ul>
+            <div class="d-flex ms-lg-3">
+                <a href="#" class="btn btn-contactate">Contactate</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="main-content text-center">
+        <div class="container">
+            <h1 class="mb-4">Nuestra historia</h1>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <p class="lead">Ecotec Alternativas es una cooperativa fundada en 2012 por estudiantes, docentes y egresados de la Escuela Técnica N.º 2 de Berazategui, con formación en energías alternativas. Nació de experiencias educativas y trabajos conjuntos con el municipio, instalando sistemas solares en espacios públicos.</p>
+                    <p class="lead">Nos especializamos en la instalación y mantenimiento de sistemas de energía solar fotovoltaica y térmica, termotanques solares, calentadores de piscinas e instalaciones eléctricas. Entre 2017 y 2022 fuimos proveedores del Consejo Escolar de Berazategui, además de atender a organismos y particulares.</p>
+                    <p class="lead">Con el tiempo, ampliamos nuestros servicios a albañilería, plomería y mampostería para ofrecer soluciones integrales. También desarrollamos equipos y prototipos propios en colaboración con instituciones, y comercializamos productos solares al público y como distribuidores.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="row align-items-center g-4">
+            <div class="col-md-6 text-center">
+                <img src="https://via.placeholder.com/500x300?text=Foto+del+equipo" class="img-fluid rounded" alt="Foto del equipo">
+                <h5 class="mt-3">Fundación: 2012</h5>
+            </div>
+            <div class="col-md-6 d-flex flex-column align-items-center">
+                <div class="mb-3">
+                    <img src="https://via.placeholder.com/500x200?text=Paneles+solares+en+un+techo" class="img-fluid rounded" alt="Paneles solares">
+                </div>
+                <div>
+                    <img src="https://via.placeholder.com/500x200?text=Logo+Ecotec+Alternativas" class="img-fluid rounded" alt="Logo Ecotec Alternativas">
+                </div>
+                <div class="mt-3 text-center">
+                    <p>Actualmente contamos con local a la calle y un equipo de profesionales atendiendo y asesorando.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission-vision-section container">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="mission-vision-card">
+                    <h3 class="d-flex align-items-center justify-content-center mb-3">
+                        <i class="fa-solid fa-seedling me-2"></i> Misión
+                    </h3>
+                    <p>Fomentar el uso de energías limpias.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mission-vision-card">
+                    <h3 class="d-flex align-items-center justify-content-center mb-3">
+                        <i class="fa-solid fa-eye me-2"></i> Visión
+                    </h3>
+                    <p>Ser referentes en soluciones solares en la región.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer text-white py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-3">
+                <h5>Redes Sociales</h5>
+                <div class="d-flex">
+                    <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h5>Dirección</h5>
+                <p>P.V. MITRE 1007 CP: 1880 Berazategui</p>
+            </div>
+            <div class="col-md-3">
+                <h5>Horarios</h5>
+                <p>Lunes a Viernes<br>10:00hs a 18:00hs</p>
+                <p>Sábados<br>10:00hs a 13:00hs</p>
+            </div>
+            <div class="col-md-3">
+                <h5>Datos de contacto</h5>
+                <p>correo electrónico:<br>ecotec.alternativos@gmail.com</p>
+                <p>whatsapp:<br>ecotec.alternativos@gmail.com</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

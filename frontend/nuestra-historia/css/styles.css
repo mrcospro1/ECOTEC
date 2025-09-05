@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+:root {
+    --color-header-footer: #01579B;
+    --color-ecotec: #1F193D;
+    --color-alternativas: #F0BC00;
+    --color-btn-start: #00B0FF;
+    --color-btn-end: #006A99;
+    --color-cta-end: #003CFF;
+}
+
+body {
+    font-family: K2D;
+}
+
+.text-ptsans {
+    font-family: PT Sans;
+}
+.g-5 .text-ptsans{
+    font-size: 20px;
+}
+/* Header */
+header {
+    background-color: var(--color-header-footer);
+}
+
+.navbar-brand .logo-ecotec {
+    color: var(--color-ecotec);
+    font-weight: bold;
+}
+
+.logo-alternativas {
+    color: var(--color-alternativas);
+}
+
+.nav-link {
+    color: white;
+}
+
+.btn-contactate, .btn-contactanos {
+    background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end) 100%);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: transform 0.2s ease;
+}
+
+.btn-contactate:hover, .btn-contactanos:hover {
+    transform: scale(1.05);
+}
+/* Main */
+.text-secondary {
+    color: var(--color-header-footer);
+}
+
+.margin{
+    margin-right: 30px;
+}
+
+
+.card {
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.text-local {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #006A99;
+}
+
+.fw-bold text{
+    font-size:5px;
+    color: #003CFF;
+} 
+
+
+
+.card .icon img{
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+.card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* Footer */
+footer {
+    background-color: var(--color-header-footer);
+}
+
+footer a {
+    text-decoration: none;
+}
+
+

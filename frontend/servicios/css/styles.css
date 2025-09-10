@@ -58,7 +58,7 @@ header {
 /* main */
 
 .hero-section-servicios {
-    background-image: url('../frontend/servicios/img/hero-fondo.jpg');
+    background-image: url(../frontend/servicios/img/hero-fondo.jpg);
     background-size: cover;
     background-position: center;
     height: 400px;
@@ -157,6 +157,7 @@ footer {
 footer a {
     text-decoration: none;
 }
+
 
 
 

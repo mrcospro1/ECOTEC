@@ -54,14 +54,17 @@ header {
     transform: scale(1.05);
 }
 
-
-/* main */
-
 .hero-section-servicios {
     background-image: url('frontend/servicios/img/hero-fondo.jpg');
     background-size: cover;
     background-position: center;
-    padding: 150px 0;
+    height: 400px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     position: relative;
 }
 
@@ -151,6 +154,7 @@ footer {
 footer a {
     text-decoration: none;
 }
+
 
 
 

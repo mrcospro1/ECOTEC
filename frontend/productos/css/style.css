@@ -132,6 +132,14 @@ header {
 .footer a {
   font-size: 0.95rem;
 }
+.social-link {
+  transition: transform 0.3s ease, color 0.3s ease;}
+}
+
+.social-link:hover {
+  transform: scale(1.2);
+  color: #66ccff !important;
+}
 
 /* Botón contacto */
 .footer .btn-info {
@@ -152,4 +160,5 @@ header {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
 

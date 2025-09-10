@@ -55,7 +55,7 @@ header {
 }
 
 .hero-section-servicios {
-    background-image: url('servicios/img/servicio fotovoltaico.jpg');
+    background-image: url('frontend/servicios/img/servicio fotovoltaico.jpg');
     background-size: cover;
     background-position: center;
     height: 400px;
@@ -66,16 +66,6 @@ header {
     align-items: center;
     text-align: center;
     position: relative;
-}
-
-.hero-section-servicios::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Capa oscura para mejorar la legibilidad */
 }
 
 .hero-content {
@@ -154,6 +144,7 @@ footer {
 footer a {
     text-decoration: none;
 }
+
 
 
 

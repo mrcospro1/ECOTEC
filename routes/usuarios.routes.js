@@ -28,8 +28,6 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   res.json({ mensaje: `Esta es la ruta DELETE de mi entidad usuarios con el ID ${req.params.id}` });
 });
-router.create("/registrarse", (req, res) =>){
 
-}
 
 module.exports = router;

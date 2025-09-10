@@ -1,17 +1,21 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
+
 const app = express();
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
-
+app.use(cors());
 app.use(express.json());
-const usuariosRoutes = require('./routes/usuarios.routes')(prisma);
-const productosRoutes = require('./routes/productos.routes')(prisma);
-app.get('/', (req, res) => {
-  res.json({ mensaje: "Bienvenido a mi API 🚀. Probá /usuarios o /productos" });
-});
-app.use('/usuarios', usuariosRoutes);
-app.use('/productos', productosRoutes);
 
-app.listen(3000, () => {
-  console.log("Servidor corriendo en http://localhost:3000");
+// Importar rutas
+const usuariosRoutes = require("./routes/usuarios.routes");
+app.use("/usuarios", usuariosRoutes);
+
+// Ruta raíz
+app.get("/", (req, res) => {
+  res.json({ mensaje: "Servidor funcionando" });
+});
+
+// Levantar servidor
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

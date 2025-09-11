@@ -11,37 +11,52 @@
     <link rel="stylesheet" href="proyectos.css">
 </head>
 <body>
+    <header>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand fw-bold logo-empresa" href="../../index.html">
+                <span class="logo-ecotec">Ecotec</span>
+                <span class="logo-alternativas">Alternativas</span>
+            </a>
+      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="proyectos.html">Proyectos</a>
+          </li>
+            
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="frontend/productos/productos.html">Productos</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../termotanques solares(productos)/termotanque solar.html">Termotanques solares</a></li>
+              <li><a class="dropdown-item" href="../luminarias solares(productos)/luminarias solares.html">Luminarias solares</a></li>
+            </ul>
+          </li>
 
-   <header class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="../../index.html">
-      <span class="logo-ecotec">Ecotec</span>
-      <span class="logo-alternativos">Alternativos</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="../proyectos/proyectos.html">Proyectos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../productos/productos.html">Productos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../servicios/servicios.html">Servicios</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../nuestra-historia/Nuestra historia.html">Nuestra Historia</a>
-        </li>
-      </ul>
-      <div class="d-flex">
-        <button class="btn btn-contactate">Contactate</button>
+          <!-- Servicios -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="frontend/servicios/servicios.html" role="button">Servicios</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../Energia fotovoltaica/energia fotovoltaica.html">Energía fotovoltaica</a></li>
+              <li><a class="dropdown-item" href="../energia convencional/energia convencional.html">Energía convencional</a></li>
+              <li><a class="dropdown-item" href="#">Termotanques solares</a></li>
+              <li><a class="dropdown-item" href="#">Climatización solar</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="frontend/nuestra-historia/Nuestra historia.html">Nuestra Historia</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-cta ms-2" href="#">Contactate</a>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
+  </nav>
 </header>
     <main>
          <section class="hero-section text-center text-white">
@@ -189,6 +204,7 @@
 </body>
 
 </html>
+
 
 
 

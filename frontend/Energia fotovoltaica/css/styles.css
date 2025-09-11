@@ -125,8 +125,7 @@ header {
   font-weight: 600;
 }
 
-.footer p,
-.footer a {
+.footer p{
   font-size: 0.95rem;
 }
 
@@ -159,3 +158,4 @@ header {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+

@@ -20,36 +20,88 @@ body {
 }
 
 /* Header */
-header {
-    background-color: var(--color-header-footer);
-}
-
-.navbar-brand .logo-ecotec {
+.logo-ecotec{
     color: var(--color-ecotec);
-    font-weight: bold;
+    font-size: 20px;
 }
 
-.logo-alternativas {
+.logo-empresa {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.logo-empresa:hover {
+  opacity: 0.7;
+}
+
+.logo-alternativas{
     color: var(--color-alternativas);
+    font-size: 20px;
 }
 
-.nav-link {
-    color: white;
+.navbar {
+    background-color: #01579B;
 }
 
-.btn-contactate, .btn-contactanos {
-    background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end) 100%);
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 5px;
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: transform 0.2s ease;
+.navbar .nav-link,
+.navbar-brand {
+  color: #fff ;
 }
 
-.btn-contactate:hover, .btn-contactanos:hover {
-    transform: scale(1.05);
+.navbar .nav-link:hover {
+  text-decoration: none;
+  color: #1F193D;
+}
+
+.alt-text {
+  color: var(--color-alternativas);
+}
+
+.logo-ecotec span{
+    color: var(--color-ecotec);
+}
+
+
+.navbar .dropdown-menu {
+  border-radius: 0.5rem;
+  transition: 0.2s ease;;
+}
+
+
+.navbar .btn-cta {
+  background: linear-gradient(90deg, #0288D1, #03A9F4);
+  color: #fff;
+  border-radius: 20px;
+  padding: 6px 16px;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.navbar .btn-cta:hover {
+   background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end));
+   transform: scale(1.05);
+}
+
+.dropdown-item:hover{
+  background-color: #003CFF;
+  color: #ffffff;
+}
+
+.navbar .dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+.navbar .dropdown-menu {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navbar .dropdown:hover > .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /*
@@ -158,4 +210,5 @@ header {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
 

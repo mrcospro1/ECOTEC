@@ -2,22 +2,35 @@ const express = require('express');
 const router = express.Router();
 
 
-router.post('/registro', async (req, res) => {
+router.post('/register', async (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).json({ mensaje: 'Faltan datos' });
   }
-
   const hash = await bcrypt.hash(password, 10);
 
-  db.run(
-    `INSERT INTO usuarios (username, password) VALUES (?, ?)`,
-    [username, hash],
-    function(err) {
-      if (err) return res.status(500).json({ mensaje: 'Usuario ya existe' });
-      res.json({ mensaje: 'Usuario registrado', id: this.lastID });
-    }
-  );
+const nuevoUsuario = await prisma.User.create({
+  data: {
+    username,
+    password: hash
+  }
+});
+});
+router.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) return res.status(400).json({ mensaje: 'Faltan datos' });
+  try {
+    const usuario = await prisma.usuario.findUnique({ where: { username } });
+    if (!usuario) return res.status(400).json({ mensaje: 'Usuario no encontrado' });
+
+    const validPassword = await bcrypt.compare(password, usuario.password);
+    if (!validPassword) return res.status(400).json({ mensaje: 'Contraseña incorrecta' });
+
+    res.json({ mensaje: 'Login exitoso', usuario });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensaje: 'Error en login' });
+  }
 });
 
 router.get('/', (req, res) => {

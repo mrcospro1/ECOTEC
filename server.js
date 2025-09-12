@@ -8,6 +8,8 @@ app.use(express.json());
 // Importar rutas
 const usuariosRoutes = require("./routes/usuarios.routes");
 app.use("/usuarios", usuariosRoutes);
+const consultaRoutes=require("./routes/consulta.routes")
+app.use("/consulta", consultaRoutes);
 
 // Ruta raíz
 app.get("/", (req, res) => {

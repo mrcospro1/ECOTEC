@@ -1,0 +1,335 @@
+@import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+    --color-header-footer: #01579B;
+    --color-ecotec: #1F193D;
+    --color-alternativas: #F0BC00;
+    --color-card-background: #ffffff;
+    --color-cta-start: #1F193D;
+    --color-cta-end: #003CFF;
+    --color-btn-start: #00B0FF;
+    --color-btn-end: #006A99;
+    --color-text-dark: #333;
+    --color-text-muted: #6c757d;
+}
+
+body {
+    font-family: K2D, arial;
+}
+.text-ptsans{
+    font-family: PT Sans;
+}
+
+/* Header */
+.logo-ecotec{
+    color: var(--color-ecotec);
+    font-size: 20px;
+}
+
+.logo-empresa {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.logo-empresa:hover {
+  opacity: 0.7;
+}
+
+.logo-alternativas{
+    color: var(--color-alternativas);
+    font-size: 20px;
+}
+
+.navbar {
+    background-color: #01579B;
+}
+
+.navbar .nav-link,
+.navbar-brand {
+  color: #fff ;
+}
+
+.navbar .nav-link:hover {
+  text-decoration: none;
+  color: #1F193D;
+}
+
+.alt-text {
+  color: var(--color-alternativas);
+}
+
+.logo-ecotec span{
+    color: var(--color-ecotec);
+}
+
+
+.navbar .dropdown-menu {
+  border-radius: 0.5rem;
+  transition: 0.2s ease;;
+}
+
+
+.navbar .btn-cta {
+  background: linear-gradient(90deg, #0288D1, #03A9F4);
+  color: #fff;
+  border-radius: 20px;
+  padding: 6px 16px;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.navbar .btn-cta:hover {
+   background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end));
+   transform: scale(1.05);
+}
+
+.dropdown-item:hover{
+  background-color: #003CFF;
+  color: #ffffff;
+}
+
+.navbar .dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+.navbar .dropdown-menu {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navbar .dropdown:hover > .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero{
+  position: relative;
+  background: url("../img/climatizacion.jpg") center/cover no-repeat;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* main */
+.titulo {
+  font-weight: bold;
+  font-size: 33px;
+  text-align: center;
+  color: #00628E; /* Azul similar al de la imagen */
+}
+
+.descripcion {
+  font-size: 22px;
+  color: #333;
+  text-align: justify;
+}
+
+.img-custom {
+  width: 540px;
+  height: 400px;
+  object-fit:cover;
+  border-radius: 10px;
+}
+
+
+
+.section-title {
+  color: #009fe3;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.info-text {
+  text-align: justify;
+  color: #444;
+  margin-bottom: 2rem;
+}
+
+.image-container {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.sub-title {
+  color: #009fe3;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.usage-images img {
+  max-width: 100%;
+  height: auto;
+}
+
+.image-explicacion{
+    display: flex;
+    justify-content: center;
+}
+
+.image-explicacion{
+    height: 200px;
+    width: 300px;
+}
+.img-fluid img{
+    height: 500px;
+    width: 500px;
+}
+
+.img-content{
+    display: flex;
+    justify-content: center;
+}
+
+.img-content img{
+    height: 200px;
+}
+
+/* servicios */
+.display-4 {
+    font-family: K2D;
+    font-weight: bold;
+}
+.title-pagina{
+    color: var(--color-btn-start);
+}
+
+.icono img{
+    height: 60px;
+    width: 60px;
+}
+
+.card-sistemas:hover{
+    transform: translateY(-10px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.img-contenido{
+    height: 400px;
+    width: 660px;
+}
+
+.text-armado{
+    font-size: 38px;
+    font-weight: bold;
+    font-family: PT sans;
+    color: var(--color-btn-end);
+}
+
+.service-item {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+}
+
+.cta-section {
+    background: linear-gradient(to right, var(--color-cta-start) 0%, var(--color-cta-end) 100%);
+    padding: 60px 0;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* CTA */
+.cta-section {
+  background: linear-gradient(90deg, var(--color-cta-start), var(--color-cta-end));
+  color: #fff;
+  padding: 3rem 1rem;
+}
+
+.cta-section .btn-cta{
+  background: linear-gradient(to right, var(--color-btn-start), var(--color-btn-end));
+  border: none;
+  border-radius: 30px;
+  padding: 12px 30px;
+  color: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.btn-cta button{
+  background: linear-gradient(90deg, #0288D1, #03A9F4);
+  color: #fff;
+  border-radius: 20px;
+  padding: 6px 16px;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.btn-cta button:hover {
+  background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end));
+  transform: scale(1.05);
+}
+
+
+.cta-section .btn-cta:hover {
+  transform: scale(1.05);
+}
+
+
+/* Footer personalizado */
+.footer h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.footer p{
+  font-size: 0.95rem;
+}
+
+.social-link {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-link:hover {
+  transform: scale(1.2);
+  color: #66ccff !important;
+}
+
+/* Botón contacto */
+.footer .btn-info {
+  border-radius: 12px;
+  padding: 8px 16px;
+  transition: background 0.3s ease;
+}
+.icon-footer img{
+    height: 30px;
+    width: 30px;
+}
+
+.footer .btn-info:hover {
+  background-color: #0d6efd;
+}
+
+/* Línea legal */
+.footer .border-top {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+

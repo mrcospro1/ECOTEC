@@ -12,10 +12,9 @@ router.post('/registro', async (req, res) => {
   }
 
   try {
-    // Hashear contraseña
+
     const hash = await bcrypt.hash(password, 10);
 
-    // Insertar en DB con Prisma
     const usuario = await prisma.User.create({
       data: {
         username,
@@ -50,14 +49,15 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ mensaje: 'Error en login' });
   }
 });
+
 router.post("/importar-excel", async (req, res) => {
+
   try {
-    // Leer archivo Excel (guardado en la raíz del proyecto)
+    
     const workbook = XLSX.readFile("datos.xlsx");
     const hoja = workbook.Sheets[workbook.SheetNames[0]];
     const datos = XLSX.utils.sheet_to_json(hoja);
 
-    // Insertar en la base (ejemplo: tabla usuarios con campos nombre, edad)
     for (let d of datos) {
       await prisma.usuarios.create({
         data: {

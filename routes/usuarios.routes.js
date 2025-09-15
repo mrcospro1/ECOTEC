@@ -1,23 +1,77 @@
 const express = require('express');
 const router = express.Router();
-
+const bcrypt = require('bcrypt');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 router.post('/registro', async (req, res) => {
   const { username, password } = req.body;
+
   if (!username || !password) {
     return res.status(400).json({ mensaje: 'Faltan datos' });
   }
 
-  const hash = await bcrypt.hash(password, 10);
+  try {
+    // Hashear contraseña
+    const hash = await bcrypt.hash(password, 10);
 
-  db.run(
-    `INSERT INTO usuarios (username, password) VALUES (?, ?)`,
-    [username, hash],
-    function(err) {
-      if (err) return res.status(500).json({ mensaje: 'Usuario ya existe' });
-      res.json({ mensaje: 'Usuario registrado', id: this.lastID });
+    // Insertar en DB con Prisma
+    const usuario = await prisma.User.create({
+      data: {
+        username,
+        password: hash,
+      },
+    });
+
+    res.json({ mensaje: 'Usuario registrado', usuario });
+  } catch (err) {
+    if (err.code === 'P2002') {
+      res.status(400).json({ mensaje: 'El usuario ya existe' });
+    } else {
+      console.error(err);
+      res.status(500).json({ mensaje: 'Error al registrar usuario' });
     }
-  );
+  }
+});
+router.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) return res.status(400).json({ mensaje: 'Faltan datos' });
+
+  try {
+    const usuario = await prisma.User.findUnique({ where: { username } });
+    if (!usuario) return res.status(400).json({ mensaje: 'Usuario no encontrado' });
+
+    const validPassword = await bcrypt.compare(password, usuario.password);
+    if (!validPassword) return res.status(400).json({ mensaje: 'Contraseña incorrecta' });
+
+    res.json({ mensaje: 'Login exitoso', usuario });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensaje: 'Error en login' });
+  }
+});
+router.post("/importar-excel", async (req, res) => {
+  try {
+    // Leer archivo Excel (guardado en la raíz del proyecto)
+    const workbook = XLSX.readFile("datos.xlsx");
+    const hoja = workbook.Sheets[workbook.SheetNames[0]];
+    const datos = XLSX.utils.sheet_to_json(hoja);
+
+    // Insertar en la base (ejemplo: tabla usuarios con campos nombre, edad)
+    for (let d of datos) {
+      await prisma.usuarios.create({
+        data: {
+          nombre: d.nombre,
+          edad: d.edad,
+        },
+      });
+    }
+
+    res.json({ mensaje: "Datos importados con éxito", registros: datos.length });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error al importar el Excel" });
+  }
 });
 
 router.get('/', (req, res) => {

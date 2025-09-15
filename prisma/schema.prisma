@@ -6,9 +6,14 @@ datasource db {
   provider = "sqlite"
   url      = "file:./dev.db"
 }
-
 model User {
   id       Int     @id @default(autoincrement())
-  username String
+  username String @unique
   password String
+}
+model Consulta {
+  id     Int      @id @default(autoincrement()) 
+  asunto String
+  mail   String
+  fecha  DateTime @default(now())               
 }

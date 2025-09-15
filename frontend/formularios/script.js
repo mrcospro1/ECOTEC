@@ -1,6 +1,6 @@
 document.getElementById("registroConsulta").addEventListener("submit", async (e) => {
       e.preventDefault();
-      
+
       const data = {
         asunto: document.getElementById("asunto").value,
         mail: document.getElementById("mail").value,
@@ -14,4 +14,5 @@ document.getElementById("registroConsulta").addEventListener("submit", async (e)
       const result = await res.json();
       console.log(result);
       alert(result.mensaje || "Registro completado");
+      
     });

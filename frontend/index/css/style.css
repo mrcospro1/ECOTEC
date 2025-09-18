@@ -172,13 +172,45 @@ body {
     transform: scale(1.05);
 }
 
-/* Partners Section */
-.partner-logo {
-    background-color: #e9ecef;
-    padding: 30px;
-    border-radius: 10px;
-    border: 2px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.logo-slider {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 220px; /* Alto fijo */
+  display: flex;
+  align-items: center;
+}
+
+/* Carril de logos */
+.logo-track {
+  display: flex;
+  gap: 40px; /* espacio entre logos */
+  animation: scroll 70s linear infinite; /* velocidad del scroll */
+  width: max-content; /* que se ajuste al contenido */
+}
+
+/* Estilo de cada logo */
+.logo-track img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;   /* mantiene proporción */
+  background: #fff;     /* fondo blanco (opcional para PNGs transparentes) */
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.logo-track img.logo-blanco {
+  background: #222;   /* fondo oscuro */
+  padding: 15px;      /* un poco más de espacio */
+  border-radius: 8px;
+}
+
+
+/* Animación del movimiento */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 /* Footer personalizado */
 .footer h5 {
@@ -217,6 +249,7 @@ body {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
 
 
 

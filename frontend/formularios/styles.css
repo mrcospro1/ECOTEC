@@ -14,14 +14,15 @@
 }
 
 /* ESTILOS DEL CUERPO Y FUENTES */
-body{
+body {
   font-family: K2D;
 }
 
 .text-ptsans {
   font-family: PT Sans;
 }
-/* NUEVOS ESTILOS DEL HEADER */
+
+/* ESTILOS DEL HEADER */
 .logo-ecotec {
   color: var(--color-ecotec);
   font-size: 20px;
@@ -103,30 +104,35 @@ body{
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ESTILOS DEL FORMULARIO */
 main {
-  background: #020024;
-  background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 32%, rgba(0, 212, 255, 1) 100%); /* Color de fondo claro para el cuerpo */
+  background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 32%, rgba(0, 212, 255, 1) 100%);
 }
 
-/* ESTILOS DEL FORMULARIO ORIGINAL */
 .custom-card {
   max-width: 800px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   border-radius: 2rem;
+  box-shadow: 6px 5px 19px -7px rgba(0,0,0,0.76);
+  -webkit-box-shadow: 6px 5px 19px -7px rgba(0,0,0,0.76);
+  -moz-box-shadow: 6px 5px 19px -7px rgba(0,0,0,0.76);
 }
 
+.icon img {
+  height: 50px;
+  width: 50px;
+}
+
+
 .custom-bg-left {
-  background: #0000b8;
-background: linear-gradient(180deg, rgba(0, 0, 184, 1) 31%, rgba(0, 212, 255, 1) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 184, 1) 31%, rgba(0, 212, 255, 1) 100%);
   border-top-left-radius: 1.8rem;
   border-bottom-left-radius: 1.8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.custom-heading {
-  color: #00B0FF;
-  font-weight: 500;
 }
 
 .custom-input,
@@ -150,26 +156,32 @@ background: linear-gradient(180deg, rgba(0, 0, 184, 1) 31%, rgba(0, 212, 255, 1)
   border: none;
   font-weight: 600;
   padding: 0.75rem 1.5rem;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.text-dark-50 {
-  color: #6c757d !important;
+.custom-btn:hover{
+  transform: scale(1.05);
+    color: #1F193D;
 }
 
-.title-consulta{
-    color: #00a2ff;
-    font-size: 35px;
-    font-weight: 500;
-    margin-top: 110px;
+.title-consulta {
+  color: #00A1FF;
+  font-size: 35px;
+  font-weight: 500;
+  margin-top: 110px;
+}
+.title-formulario{
+    color: #1F193D;
 }
 
-.text-consulta{
-    color: #fff;
-    font-size: 18px;
+.text-consulta {
+  color: #fff;
+  font-size: 18px;
 }
-.text-consulta-subtitle{
-    color: #fff;
-    font-size: 13px;
+
+.text-consulta-subtitle {
+  color: #fff;
+  font-size: 13px;
 }
 
 /* MEDIA QUERY PARA EL FORMULARIO */
@@ -178,4 +190,3 @@ background: linear-gradient(180deg, rgba(0, 0, 184, 1) 31%, rgba(0, 212, 255, 1)
     border-radius: 1rem;
   }
 }
-

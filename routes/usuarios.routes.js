@@ -10,22 +10,6 @@ router.post('/register', async (req, res) => {
   if (!username || !password) {
     return res.status(400).json({ mensaje: 'Faltan datos' });
   }
-<<<<<<< HEAD
-  const hash = await bcrypt.hash(password, 10);
-
-const nuevoUsuario = await prisma.User.create({
-  data: {
-    username,
-    password: hash
-  }
-});
-});
-router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password) return res.status(400).json({ mensaje: 'Faltan datos' });
-  try {
-    const usuario = await prisma.usuario.findUnique({ where: { username } });
-=======
 
   try {
 
@@ -54,7 +38,6 @@ router.post('/login', async (req, res) => {
 
   try {
     const usuario = await prisma.User.findUnique({ where: { username } });
->>>>>>> feature/importar-exce
     if (!usuario) return res.status(400).json({ mensaje: 'Usuario no encontrado' });
 
     const validPassword = await bcrypt.compare(password, usuario.password);
@@ -65,8 +48,6 @@ router.post('/login', async (req, res) => {
     console.error(err);
     res.status(500).json({ mensaje: 'Error en login' });
   }
-<<<<<<< HEAD
-=======
 });
 
 router.post("/importar-excel", async (req, res) => {
@@ -91,7 +72,6 @@ router.post("/importar-excel", async (req, res) => {
     console.error(err);
     res.status(500).json({ error: "Error al importar el Excel" });
   }
->>>>>>> feature/importar-exce
 });
 
 router.get('/', (req, res) => {

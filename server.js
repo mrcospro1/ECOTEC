@@ -8,14 +8,8 @@ app.use(express.json());
 // Importar rutas
 const usuariosRoutes = require("./routes/usuarios.routes");
 app.use("/usuarios", usuariosRoutes);
-<<<<<<< HEAD
-const consultaRoutes=require("./routes/consulta.routes")
-app.use("/consulta", consultaRoutes);
-
-=======
 const consultaRoutes= require("./routes/consulta.routes");
 app.use("/consulta", consultaRoutes);
->>>>>>> feature/importar-exce
 // Ruta raíz
 app.get("/", (req, res) => {
   res.json({ mensaje: "Servidor funcionando" });

@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-const express = require('express');
-const router = express.Router();
-
-router.post('/register', async (req, res) => {
-    const {consulta, contacto}=req.body;
-    const nuevaConsulta= await Prisma.Consulta.create({
-        data:{
-            contacto:`${contacto}`,
-            mensaje:`${consulta}`
-        }
-    })
-    res.json({});
-});
-=======
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const express = require('express');
@@ -47,5 +32,4 @@ router.get("/ver", async (req, res) => {
 });
 
 
->>>>>>> feature/importar-exce
 module.exports = router;

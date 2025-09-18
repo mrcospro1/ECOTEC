@@ -11,18 +11,9 @@ model User {
   username String @unique
   password String
 }
-<<<<<<< HEAD
-model Consulta{
-  id Int @id @default(autoincrement())
-  contacto String
-  mensaje String
-  fecha DateTime @default(now())
-}
-=======
 model Consulta {
   id     Int      @id @default(autoincrement()) 
   asunto String
   mail   String
   fecha  DateTime @default(now())               
 }
->>>>>>> feature/importar-exce

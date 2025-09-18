@@ -138,8 +138,6 @@ body {
     border: none;
     padding: 10px 30px;
     border-radius: 5px;
-    font-weight: bold;
-    text-transform: uppercase;
     transition: transform 0.2s ease;
 }
 
@@ -348,3 +346,4 @@ body {
   border-color: rgba(255, 255, 255, 0.3) !important;
 
 }
+

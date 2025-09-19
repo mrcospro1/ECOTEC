@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
-  },   
+  },
   "devDependencies": {
     "prisma": "^6.15.0"
   },
@@ -17,4 +17,3 @@
     "xlsx": "^0.18.5"
   }
 }
-

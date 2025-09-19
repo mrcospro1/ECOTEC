@@ -1,7 +1,0 @@
--- CreateTable
-CREATE TABLE "Consulta" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "contacto" TEXT NOT NULL,
-    "mensaje" TEXT NOT NULL,
-    "fecha" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);

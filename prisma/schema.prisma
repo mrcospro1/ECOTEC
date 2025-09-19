@@ -13,6 +13,8 @@ model User {
 }
 model Consulta {
   id     Int      @id @default(autoincrement()) 
+  nombre String
+  apellido String
   asunto String
   mail   String
   fecha  DateTime @default(now())               

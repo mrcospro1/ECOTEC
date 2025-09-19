@@ -4,10 +4,12 @@ const express = require('express');
 const router = express.Router();
 
 router.post("/registro", async (req,res)=>{
-    const {asunto, mail}=req.body;
+    const {nombre,apellido,asunto, mail}=req.body;
     try{
         const nuevaConsulta= await prisma.Consulta.create({
         data:{
+            nombre:nombre,
+            apellido:apellido,
             asunto:asunto,
             mail:mail
         }

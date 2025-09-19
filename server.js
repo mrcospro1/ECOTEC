@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-app.use(cors({ origin: "https://ecotec.onrender.com" }));
+
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: "https://ecotec.onrender.com" }));
 app.use(express.json());
 
 // Importar rutas

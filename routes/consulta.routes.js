@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 const express = require('express');
 const router = express.Router();
 
-app.post("/registro", async (req, res) => {
+router.post("/registro", async (req, res) => {
   const { nombre, apellido, asunto, mail } = req.body;
   if (!nombre || !apellido || !asunto || !mail) {
     return res.status(400).json({ error: "Faltan datos obligatorios" });

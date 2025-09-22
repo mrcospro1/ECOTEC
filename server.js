@@ -1,9 +1,13 @@
 const express = require("express");
 const cors = require("cors");
-
 const app = express();
-app.use(cors({ origin: "https://ecotec.onrender.com" }));
 app.use(express.json());
+
+app.use(cors({
+  origin: "https://ecotec-liart.vercel.app", // tu frontend actual
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type"]
+}));
 
 // Importar rutas
 const usuariosRoutes = require("./routes/usuarios.routes");

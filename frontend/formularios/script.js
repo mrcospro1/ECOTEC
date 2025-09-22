@@ -7,7 +7,7 @@ document.getElementById("registroConsulta").addEventListener("submit", async (e)
         mail: document.getElementById("mail").value,
         asunto: document.getElementById("asunto").value,
       };
-      const res = await fetch("https://ecotec.onrender.com/consulta/registro", {
+      const res = await fetch("https://ecotec-1.onrender.com/consulta/registro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)

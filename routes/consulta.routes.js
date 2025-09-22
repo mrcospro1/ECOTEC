@@ -2,6 +2,11 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const express = require('express');
 const router = express.Router();
+const cors = require('cors');
+
+router.use(cors({
+  origin: "https://ecotec-liart.vercel.app"
+}));
 
 router.post("/registro", async (req, res) => {
   const { nombre, apellido, asunto, mail } = req.body;

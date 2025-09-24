@@ -162,8 +162,38 @@ body {
 
 
 .cta-section {
-    background: linear-gradient(to right, var(--color-cta-start) 0%, var(--color-cta-end) 100%);
-    padding: 60px 0;
+  background: linear-gradient(90deg, var(--color-cta-start), var(--color-cta-end));
+  color: #fff;
+  padding: 3rem 1rem;
+}
+
+.cta-section .btn-cta{
+  font-size:20px;  
+  background: linear-gradient(to right, var(--color-btn-start), var(--color-btn-end));
+  border: none;
+  border-radius: 30px;
+  padding: 12px 30px;
+  color: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.btn-cta button{
+  background: linear-gradient(90deg, #0288D1, #03A9F4);
+  color: #fff;
+  border-radius: 20px;
+  padding: 6px 16px;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.btn-cta button:hover {
+  background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end));
+  transform: scale(1.05);
+}
+
+
+.cta-section .btn-cta:hover {
+  transform: scale(1.05);
 }
 
 .card {
@@ -210,5 +240,6 @@ body {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
 
 

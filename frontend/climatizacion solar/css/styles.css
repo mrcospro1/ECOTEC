@@ -266,6 +266,7 @@ body {
 }
 
 .cta-section .btn-cta{
+  font-size:20px;  
   background: linear-gradient(to right, var(--color-btn-start), var(--color-btn-end));
   border: none;
   border-radius: 30px;
@@ -332,4 +333,5 @@ body {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
 

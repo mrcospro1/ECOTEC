@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: "https://ecotec-liart.vercel.app", // tu frontend actual
+  origin: process.env.CORS_ORIGIN, 
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type"]
 }));
@@ -19,7 +20,7 @@ app.get("/", (req, res) => {
   res.json({ mensaje: "Servidor funcionando" });
 });
 // Levantar servidor
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

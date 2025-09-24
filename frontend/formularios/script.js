@@ -1,4 +1,5 @@
-document.getElementById("registroConsulta").addEventListener("submit", async (e) => {
+const formulario=document.getElementById("registroConsulta");
+formulario.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const data = {
@@ -7,7 +8,10 @@ document.getElementById("registroConsulta").addEventListener("submit", async (e)
         mail: document.getElementById("mail").value,
         asunto: document.getElementById("asunto").value,
       };
-      const res = await fetch("https://ecotec-1.onrender.com/consulta/registro", {
+      
+      const host =process.env.HOST;
+      const ruta ="/consulta/registro";
+      const res = await fetch(`${host}${ruta}`,{
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -16,5 +20,6 @@ document.getElementById("registroConsulta").addEventListener("submit", async (e)
       const result = await res.json();
       console.log(result);
       alert(result.mensaje || "Registro completado");
-      
+
+      formulario.reset();
     });

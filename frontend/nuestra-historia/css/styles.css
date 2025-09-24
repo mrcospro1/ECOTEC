@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+:root {
+    --color-header-footer: #01579B;
+    --color-ecotec: #1F193D;
+    --color-alternativas: #F0BC00;
+    --color-btn-start: #00B0FF;
+    --color-btn-end: #006A99;
+    --color-cta-end: #003CFF;
+}
+
+body {
+    font-family: K2D;
+}
+
+.text-ptsans {
+    font-family: PT Sans;
+}
+.g-5 .text-ptsans{
+    font-size: 20px;
+}
+
+/* Header */
+.logo-ecotec{
+    color: var(--color-ecotec);
+    font-size: 20px;
+}
+
+.logo-empresa {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.logo-empresa:hover {
+  opacity: 0.7;
+}
+
+.logo-alternativas{
+    color: var(--color-alternativas);
+    font-size: 20px;
+}
+
+.navbar {
+    background-color: #01579B;
+}
+
+.navbar .nav-link,
+.navbar-brand {
+  color: #fff ;
+}
+
+.navbar .nav-link:hover {
+  text-decoration: none;
+  color: #1F193D;
+}
+
+.alt-text {
+  color: var(--color-alternativas);
+}
+
+.logo-ecotec span{
+    color: var(--color-ecotec);
+}
+
+
+.navbar .dropdown-menu {
+  border-radius: 0.5rem;
+  transition: 0.2s ease;;
+}
+
+
+.navbar .btn-cta {
+  background: linear-gradient(90deg, #0288D1, #03A9F4);
+  color: #fff;
+  border-radius: 20px;
+  padding: 6px 16px;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.navbar .btn-cta:hover {
+   background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end));
+   transform: scale(1.05);
+}
+
+.dropdown-item:hover{
+  background-color: #003CFF;
+  color: #ffffff;
+}
+
+.navbar .dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+.navbar .dropdown-menu {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navbar .dropdown:hover > .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Main */
+.text-secondary {
+    color: var(--color-header-footer);
+}
+
+.margin{
+    margin-right: 30px;
+}
+
+
+.card {
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.text-local {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #006A99;
+}
+
+.fw-bold text{
+    font-size:5px;
+    color: #003CFF;
+} 
+
+
+
+.card .icon img{
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+.card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer personalizado */
+.footer h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.footer p{
+  font-size: 0.95rem;
+}
+.social-link {
+  transition: transform 0.3s ease, color 0.3s ease;}
+}
+
+.social-link:hover {
+  transform: scale(1.2);
+  color: #66ccff !important;
+}
+
+/* Botón contacto */
+.footer .btn-info {
+  border-radius: 12px;
+  padding: 8px 16px;
+  transition: background 0.3s ease;
+}
+.icon-footer img{
+    height: 30px;
+    width: 30px;
+}
+
+.footer .btn-info:hover {
+  background-color: #0d6efd; /* azul más intenso */
+}
+
+/* Línea legal */
+.footer .border-top {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+
+
+

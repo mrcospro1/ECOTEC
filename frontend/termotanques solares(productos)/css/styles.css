@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+:root {
+    --color-header-footer: #01579B;
+    --color-ecotec: #1F193D;
+    --color-alternativas: #F0BC00;
+    --color-btn-start: #00B0FF;
+    --color-btn-end: #006A99;
+    --color-cta-start: #1F193D;
+    --color-cta-end: #003CFF;
+}
+
+body {
+    font-family: K2D;
+}
+.text-ptsans{
+    font-family: PT Sans;
+}
+
+/* Header */
+.logo-ecotec{
+    color: var(--color-ecotec);
+    font-size: 20px;
+}
+
+.logo-empresa {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.logo-empresa:hover {
+  opacity: 0.7;
+}
+
+.logo-alternativas{
+    color: var(--color-alternativas);
+    font-size: 20px;
+}
+
+.navbar {
+    background-color: #01579B;
+}
+
+.navbar .nav-link,
+.navbar-brand {
+  color: #fff ;
+}
+
+.navbar .nav-link:hover {
+  text-decoration: none;
+  color: #1F193D;
+}
+
+.alt-text {
+  color: var(--color-alternativas);
+}
+
+.logo-ecotec span{
+    color: var(--color-ecotec);
+}
+
+
+.navbar .dropdown-menu {
+  border-radius: 0.5rem;
+  transition: 0.2s ease;;
+}
+
+
+.navbar .btn-cta {
+  background: linear-gradient(90deg, #0288D1, #03A9F4);
+  color: #fff;
+  border-radius: 20px;
+  padding: 6px 16px;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.navbar .btn-cta:hover {
+   background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end));
+   transform: scale(1.05);
+}
+
+.dropdown-item:hover{
+  background-color: #003CFF;
+  color: #ffffff;
+}
+
+.navbar .dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+.navbar .dropdown-menu {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navbar .dropdown:hover > .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/termotanque\ solar.jpg') no-repeat center center/cover;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: 'K2D', sans-serif;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: 'PT Sans', sans-serif;
+    color: white;
+}
+
+
+
+.btn-cta {
+    margin: auto;
+    background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end) 100%);
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+}
+
+.btn-cta:hover {
+    transform: scale(1.05);
+}
+
+/* Beneficios Section */
+.title-card{
+    color: #00B0FF;
+}
+
+.title{
+    color: #006A99;
+}
+
+.feature-card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.col-12 img {
+    height: 400px;
+    width: 800px;
+    object-fit: cover;
+}
+
+.icon img {
+    height: 50px;
+    width: 50px;
+}
+
+
+/* Descripción Producto Section */
+.descripcion-producto-section {
+    background-color: #fff; /* Fondo blanco para la sección, si no hay degradado global */
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.custom-description-block {
+    position: relative;
+    max-width: 800px; /* Ancho máximo para el bloque completo como en la imagen */
+    height: 500px;
+    margin: auto;
+    border-radius: 20px; /* Bordes redondeados generales, ajusta si es necesario */
+    overflow: hidden; /* Asegura que los bordes redondeados se apliquen bien */
+}
+
+.description-image-wrapper {
+    flex: 0 0 50%; /* La imagen ocupa la mitad del espacio en pantallas grandes */
+    max-width: 50%; /* Asegura que no se estire más de la mitad */
+    position: relative;
+}
+
+.description-image-wrapper img {
+    width: 100%;
+    height: 100%; /* La imagen llenará su contenedor */
+    object-fit: cover; /* Asegura que la imagen no se deforme */
+    display: block;
+    border-radius: 20px 0 0 20px; /* Bordes redondeados solo a la izquierda */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Sombra sutil para la imagen */
+}
+
+.description-content-wrapper {
+    flex: 1; /* El contenido de texto toma el espacio restante */
+    background-color: #00B0FF; /* Fondo azul brillante como en la imagen */
+    color: white;
+    padding: 2.5rem; /* Relleno interno */
+    border-radius: 0 20px 20px 0; /* Bordes redondeados solo a la derecha */
+    position: relative;
+    z-index: 1;
+    display: flex; /* Para centrar el contenido verticalmente si es necesario */
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Sombra sutil para el contenido */
+    /* Para el efecto de "salida" o solapamiento */
+    margin-left: -50px; /* Ajusta este valor para controlar cuánto se solapa */
+    padding-left: 70px; /* Ajusta el padding para que el texto no se oculte */
+}
+
+.description-content-wrapper .card-title {
+    font-weight: bold;
+    font-size: 2.2rem; /* Tamaño de fuente más grande para el título */
+    margin-bottom: 1rem;
+}
+
+.description-content-wrapper .card-text {
+    line-height: 1.6;
+    font-size: 1.1rem; /* Ajusta el tamaño de fuente para el texto */
+    font-family: 'PT Sans', sans-serif; /* Asegura la fuente PT Sans */
+}
+
+/* Media Queries para pantallas más pequeñas */
+@media (max-width: 767.98px) { /* Para dispositivos móviles */
+    .custom-description-block {
+        flex-direction: column; /* Apila la imagen y el texto */
+        border-radius: 20px; /* Bordes redondeados en todo el bloque */
+    }
+
+    .description-image-wrapper {
+        flex: 0 0 100%;
+        max-width: 100%;
+        border-radius: 20px 20px 0 0; /* Bordes redondeados arriba */
+    }
+
+    .description-image-wrapper img {
+        border-radius: 20px 20px 0 0; /* Bordes redondeados arriba */
+        height: 250px; /* Altura fija para la imagen en móvil */
+    }
+
+    .description-content-wrapper {
+        border-radius: 0 0 20px 20px; /* Bordes redondeados abajo */
+        margin-left: 0; /* Quita el margen negativo */
+        padding-left: 2.5rem; /* Ajusta el padding normal */
+        padding-top: 1.5rem;
+    }
+}
+
+
+/* Descarga de Precios Section */
+.btn-descarga {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 10px 40px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    transition: background-color 0.3s;
+}
+
+.descarga-button img{
+    height: 20px;
+    width: 20px;
+}
+
+.btn-descarga:hover {
+    transform: scale(1.03);
+    background-color: #003CFF;
+    color: #fff;
+    transition: transform 0.2s ease;
+}
+
+/* Galería de Instalaciones Section */
+.galeria-instalaciones-section {
+    background-color: #F8F9FA;
+}
+
+.galeria-instalaciones-section img {
+    height: 250px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.text-descarga{
+    font-weight: bold;
+}
+
+/* Footer personalizado */
+.footer h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.footer p {
+  font-size: 0.95rem;
+}
+
+/* Íconos sociales con efecto */
+.social-link {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-link:hover {
+  transform: scale(1.2);
+  color: #66ccff !important;
+}
+
+/* Botón contacto */
+.footer .btn-info {
+  border-radius: 12px;
+  padding: 8px 16px;
+  transition: background 0.3s ease;
+}
+.icon-footer img{
+    height: 30px;
+    width: 30px;
+}
+
+.footer .btn-info:hover {
+  background-color: #0d6efd; /* azul más intenso */
+}
+
+/* Línea legal */
+.footer .border-top {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+
+
+
+
+

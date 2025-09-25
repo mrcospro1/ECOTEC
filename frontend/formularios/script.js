@@ -1,4 +1,4 @@
-import { HOST } from ".config.js";
+const { HOST } = require("./config");
 
 console.log(HOST); 
 

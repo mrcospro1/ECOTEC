@@ -1,6 +1,6 @@
-import { HOST } from "./config.js";
+import { HOST } from ".config.js";
 
-console.log(HOST); // "https://ecotec-1.onrender.com"
+console.log(HOST); 
 
 const formulario=document.getElementById("registroConsulta");
 formulario.addEventListener("submit", async (e) => {

@@ -1,4 +1,4 @@
-const { HOST } = require("../config");
+import { HOST } from "../config";
 
 console.log(HOST); 
 
@@ -12,10 +12,8 @@ formulario.addEventListener("submit", async (e) => {
         mail: document.getElementById("mail").value,
         asunto: document.getElementById("asunto").value,
       };
-      
-      const host =HOST;
       const ruta ="/consulta/registro";
-      const res = await fetch(`${host}${ruta}`,{
+      const res = await fetch(`${HOST}${ruta}`,{
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)

@@ -1,4 +1,4 @@
-const { HOST } = require("./config");
+const { HOST } = require("../config");
 
 console.log(HOST); 
 

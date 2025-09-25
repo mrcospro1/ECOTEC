@@ -1,1 +1,1 @@
-export const HOST="https://ecotec-1.onrender.com"
+export const HOST = "https://ecotec-1.onrender.com";

@@ -1,3 +1,7 @@
+import { HOST } from "./config.js";
+
+console.log(HOST); // "https://ecotec-1.onrender.com"
+
 const formulario=document.getElementById("registroConsulta");
 formulario.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -9,7 +13,7 @@ formulario.addEventListener("submit", async (e) => {
         asunto: document.getElementById("asunto").value,
       };
       
-      const host =process.env.HOST;
+      const host =HOST;
       const ruta ="/consulta/registro";
       const res = await fetch(`${host}${ruta}`,{
         method: "POST",

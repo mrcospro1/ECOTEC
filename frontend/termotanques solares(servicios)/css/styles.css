@@ -123,44 +123,33 @@ body {
 }
 
 /* --- Systems Section --- */
-.systems-section,
-.accessories-section,
-.services-section {
-    background-color: #fff;
-}
-
-.section-title {
-    color: #00628E;
-    font-weight: 700;
-    font-size: 2.2rem;
-}
-
-
 .custom-card {
+  border: none;
   border-radius: 15px;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .custom-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+  transform: translateY(-8px);
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.25);
 }
 
-.custom-img {
-  width: 120px;   /* tamaño fijo similar al ejemplo */
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 15px;
+.custom-card img {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  object-fit: cover;
+  height: 220px;
+  width: 100%;
 }
 
-.card-title {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+.card-title-termo{
+  font-size: 30px;
 }
 
-.card-text {
-  font-size: 0.95rem;
-  color: #333;
+.card-text-termo{
+  font-size: 18px;
+  color: #444;
 }
 
 
@@ -204,46 +193,41 @@ body {
 }
 
 /* --- Accessories Section --- */
-.custom-card-accesorios {
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 300px; /* Ajuste para el móvil, se sobrescribe en escritorio */
-    transition: transform 0.3s ease;
+.accesorio-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
 }
 
-.custom-card-accesorios:hover {
-    transform: translateY(-5px);
+.accesorio-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.25);
 }
 
-/* Custom image styling */
-.card-img-top {
-    border-radius: 10px;
-    height: 150px; /* Adjust image height as needed */
-    object-fit: contain; /* Ensures the image fits without distortion */
-    padding: 10px;
+.accesorio-card img {
+  height: 120px;
+  object-fit: contain;
+  margin-top: 10px;
 }
 
 .card-title {
-    font-weight: bold;
+  font-size: 1rem;
+  margin-top: 10px;
 }
 
-/* Carousel controls */
+.card-text {
+  font-size: 0.85rem;
+  color: #555;
+}
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: #337ab7; /* Bootstrap's primary blue */
-    border-radius: 50%;
-    padding: 20px;
+  background-color: #e9e7e7; 
+  border-radius: 50%;
+  padding: 15px;
 }
-
-/* Align carousel controls vertically */
-.carousel-control-prev,
-.carousel-control-next {
-    width: 5%; /* Make the clickable area smaller */
-    top: 50%;
-    transform: translateY(-50%);
-    bottom: auto;
-}
-
 
 /* --- Services Section --- */
 .icono img{

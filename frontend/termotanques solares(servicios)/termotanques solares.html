@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecotec - Termotanque Solar</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -27,8 +27,6 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Proyectos</a>
           </li>
-
-          <!-- Productos -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="/productos/productos.html">Productos</a>
             <ul class="dropdown-menu">
@@ -36,8 +34,6 @@
               <li><a class="dropdown-item" href="/luminarias solares(productos)/luminarias solares.html">Luminarias solares</a></li>
             </ul>
           </li>
-
-          <!-- Servicios -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="../servicios/servicios.html" role="button">Servicios</a>
             <ul class="dropdown-menu">
@@ -76,37 +72,33 @@
     </section>
 
     <section class="systems-section py-5">
-        <div class="container py-5">
-    <h2 class="text-center fw-bold text-primary mb-5">Existen dos sistemas de termotanque</h2>
-    
-    <div class="row g-4 justify-content-center">
-      
-      <!-- Card presurizados -->
-      <div class="col-md-5">
-        <div class="card h-100 shadow-lg border-0 custom-card text-center p-3">
-          <img src="img/sistema presurizados.jpg" class="custom-img mx-auto" alt="Sistemas presurizados">
-          <div class="card-body">
-            <h5 class="card-title text-primary fw-bold">Sistemas presurizados</h5>
-            <p class="card-text">
-              Si se conecta el termotanque a una bomba para que el agua llegue con más presión o si se instala en lugares donde la temperatura es muy baja, se recomienda este sistema.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-5">
-        <div class="card h-100 shadow-lg border-0 custom-card text-center p-3">
-          <img src="img/sistema no presurizados.jpg" class="custom-img mx-auto" alt="Sistemas no presurizados">
-          <div class="card-body">
-            <h5 class="card-title text-primary fw-bold">Sistemas no presurizados</h5>
-            <p class="card-text">
-              Si el termotanque va a ir conectado directo de tanque de agua o a la red en lugares donde la temperatura del medio ambiente no es ni muy fría ni muy caliente, se recomienda utilizar no presurizado.
-            </p>
-          </div>
+        <div class="container my-5">
+  <div class="row g-4">
+    <div class="col-12 col-md-6">
+      <div class="card custom-card h-100">
+        <img src="img/sistema presurizados.jpg" class="card-img-top" alt="Sistema presurizado">
+        <div class="card-body">
+          <h5 class="card-title-termo text-primary fw-bold text-center">Sistemas presurizados</h5>
+          <p class="card-text-termo">
+            Si se conecta el termotanque a una bomba para que el agua llegue con más presión o si se instala en lugares donde la temperatura es muy baja, se recomienda este sistema.
+          </p>
         </div>
       </div>
     </div>
+    <div class="col-12 col-md-6">
+      <div class="card custom-card h-100">
+        <img src="img/sistema no presurizados.jpg" class="card-img-top" alt="Sistema no presurizado">
+        <div class="card-body">
+          <h5 class="card-title-termo text-primary fw-bold text-center">Sistemas no presurizados</h5>
+          <p class="card-text-termo">
+            Si el termotanque va a ir conectado directo de tanque de agua o a la red en lugares donde la temperatura del medio ambiente no es ni muy fría ni muy caliente, se recomienda utilizar no presurizado.
+          </p>
+        </div>
+      </div>
+    </div>
+
   </div>
+</div>
     </section>
     <section class="table-section py-5">
         <h3 class="section-title text-center">¿Cómo calculo los litros necesarios?</h3>
@@ -136,198 +128,105 @@
         </div>
     </section>
    
-    <section class="py-5">
-  <div class="container my-5">
-    <h2 class="text-center mb-4">Accesorios de termotanque</h2>
+<section class="py-5">
+<div class="container my-5">
+  <h2 class="text-center mb-4 fw-bold">Accesorios para Termotanques Solares</h2>
 
-    <div id="accessoryCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-wrap="true">
-      <div class="carousel-inner">
+  <div id="carouselAccesorios" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
 
-        <!-- ================= MOBILE ================= -->
-        <!-- 1 -->
-        <div class="carousel-item active d-md-none">
-          <div class="card p-3 custom-card-accesorios h-100 mx-auto">
-            <img src="img/tanque prellenado.jpg" class="card-img-top mx-auto d-block" alt="Tanque de prellenado">
-            <div class="card-body text-center d-flex flex-column">
-              <h5 class="card-title text-primary">Tanque de prellenado</h5>
-              <p class="card-text text-secondary">Regula el ingreso de agua al termotanque solar impidiendo la sobre presión...</p>
+      <div class="carousel-item active">
+        <div class="row g-4">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card accesorio-card h-100 text-center">
+              <img src="img/tanque prellenado.jpg" class="card-img-top" alt="Tanque de prellenado">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Tanque de prellenado</h5>
+                <p class="card-text">Regula el ingreso de agua al termotanque solar impidiendo la sobre presión por columna de agua o por presión de ingreso de la misma.</p>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- 2 -->
-        <div class="carousel-item d-md-none">
-          <div class="card p-3 custom-card-accesorios h-100 mx-auto">
-            <img src="img/tubos de vidrio.jpg" class="card-img-top mx-auto d-block" alt="Tubos de vidrio">
-            <div class="card-body text-center d-flex flex-column">
-              <h5 class="card-title text-primary">Tubos de vidrio</h5>
-              <p class="card-text text-secondary">Son los encargados de transferir la energía del sol al agua...</p>
-            </div>
-          </div>
-        </div>
-        <!-- 3 -->
-        <div class="carousel-item d-md-none">
-          <div class="card p-3 custom-card-accesorios h-100 mx-auto">
-            <img src="img/resistencia electrica.jpg" class="card-img-top mx-auto d-block" alt="Resistencia eléctrica">
-            <div class="card-body text-center d-flex flex-column">
-              <h5 class="card-title text-primary">Resistencia eléctrica</h5>
-              <p class="card-text text-secondary">Resistencia eléctrica de calentamiento para termotanque solar...</p>
-            </div>
-          </div>
-        </div>
-        <!-- 4 -->
-        <div class="carousel-item d-md-none">
-          <div class="card p-3 custom-card-accesorios h-100 mx-auto">
-            <img src="img/barra-de-magnesio.png" class="card-img-top mx-auto d-block" alt="Barra de magnesio">
-            <div class="card-body text-center d-flex flex-column">
-              <h5 class="card-title text-primary">Barra de magnesio</h5>
-              <p class="card-text text-secondary">Ayuda a neutralizar las sales minerales del agua...</p>
-            </div>
-          </div>
-        </div>
-        <!-- 5 -->
-        <div class="carousel-item d-md-none">
-          <div class="card p-3 custom-card-accesorios h-100 mx-auto">
-            <img src="img/controlador tk8.jpg" class="card-img-top mx-auto d-block" alt="Controlador TK-8">
-            <div class="card-body text-center d-flex flex-column">
-              <h5 class="card-title text-primary">Controlador TK-8</h5>
-              <p class="card-text text-secondary">Con este panel es posible controlar casi cualquier cosa...</p>
-            </div>
-          </div>
-        </div>
-        <!-- 6 -->
-        <div class="carousel-item d-md-none">
-          <div class="card p-3 custom-card-accesorios h-100 mx-auto">
-            <img src="img/o-ring.jpg" class="card-img-top mx-auto d-block" alt="O-Ring">
-            <div class="card-body text-center d-flex flex-column">
-              <h5 class="card-title text-primary">O-Ring</h5>
-              <p class="card-text text-secondary">Cumple las funciones de sostén de los tubos colectores...</p>
-            </div>
-          </div>
-        </div>
-        <!-- 7 -->
-        <div class="carousel-item d-md-none">
-          <div class="card p-3 custom-card-accesorios h-100 mx-auto">
-            <img src="img/sello anti polvo.jpg" class="card-img-top mx-auto d-block" alt="Sello antipolvo">
-            <div class="card-body text-center d-flex flex-column">
-              <h5 class="card-title text-primary">Sello antipolvo</h5>
-              <p class="card-text text-secondary">Para proteger al termotanque solar que no ingrese polvo.</p>
-            </div>
-          </div>
-        </div>
-        <!-- 8 -->
-        <div class="carousel-item d-md-none">
-          <div class="card p-3 custom-card-accesorios h-100 mx-auto">
-            <img src="img/valvula mezcladora.jpg" class="card-img-top mx-auto d-block" alt="Válvula mezcladora">
-            <div class="card-body text-center d-flex flex-column">
-              <h5 class="card-title text-primary">Válvula mezcladora</h5>
-              <p class="card-text text-secondary">Permite la mezcla del agua caliente y fría, regulando la temperatura de salida.</p>
-            </div>
-          </div>
-        </div>
 
-        <!-- ================= DESKTOP ================= -->
-        <!-- Slide 1 -->
-        <div class="carousel-item active d-none d-md-block">
-          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-            <!-- accesorios 1-4 -->
-            <div class="col">
-                <div class="card p-3 custom-card-accesorios h-100">
-                  <img src="img/tanque prellenado.jpg" class="card-img-top mx-auto d-block" alt="Tanque de prellenado">
-                  <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-primary">Tanque de prellenado</h5>
-                    <p class="card-text text-secondary">Regula el ingreso de agua al termotanque solar impidiendo la sobre presión...</p>
-                  </div>
-                </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card accesorio-card h-100 text-center">
+              <img src="img/tubos de vidrio.jpg" class="card-img-top" alt="Tubos de vidrio">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Tubos de vidrio</h5>
+                <p class="card-text">Son los encargados de transferir la energía del sol al agua para su calentamiento.</p>
               </div>
-		<div class="col">
-                <div class="card p-3 custom-card-accesorios h-100">
-                  <img src="img/tubos de vidrio.jpg" class="card-img-top mx-auto d-block" alt="Tubos de vidrio">
-                  <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-primary">Tubos de vidrio</h5>
-                    <p class="card-text text-secondary">Son los encargados de transferir la energía del sol al agua...</p>
-                  </div>
-                </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card accesorio-card h-100 text-center">
+              <img src="img/resistencia electrica.jpg" class="card-img-top" alt="Resistencia eléctrica">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Resistencia eléctrica</h5>
+                <p class="card-text">Resistencia eléctrica de calentamiento para termotanque solar atmosférico con resistencia</p>
               </div>
-		<div class="col">
-                <div class="card p-3 custom-card-accesorios h-100">
-                  <img src="img/resistencia electrica.jpg" class="card-img-top mx-auto d-block" alt="Resistencia eléctrica">
-                  <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-primary">Resistencia eléctrica</h5>
-                    <p class="card-text text-secondary">Resistencia eléctrica de calentamiento para termotanque solar...</p>
-                  </div>
-                </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card accesorio-card h-100 text-center">
+              <img src="img/barra-de-magnesio.png" class="card-img-top" alt="Barra de magnesio">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Barra de magnesio</h5>
+                <p class="card-text">Ayuda a neutralizar las sales minerales del agua, evitando con esto que las mismas se adhieran al tanque interno del termotanque solar.</p>
               </div>
-		<div class="col">
-                <div class="card p-3 custom-card-accesorios h-100">
-                  <img src="img/barra-de-magnesio.png" class="card-img-top mx-auto d-block" alt="Barra de magnesio">
-                  <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-primary">Barra de magnesio</h5>
-                    <p class="card-text text-secondary">Ayuda a neutralizar las sales minerales del agua...</p>
-                  </div>
-                </div>
-              </div>
+            </div>
           </div>
         </div>
-        <!-- Slide 2 -->
-        <div class="carousel-item d-none d-md-block">
-          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-            <!-- accesorios 5-8 -->
-            <div class="col">
-                <div class="card p-3 custom-card-accesorios h-100">
-                  <img src="img/tk8.jpg" class="card-img-top mx-auto d-block" alt="Controlador TK-8">
-                  <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-primary">Controlador TK-8</h5>
-                    <p class="card-text text-secondary">Con este panel es posible controlar casi cualquier cosa...</p>
-                  </div>
-                </div>
+      </div>
+      <div class="carousel-item">
+        <div class="row g-4">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card accesorio-card h-100 text-center">
+              <img src="img/tk8.jpg" class="card-img-top" alt="Controlador TK-8">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Controlador TK-8</h5>
+                <p class="card-text">Con este panel es posible controlar casi cualquier cosa que se desee tanto para trabajar en modo automático, como manual para el uso del calentador solar.</p>
               </div>
-		<div class="col">
-                <div class="card p-3 custom-card-accesorios h-100">
-                  <img src="img/o-ring.jpg" class="card-img-top mx-auto d-block" alt="O-Ring">
-                  <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-primary">O-Ring</h5>
-                    <p class="card-text text-secondary">Cumple las funciones de sostén de los tubos colectores...</p>
-                  </div>
-                </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card accesorio-card h-100 text-center">
+              <img src="img/o-ring.jpg" class="card-img-top" alt="O-Ring">
+              <div class="card-body">
+                <h5 class="card-title text-primary">O-Ring</h5>
+                <p class="card-text">Cumple las funciones de sostén de los tubos colectores de vidrio, y de junta de unión entre ellos y el tanque interno del termotanque solar.</p>
               </div>
-		<div class="col">
-                <div class="card p-3 custom-card-accesorios h-100">
-                  <img src="img/sello anti polvo.jpg" class="card-img-top mx-auto d-block" alt="Sello antipolvo">
-                  <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-primary">Sello antipolvo</h5>
-                    <p class="card-text text-secondary">Para proteger al termotanque solar que no ingrese polvo.</p>
-                  </div>
-                </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card accesorio-card h-100 text-center">
+              <img src="img/sello anti polvo.jpg" class="card-img-top" alt="Sello antipolvo">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Sello antipolvo</h5>
+                <p class="card-text">Para proteger al termotanque solar que no ingrese polvo.</p>
               </div>
-		<div class="col">
-                <div class="card p-3 custom-card-accesorios h-100">
-                  <img src="img/valvula mezcladora.jpg" class="card-img-top mx-auto d-block" alt="Válvula mezcladora">
-                  <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-primary">Válvula mezcladora</h5>
-                    <p class="card-text text-secondary">Permite la mezcla del agua caliente y fría, regulando la temperatura de salida.</p>
-                  </div>
-                </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card accesorio-card h-100 text-center">
+              <img src="img/valvula mezcladora.jpg" class="card-img-top" alt="Válvula mezcladora">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Válvula mezcladora</h5>
+                <p class="card-text">Es un elemento que permite la mezcla del agua caliente proveniente del termotanque solar y el agua fría del tanque mezclando automáticamente la misma y regulando la temperatura de salida</p>
               </div>
+            </div>
           </div>
         </div>
-
       </div>
 
-      <!-- Controles -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#accessoryCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Anterior</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#accessoryCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Siguiente</span>
-      </button>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselAccesorios" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselAccesorios" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
   </div>
+</div>
 </section>
-
-
-
 
     <section class="py-5">
             <div class="container">
@@ -383,8 +282,6 @@
 <footer class="footer bg-primary text-white py-5">
   <div class="container">
     <div class="row gy-4">
-      
-      <!-- Redes Sociales -->
       <div class="col-md-3">
         <h5 class="mb-3">Síguenos</h5>
         <div class="d-flex gap-3 fs-4">
@@ -393,22 +290,16 @@
           <a href="https://www.instagram.com/ecotecalternativas/" class="text-white social-link" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
         </div>
       </div>
-
-      <!-- Dirección -->
       <div class="col-md-3">
         <h5 class="mb-3">Ubicación</h5>
         <p class="mb-1">Av. Mitre 1007, CP 1880 Berazategui</p>
         <a href="https://www.google.com/maps/place/Ecotec+Energias+Alternativas/@-34.7561104,-58.2114917,595m/data=!3m2!1e3!4b1!4m6!3m5!1s0x95a3263159f31589:0xcb473e546742d358!8m2!3d-34.7561148!4d-58.2089168!16s%2Fg%2F11g8kvc8ln?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="link-light text-decoration-underline">Ver en Google Maps</a>
       </div>
-
-      <!-- Horarios -->
       <div class="col-md-3">
         <h5 class="mb-3">Horarios</h5>
         <p class="mb-1"><strong>Lunes a viernes:</strong><br>10:00hs - 18:00hs</p>
         <p class="mb-0"><strong>Sábados:</strong><br>9:00hs - 13:00hs</p>
       </div>
-
-      <!-- Contacto -->
       <div class="col-md-3">
         <h5 class="mb-3">Contacto</h5>
         <p class="mb-1">
@@ -433,6 +324,6 @@
     </div>
   </div>
 </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

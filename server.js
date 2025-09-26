@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: process.env.CORS_ORIGIN, 
+  origin:["http://127.0.0.1:5500",process.env.CORS_ORIGIN] , 
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type"]
 }));

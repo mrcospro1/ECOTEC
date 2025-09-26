@@ -5,9 +5,9 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin:["http://127.0.0.1:5500",process.env.CORS_ORIGIN] , 
+  origin: "https://ecotec-liart.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type"]
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 // Importar rutas

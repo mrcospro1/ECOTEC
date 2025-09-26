@@ -1,7 +1,4 @@
-import { HOST } from "../config";
-
-console.log(HOST); 
-
+const hostUrl=window.ENV.HOST
 const formulario=document.getElementById("registroConsulta");
 formulario.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -13,7 +10,7 @@ formulario.addEventListener("submit", async (e) => {
         asunto: document.getElementById("asunto").value,
       };
       const ruta ="/consulta/registro";
-      const res = await fetch(`${HOST}${ruta}`,{
+      const res = await fetch(`${hostUrl}${ruta}`,{
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)

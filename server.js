@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: "https://ecotec-liart.vercel.app",
+  origin: CORS_ORIGIN,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));

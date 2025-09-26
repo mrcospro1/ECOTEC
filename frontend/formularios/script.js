@@ -2,7 +2,6 @@ const hostUrl=window.ENV.HOST
 const formulario=document.getElementById("registroConsulta");
 formulario.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       const data = {
         nombre: document.getElementById("nombre").value,
         apellido: document.getElementById("apellido").value,

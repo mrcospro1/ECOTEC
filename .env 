@@ -1,5 +1,0 @@
-DATABASE_URL="postgresql://postgres:48426138@Marcos@db.pwrmcremycgsfuzzemnd.supabase.com:5432/postgres"
-CORS_ORIGIN="https://ecotec-liart.vercel.app"
-EMAIL_PASS="zdykqwofxxjobsiv"
-EMAIL_USER="marcosbenitez127@gmail.com"
-HOST="https://ecotec-1.onrender.com"

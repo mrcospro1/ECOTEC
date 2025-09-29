@@ -13,16 +13,24 @@ router.post("/registro", async (req, res) => {
   if (!nombre || !apellido || !asunto || !mail) {
     return res.status(400).json({ error: "Faltan datos obligatorios" });
   }
-
-  try {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(mail)) {
+  return res.status(400).json({ error: "Email inválido" });
+}else{
+    try {
     const nuevaConsulta = await prisma.consulta.create({
       data: { nombre, apellido, asunto, mail },
     });
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: "smtp.gmail.com",
+      port: 587,
+      secure: false,
       auth: {
         user: process.env.EMAIL_USER, 
         pass: process.env.EMAIL_PASS, 
+      },
+      tls:{
+        rejectUnauthorized: false
       },
     });
     await transporter.sendMail({
@@ -103,6 +111,8 @@ router.post("/registro", async (req, res) => {
     console.error("Error al crear consulta:", error);
     res.status(500).json({ error: "Error interno del servidor" });
   }
+}
+
 });
 
 router.get("/ver", async (req, res) => {

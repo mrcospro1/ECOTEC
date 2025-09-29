@@ -22,7 +22,7 @@ router.post("/registro", async (req, res) => {
       data: { nombre, apellido, asunto, mail },
     });
     const transporter = nodemailer.createTransport({
-      service: "smtp.gmail.com",
+      service: "gmail",
       port: 587,
       secure: false,
       auth: {

@@ -1,5 +1,6 @@
 const hostUrl=window.ENV.HOST
 const formulario=document.getElementById("registroConsulta");
+const boton =document.querySelector("#btnFormulario");
 formulario.addEventListener("submit", async (e) => {
     boton.disabled = true;
     boton.innerText = "Enviando...";

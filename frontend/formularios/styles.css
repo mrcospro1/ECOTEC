@@ -105,6 +105,11 @@ body {
   transform: translateY(0);
 }
 
+.icono-logo img{
+    height: 40px;
+    width: 40px;
+}
+
 /* ESTILOS DEL FORMULARIO */
 main {
   background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 32%, rgba(0, 212, 255, 1) 100%);

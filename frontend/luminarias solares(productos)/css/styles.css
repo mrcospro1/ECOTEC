@@ -104,6 +104,11 @@ body {
   transform: translateY(0);
 }
 
+.icono-logo img{
+    height: 40px;
+    width: 40px;
+}
+
 /* Hero Section */
 .hero-section {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/luminarias-4.jpg') no-repeat center center/cover;
@@ -345,5 +350,6 @@ body {
   border-color: rgba(255, 255, 255, 0.3) !important;
 
 }
+
 
 

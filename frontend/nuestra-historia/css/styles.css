@@ -107,6 +107,11 @@ body {
   transform: translateY(0);
 }
 
+.icono-logo img{
+    height: 40px;
+    width: 40px;
+}
+
 /* Main */
 .text-secondary {
     color: var(--color-header-footer);
@@ -186,6 +191,7 @@ body {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
 
 
 

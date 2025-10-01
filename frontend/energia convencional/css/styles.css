@@ -107,6 +107,11 @@ body {
   transform: translateY(0);
 }
 
+.icono-logo img{
+    height: 40px;
+    width: 40px;
+}
+
 /* Hero */
 .hero {
   position: relative;
@@ -250,6 +255,7 @@ body {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
 
 
 

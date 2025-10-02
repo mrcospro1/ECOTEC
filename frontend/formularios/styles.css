@@ -171,7 +171,7 @@ main{
 }
 
 .title-consulta {
-  color: #00A1FF;
+  color: var(--color-alternativas);
   font-size: 30px;
   font-weight: 500;
   margin-top: 110px;

@@ -111,8 +111,9 @@ body {
 }
 
 /* ESTILOS DEL FORMULARIO */
-main {
-  background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 32%, rgba(0, 212, 255, 1) 100%);
+main{
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('fondo-consulta.jpg') no-repeat center center;
+  background-size: cover;
 }
 
 .custom-card {
@@ -171,22 +172,36 @@ main {
 
 .title-consulta {
   color: #00A1FF;
-  font-size: 35px;
+  font-size: 30px;
   font-weight: 500;
   margin-top: 110px;
 }
+.icono-logo img{
+  height: 40px;
+  width: 40px;
+}
+
+.icono-form img {
+  height: 30px;
+  width: 30px;
+}
+
 .title-formulario{
     color: #1F193D;
 }
 
 .text-consulta {
   color: #fff;
-  font-size: 18px;
+  font-size: 24px;
 }
 
 .text-consulta-subtitle {
   color: #fff;
-  font-size: 13px;
+  font-size: 1rem;
+  display: flex;              
+  align-items: center;        
+  gap: 10px;                  
+  text-align: left;           
 }
 
 /* MEDIA QUERY PARA EL FORMULARIO */

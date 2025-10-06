@@ -2,13 +2,12 @@ const prisma = require('../prismaModulo');
 const express = require('express');
 const router = express.Router();
 const cors = require('cors');
-const nodemailer = require("nodemailer");
+const sgMail = require("@sendgrid/mail");
 
 router.use(cors({
   origin: process.env.CORS_ORIGIN
 }));
 
-import sgMail from "@sendgrid/mail";
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 router.post("/registro", async (req, res) => {

@@ -27,8 +27,8 @@ router.post("/registro", async (req, res) => {
       data: { nombre, apellido, asunto, mail },
     });
     await sgMail.send({
-      to: "marcosbenitez1237@gmail.com", // tu correo
-      from: "tucorreo@tudominio.com", // debe estar verificado en SendGrid
+      to: "marcosbenitez1237@gmail.com",
+      from: process.env.EMAIL_USER, 
       subject: "📩 Nueva consulta",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
@@ -53,7 +53,7 @@ router.post("/registro", async (req, res) => {
     });
     await sgMail.send({
       to: nuevaConsulta.mail,
-      from: "tucorreo@tudominio.com",
+      from: process.env.EMAIL_USER,
       subject: "Gracias por tu consulta – ECOTEC Energías Alternativas",
       html: `
       <div style="font-family: Arial, sans-serif; background-color: #f4f8ff; padding: 30px;">

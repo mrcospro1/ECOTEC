@@ -20,23 +20,52 @@ body {
 }
 
 /* Header */
-.logo-ecotec{
-    color: var(--color-ecotec);
-    font-size: 20px;
-}
-
 .logo-empresa {
-  opacity: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
   transition: opacity 0.2s ease;
+  opacity: 1;
 }
 
 .logo-empresa:hover {
-  opacity: 0.7;
+  opacity: 0.7; /* solo cambia la opacidad */
 }
 
-.logo-alternativas{
-    color: var(--color-alternativas);
-    font-size: 20px;
+.logo-icono {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.logo-texto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1;
+}
+
+.logo-ecotec {
+  color: var(--color-ecotec);
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.logo-alternativas {
+  color: var(--color-alternativas);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+
+.logo-empresa:hover {
+  opacity: 0.8;
 }
 
 .navbar {
@@ -271,6 +300,7 @@ body {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
 
 
 

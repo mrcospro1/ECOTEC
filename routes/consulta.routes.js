@@ -10,8 +10,6 @@ router.use(cors({
   origin: process.env.CORS_ORIGIN
 }));
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
 router.post("/registro", async (req, res) => {
   const { nombre, apellido, asunto, mail } = req.body;
 

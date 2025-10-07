@@ -1,5 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const prisma = require('../prismaModulo');
 const express = require('express');
 const router = express.Router();
 const cors = require('cors');
@@ -11,10 +10,18 @@ router.use(cors({
   origin: process.env.CORS_ORIGIN
 }));
 
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 router.post("/registro", async (req, res) => {
   const { nombre, apellido, asunto, mail } = req.body;
+
   if (!nombre || !apellido || !asunto || !mail) {
     return res.status(400).json({ error: "Faltan datos obligatorios" });
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(mail)) {
+    return res.status(400).json({ error: "Email inválido" });
   }
 
   try {
@@ -58,7 +65,6 @@ router.post("/registro", async (req, res) => {
       mensaje: "Registro exitoso",
       consulta: nuevaConsulta,
     });
-
   } catch (error) {
     console.error("Error al crear consulta:", error);
     res.status(500).json({ error: "Error interno del servidor" });

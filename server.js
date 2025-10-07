@@ -9,16 +9,17 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
-
+// Ruta raíz
+app.get("/", (req, res) => {
+  res.json({ mensaje: "Servidor funcionando" });
+});
 // Importar rutas
 const usuariosRoutes = require("./routes/usuarios.routes");
 app.use("/usuarios", usuariosRoutes);
 const consultaRoutes= require("./routes/consulta.routes");
 app.use("/consulta", consultaRoutes);
-// Ruta raíz
-app.get("/", (req, res) => {
-  res.json({ mensaje: "Servidor funcionando" });
-});
+
+
 // Levantar servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

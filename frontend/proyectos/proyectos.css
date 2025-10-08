@@ -263,6 +263,11 @@ body {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+.icon img {
+    height: 50px;
+    width: 50px;
+}
+
 
 
 

@@ -39,12 +39,25 @@ router.post("/registro", async (req, res) => {
           </div>
           <div style="padding: 20px; color: #333;">
             <p><strong>Cliente N°:</strong> ${nuevaConsulta.id}</p>
-            <p><strong>Fecha:</strong> ${new Date(nuevaConsulta.createdAt).toLocaleString()}</p>
+            <p><strong>Fecha:</strong> ${new Date(nuevaConsulta.fecha).toLocaleString()}.</p>
             <p><strong>Nombre:</strong> ${nuevaConsulta.nombre} ${nuevaConsulta.apellido}</p>
             <p><strong>Email:</strong> ${nuevaConsulta.mail}</p>
             <p><strong>Asunto:</strong></p>
             <div style="background-color: #f7f7f7; padding: 10px; border-radius: 5px; border: 1px solid #eee;">
               ${nuevaConsulta.asunto}
+            </div>
+          </div>
+          <div style="text-align: center; margin-top: 30px;">
+              <a href="mailto:${nuevaConsulta.mail}"
+                 style="background-color: #007bff; 
+                        color: white; 
+                        padding: 12px 25px; 
+                        border-radius: 6px; 
+                        text-decoration: none; 
+                        font-weight: bold;
+                        display: inline-block;">
+                Responder
+              </a>
             </div>
           </div>
           <div style="background-color: #f1f1f1; padding: 10px; text-align: center; font-size: 12px; color: #555;">

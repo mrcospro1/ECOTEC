@@ -277,22 +277,23 @@ body {
 @media (max-width: 767.98px) { 
     .custom-description-block {
         flex-direction: column; 
-        border-radius: 20px; 
+        height: auto;
+        border-radius:  20px 20px; 
     }
 
     .description-image-wrapper {
         flex: 0 0 100%;
         max-width: 100%;
-        border-radius: 20px 20px 0 0; 
+        border-radius: 20px 20px; 
     }
 
     .description-image-wrapper img {
-        border-radius: 20px 20px 0 0; 
-        height: 250px; 
+        border-radius: 0 0 20px 20px; 
+        height: auto; 
     }
 
     .description-content-wrapper {
-        border-radius: 0 0 20px 20px; 
+        border-radius:  20px 20px; 
         margin-left: 0; 
         padding-left: 2.5rem; 
         padding-top: 1.5rem;
@@ -377,6 +378,7 @@ body {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
 
 
 

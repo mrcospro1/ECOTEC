@@ -182,7 +182,7 @@ main{
 }
 
 .custom-input::placeholder,
-.custom-textarea::placeh {
+.custom-textarea::placeholder {
   color: #6c757d;
 }
 

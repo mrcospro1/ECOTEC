@@ -182,7 +182,7 @@ main{
 }
 
 .custom-input::placeholder,
-.custom-textarea::placeholder {
+.custom-textarea::placeh {
   color: #6c757d;
 }
 
@@ -219,11 +219,6 @@ main{
     color: #1F193D;
 }
 
-.text-consulta {
-  color: #fff;
-  font-size: 24px;
-}
-
 .text-consulta-subtitle {
   color: #fff;
   font-size: 1rem;
@@ -231,6 +226,58 @@ main{
   align-items: center;        
   gap: 10px;                  
   text-align: left;           
+}
+
+
+.logo-form-container {
+  display: flex;
+  justify-content: center; 
+  margin-bottom: 2rem;
+  margin-top: 2rem; 
+}
+
+.logo-form-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.logo-form-icono {
+  height: 55px; 
+  width: auto;
+  display: block;
+}
+
+.logo-form-texto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1; 
+  text-align: left;
+}
+
+.logo-form-ecotec {
+  color: var(--color-alternativas); 
+  font-size: 34px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.logo-form-alternativas {
+  color: var(--color-alternativas); 
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+
+.text-consulta {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 1.5rem; 
 }
 
 /* MEDIA QUERY PARA EL FORMULARIO */

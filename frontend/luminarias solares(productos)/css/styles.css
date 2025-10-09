@@ -214,90 +214,90 @@ body {
 
 /* Descripción Producto Section */
 .descripcion-producto-section {
-    background-color: #fff; /* Fondo blanco para la sección, si no hay degradado global */
+    background-color: #fff; 
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
 
 .custom-description-block {
+    display: flex;
     position: relative;
-    max-width: 800px; /* Ancho máximo para el bloque completo como en la imagen */
+    max-width: 800px; 
     height: 500px;
     margin: auto;
-    border-radius: 20px; /* Bordes redondeados generales, ajusta si es necesario */
-    overflow: hidden; /* Asegura que los bordes redondeados se apliquen bien */
+    border-radius: 20px; 
+    overflow: hidden; 
 }
 
 .description-image-wrapper {
-    flex: 0 0 50%; /* La imagen ocupa la mitad del espacio en pantallas grandes */
-    max-width: 50%; /* Asegura que no se estire más de la mitad */
+    flex: 0 0 50%; 
+    max-width: 50%; 
     position: relative;
 }
 
 .description-image-wrapper img {
     width: 100%;
-    height: 100%; /* La imagen llenará su contenedor */
-    object-fit: cover; /* Asegura que la imagen no se deforme */
+    height: 100%; 
+    object-fit: cover; 
     display: block;
-    border-radius: 20px 0 0 20px; /* Bordes redondeados solo a la izquierda */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Sombra sutil para la imagen */
+    border-radius: 20px 0 0 20px; 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); 
 }
 
 .description-content-wrapper {
-    flex: 1; /* El contenido de texto toma el espacio restante */
-    background-color: #00B0FF; /* Fondo azul brillante como en la imagen */
+    flex: 1; 
+    background-color: #00B0FF;
     color: white;
-    padding: 2.5rem; /* Relleno interno */
-    border-radius: 0 20px 20px 0; /* Bordes redondeados solo a la derecha */
+    padding: 2.5rem; 
+    border-radius: 0 20px 20px 0; 
     position: relative;
     z-index: 1;
-    display: flex; /* Para centrar el contenido verticalmente si es necesario */
+    display: flex; 
     flex-direction: column;
     justify-content: center;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Sombra sutil para el contenido */
-    /* Para el efecto de "salida" o solapamiento */
-    margin-left: -50px; /* Ajusta este valor para controlar cuánto se solapa */
-    padding-left: 70px; /* Ajusta el padding para que el texto no se oculte */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); 
+    margin-left: -50px; 
+    padding-left: 70px; 
 }
 
 .description-content-wrapper .card-title {
     font-weight: bold;
-    font-size: 2.2rem; /* Tamaño de fuente más grande para el título */
+    font-size: 2.2rem;
     margin-bottom: 1rem;
 }
 
 .description-content-wrapper .card-text {
     line-height: 1.6;
-    font-size: 1.1rem; /* Ajusta el tamaño de fuente para el texto */
-    font-family: 'PT Sans', sans-serif; /* Asegura la fuente PT Sans */
+    font-size: 1.1rem; 
+    font-family: 'PT Sans', sans-serif; 
 }
 
 /* Media Queries para pantallas más pequeñas */
-@media (max-width: 767.98px) { /* Para dispositivos móviles */
+@media (max-width: 767.98px) { 
     .custom-description-block {
-        flex-direction: column; /* Apila la imagen y el texto */
-        border-radius: 20px; /* Bordes redondeados en todo el bloque */
+        flex-direction: column; 
+        height: auto;
+        border-radius:  20px 20px; 
     }
 
     .description-image-wrapper {
         flex: 0 0 100%;
         max-width: 100%;
-        border-radius: 20px 20px 0 0; /* Bordes redondeados arriba */
+        border-radius: 20px 20px; 
     }
 
     .description-image-wrapper img {
-        border-radius: 20px 20px 0 0; /* Bordes redondeados arriba */
-        height: 250px; /* Altura fija para la imagen en móvil */
+        border-radius: 0 0 20px 20px; 
+        height: auto; 
     }
 
     .description-content-wrapper {
-        border-radius: 0 0 20px 20px; /* Bordes redondeados abajo */
-        margin-left: 0; /* Quita el margen negativo */
-        padding-left: 2.5rem; /* Ajusta el padding normal */
+        border-radius:  20px 20px; 
+        margin-left: 0; 
+        padding-left: 2.5rem; 
         padding-top: 1.5rem;
     }
 }
-
 
 /* Descarga de Precios Section */
 .btn-descarga {
@@ -379,6 +379,7 @@ body {
   border-color: rgba(255, 255, 255, 0.3) !important;
 
 }
+
 
 
 

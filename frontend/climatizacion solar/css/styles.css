@@ -25,7 +25,10 @@ body {
 .text-ptsans{
     font-family: PT Sans;
 }
-
+img, video, iframe {
+    max-width: 100%; /* Asegura que no sean más anchos que su padre */
+    height: auto;
+}
 /* Header */
 .logo-empresa {
   display: inline-flex;
@@ -392,6 +395,7 @@ body {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
 
 
 

@@ -25,10 +25,6 @@ body {
 .text-ptsans{
     font-family: PT Sans;
 }
-img, video, iframe {
-    max-width: 100%; /* Asegura que no sean más anchos que su padre */
-    height: auto;
-}
 /* Header */
 .logo-empresa {
   display: inline-flex;
@@ -93,6 +89,10 @@ img, video, iframe {
 
 .alt-text {
   color: var(--color-alternativas);
+}
+.img-content {
+    max-width: 100%; /* Asegura que no sean más anchos que su padre */
+    height: auto;
 }
 
 .logo-ecotec span{
@@ -395,6 +395,7 @@ img, video, iframe {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
 
 
 

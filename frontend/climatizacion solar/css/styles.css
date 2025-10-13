@@ -188,7 +188,14 @@ body {
   border-radius: 10px;
 }
 
+@media (max-width: 767px){
+  .img-custom{
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  } 
 
+}
 
 .section-title {
   color: #009fe3;
@@ -385,6 +392,7 @@ body {
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
 
 
 

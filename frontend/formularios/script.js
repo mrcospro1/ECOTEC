@@ -23,7 +23,7 @@ formulario.addEventListener("submit", async (e) => {
   });
 
   if (res.ok) {
-    window.location.href = "/exito.html";  // ✅ Redirección correcta
+    window.location.href = "check.html";
   } else {
     boton.disabled = false;
     boton.innerText = "Enviar";

@@ -23,8 +23,7 @@ formulario.addEventListener("submit", async (e) => {
   });
 
   if (res.ok) {
-    window.location.href = "/exito.html";  // ✅ Redirección correcta
-  } else {
+    window.location.href = "check.html";  // 
     boton.disabled = false;
     boton.innerText = "Enviar";
     alert("Hubo un problema al enviar la consulta.");

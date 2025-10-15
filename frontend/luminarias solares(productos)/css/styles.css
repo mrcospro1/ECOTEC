@@ -189,10 +189,19 @@ body {
 }
 
 .feature-card {
+    height: 100%;
     background-color: #f8f9fa;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-card p.text-muted{
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
 }
 
 .feature-card:hover {
@@ -435,6 +444,7 @@ body {
   border-color: rgba(255, 255, 255, 0.3) !important;
 
 }
+
 
 
 

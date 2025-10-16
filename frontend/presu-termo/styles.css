@@ -1,7 +1,7 @@
 
 body {
     background-color: #f8f9fa;
-   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('hero-termo.jpg') no-repeat center center;
+   background-image: url('hero-termo.jpg') no-repeat center center;
    background-size: cover;
 }
 
@@ -110,4 +110,5 @@ body {
     position: absolute;
 
 }
+
 

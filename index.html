@@ -113,21 +113,46 @@
       </div>
     </section>
 
-    <section class="container text-center my-5 py-5">
-      <div class="row justify-content-center mb-4">
-        <div class="col-md-8">
-          <h2 class="fw-bold">Proyectos en acción</h2>
-          <p class="text-muted text-ptsans">Conoce algunos de nuestros proyectos realizados.
-            Nos enorgullece llevar energía limpia y renovable a hogares, empresas y espacios públicos.</p>
+    <section class="py-5">
+    <div class="container my-5">
+        <h2 class="text-center mb-4 fw-bold">Proyectos en acción</h2>
+        <p class="text-muted text-ptsans text-center">
+            Conoce algunos de nuestros proyectos realizados.
+            Nos enorgullece llevar energía limpia y renovable a hogares, empresas y espacios públicos.
+          </p>
+        <div id="carouselProyectosSoloImagen" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <a href="/frontend/proyectos/proyectos.html#arbol-solar-text" title="Ver proyecto: Árbol solar">
+                        <img src="frontend/index/images/proyectos_arbol-solar.jpg" class="img-carousel-proyecto" alt="Árbol solar">
+                    </a>
+                </div>
+
+                <div class="carousel-item">
+                    <a href="/frontend/proyectos/proyectos.html#desfibriladores-text" title="Ver proyecto: Desfibriladores solares">
+                        <img src="frontend/index/images/proyectos_desfibriladores.jpg" class="img-carousel-proyecto" alt="Desfibriladores solares">
+                    </a>
+                </div>
+
+                <div class="carousel-item">
+                    <a href="/frontend/proyectos/proyectos.html#generador-portatil-text" title="Ver proyecto: Generador portátil">
+                        <img src="frontend/index/images/proyectos_generador-portatil.jpg" class="img-carousel-proyecto" alt="Generador portátil">
+                    </a>
+                </div>
+                
+                </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselProyectosSoloImagen" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselProyectosSoloImagen" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
         </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-12">
-          <img src="frontend/index/images/desfribilador solar.jpeg" class="img-fluid rounded-3 shadow-lg"
-            alt="Proyecto destacado">
-        </div>
-      </div>
-    </section>
+    </div>
+</section>
 
     <section class="container text-center my-5 py-5">
       <div class="row g-4">
@@ -292,3 +317,4 @@
 
 
 </html>
+

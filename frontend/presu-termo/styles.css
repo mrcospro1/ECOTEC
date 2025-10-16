@@ -1,9 +1,4 @@
 
-body {
-    background-color: #f8f9fa;
-   background-image: url('hero-termo.jpg') no-repeat center center;
-   background-size: cover;
-}
 
 .card-title-main {
     color: #3b3164;
@@ -110,5 +105,6 @@ body {
     position: absolute;
 
 }
+
 
 

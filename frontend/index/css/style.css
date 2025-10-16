@@ -240,6 +240,49 @@ body {
   display: flex;
 }
 
+/* proyectos en curso */
+.img-carousel-proyecto {
+    width: 400px ; 
+    height: 400px; 
+    max-height: 400px;
+    width: auto; 
+    margin: 0 auto; 
+    object-fit: cover; 
+    border-radius: 20px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+.carousel-item a {
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-item a:hover .img-carousel-proyecto {
+    transform: scale(1.02); 
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.25);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--color-btn-end); 
+    border-radius: 50%;
+    padding: 15px;
+}
+
+@media (max-width: 768px) {
+    .img-carousel-proyecto {
+        
+        width: 280px !important; 
+        height: 200px !important; 
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 10%; 
+    }
+}
+
 /* Cards Section */
 .card-img-top {
   height: 200px;
@@ -362,4 +405,5 @@ body {
 /* Línea legal */
 .footer .border-top {
   border-color: rgba(255, 255, 255, 0.3) !important;
+
 }

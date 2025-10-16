@@ -1,8 +1,8 @@
-/* =======================================
-   ESTILOS GENERALES Y LAYOUT
-   ======================================= */
+
 body {
     background-color: #f8f9fa;
+   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('fondo-consulta.jpg') no-repeat center center;
+   background-size: cover;
 }
 
 .card-title-main {
@@ -108,4 +108,5 @@ body {
     transform: translateX(100%); /* Sale hacia la derecha */
     opacity: 0;
     position: absolute;
+
 }

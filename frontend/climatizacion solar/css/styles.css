@@ -26,6 +26,32 @@ body {
 .text-ptsans{
     font-family: PT Sans;
 }
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+.scroll-reveal.reveal-hidden {
+    opacity: 0;
+    transform: translateY(30px); 
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+header .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+
+
 /* Header */
 .logo-empresa {
   display: inline-flex;
@@ -466,6 +492,7 @@ body {
     border-width: 5px;
   }
 }
+
 
 
 

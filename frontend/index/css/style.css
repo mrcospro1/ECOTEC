@@ -22,52 +22,27 @@ body {
 .text-ptsans {
   font-family: PT Sans;
 }
-
-#chatbot {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 300px;
-  height: 400px;
-  background: #f8f9fa;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  z-index: 9999;
+html {
+    scroll-behavior: smooth;
 }
 
-#chatlog {
-  flex-grow: 1;
-  padding: 10px;
-  overflow-y: auto;
-  font-size: 14px;
+.scroll-reveal.reveal-hidden {
+    opacity: 0;
+    transform: translateY(30px); 
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-#userInput {
-  display: flex;
-  border-top: 1px solid #ccc;
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-#userInput input {
-  flex-grow: 1;
-  padding: 10px;
-  border: none;
-  outline: none;
-}
-
-#userInput button {
-  padding: 10px 15px;
-  border: none;
-  background-color: #0d6efd;
-  color: white;
-  cursor: pointer;
-}
-
-#userInput button:hover {
-  background-color: #0b5ed7;
+header .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
 }
 
 /* Header */
@@ -480,6 +455,7 @@ body {
     border-width: 5px;
   }
 }
+
 
 
 

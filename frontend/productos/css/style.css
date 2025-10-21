@@ -218,6 +218,8 @@ header{
 .btn-card {
     display: flex;
     justify-content: center;
+    height:30px;
+    width:30px;
     background-color: var(--color-boton);
     color: white;
     border: none;
@@ -383,6 +385,7 @@ header{
     border-width: 5px;
   }
 }
+
 
 
 

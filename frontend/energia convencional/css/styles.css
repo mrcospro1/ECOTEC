@@ -2,14 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
-    --color-header-footer: #01579B;
-    --color-ecotec: #1F193D;
-    --color-alternativas: #F0BC00;
+    --color-header:rgba(31, 25, 61, 0.8);
+    --color-boton: #efa600;
+    --color-ecotec:#1F193D;
+    --color-alternativas:#F0BC00;
+    --color-footer-icon:#8591b8;
     --color-card-background: #ffffff;
     --color-cta-start: #1F193D;
     --color-cta-end: #003CFF;
-    --color-btn-start: #00B0FF;
-    --color-btn-end: #006A99;
+    --color-sub-menu:#1A0F6B;
     --color-text-dark: #333;
     --color-text-muted: #6c757d;
 }
@@ -47,6 +48,16 @@ header .scroll-reveal {
 }
 
 /* Header */
+header{
+  background-color:var(--color-header);
+
+}
+
+.logo-ecotec{
+    color: var(--color-ecotec);
+    font-size: 20px;
+}
+
 .logo-empresa {
   display: inline-flex;
   align-items: center;
@@ -57,7 +68,7 @@ header .scroll-reveal {
 }
 
 .logo-empresa:hover {
-  opacity: 0.7; /* solo cambia la opacidad */
+  opacity: 0.7; 
 }
 
 .logo-icono {
@@ -95,9 +106,6 @@ header .scroll-reveal {
   opacity: 0.8;
 }
 
-.navbar {
-    background-color: #01579B;
-}
 
 .navbar .nav-link,
 .navbar-brand {
@@ -106,7 +114,7 @@ header .scroll-reveal {
 
 .navbar .nav-link:hover {
   text-decoration: none;
-  color: #1F193D;
+  color: var(--color-alternativas);
 }
 
 .alt-text {
@@ -125,7 +133,7 @@ header .scroll-reveal {
 
 
 .navbar .btn-cta {
-  background: linear-gradient(90deg, #0288D1, #03A9F4);
+  background: var(--color-boton);
   color: #fff;
   border-radius: 20px;
   padding: 6px 16px;
@@ -134,12 +142,13 @@ header .scroll-reveal {
 }
 
 .navbar .btn-cta:hover {
-   background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end));
+   background: var(--color-boton);
+   outline:1px solid #fff ;
    transform: scale(1.05);
 }
 
 .dropdown-item:hover{
-  background-color: #003CFF;
+  background-color: var(--color-sub-menu);
   color: #ffffff;
 }
 
@@ -159,11 +168,11 @@ header .scroll-reveal {
   opacity: 1;
   transform: translateY(0);
 }
-
 .icono-logo img{
     height: 40px;
     width: 40px;
 }
+
 
 /* Hero */
 .hero {
@@ -197,8 +206,9 @@ header .scroll-reveal {
     font-family: K2D;
     font-weight: bold;
 }
+
 .title-pagina{
-    color: var(--color-btn-start);
+    color: var(--color-sub-menu);
 }
 
 .icono img{
@@ -219,11 +229,16 @@ header .scroll-reveal {
 /*
  * Service Section
  */
+
+.text-primary{
+  color: var(--color-alternativas) !important;
+}
+ 
 .text-armado{
     font-size: 38px;
     font-weight: bold;
     font-family: PT sans;
-    color: var(--color-btn-end);
+    color: var(--color-ecotec);
 }
 
 .service-grid {
@@ -260,29 +275,48 @@ header .scroll-reveal {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+.icono{
+  padding: 10px;
+}
 
 
 /* CTA */
 .cta-section {
-  background: linear-gradient(90deg, var(--color-cta-start), var(--color-cta-end));
   color: #fff;
   padding: 3rem 1rem;
+  height: 200px;
 }
 
-.cta-section .btn-cta {
-  background: linear-gradient(to right, var(--color-btn-start), var(--color-btn-end));
+.cta-section{
+  font-size: 20px;
+  background: var(--color-footer-icon);
+  padding: 12px 30px;
+  color: #fff;
+}
+
+.btn-cta{
+  background-color: var(--color-boton);
+  font-size:20px;
+  color: #fff;
   border: none;
   border-radius: 30px;
   padding: 12px 30px;
-  color: #fff;
   transition: transform 0.2s ease-in-out;
-}
 
-.cta-section .btn-cta:hover {
+}
+ 
+.btn-cta:hover {
+  background-color: var(--color-boton);
+   filter: contrast(150%);
   transform: scale(1.05);
 }
 
-/* Footer personalizado */
+/* Footer*/
+.footer{
+  background-color: var(--color-ecotec) !important;
+}
+
+
 .footer h5 {
   font-size: 1.2rem;
   font-weight: 600;
@@ -291,21 +325,21 @@ header .scroll-reveal {
 .footer p{
   font-size: 0.95rem;
 }
-
-/* Íconos sociales con efecto */
 .social-link {
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .social-link:hover {
   transform: scale(1.2);
-  color: #66ccff !important;
+  color: var(--color-footer-icon) !important;
 }
 
 /* Botón contacto */
 .footer .btn-info {
   border-radius: 12px;
+  border: none;
   padding: 8px 16px;
+  background-color: var(--color-alternativas);
   transition: background 0.3s ease;
 }
 .icon-footer img{
@@ -314,14 +348,9 @@ header .scroll-reveal {
 }
 
 .footer .btn-info:hover {
-  background-color: #0d6efd; /* azul más intenso */
+  background-color: var(--color-ecotec); 
+  outline: solid 1px #fff;
 }
-
-/* Línea legal */
-.footer .border-top {
-  border-color: rgba(255, 255, 255, 0.3) !important;
-}
-
 #loader {
   position: fixed;
   top: 0;

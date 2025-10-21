@@ -1,23 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-
 :root {
-    --color-header-footer: #01579B;
-    --color-ecotec: #1F193D;
-    --color-alternativas: #F0BC00;
-    --color-btn-start: #00B0FF;
-    --color-btn-end: #006A99;
+    --color-header:rgba(31, 25, 61, 0.8);
+    --color-boton: #efa600;
+    --color-ecotec:#1F193D;
+    --color-alternativas:#F0BC00;
+    --color-footer-icon:#8591b8;
+    --color-card-background: #ffffff;
     --color-cta-start: #1F193D;
     --color-cta-end: #003CFF;
-
+    --color-sub-menu:#1A0F6B;
+    --color-text-dark: #333;
+    --color-text-muted: #6c757d;
 }
 
+/* Base */
 body {
-    font-family: K2D;
+    font-family: K2D, arial;
 }
-
-.text-ptsans {
+.text-ptsans{
     font-family: PT Sans;
 }
 
@@ -46,6 +48,16 @@ header .scroll-reveal {
 }
 
 /* Header */
+header{
+  background-color:var(--color-header);
+
+}
+
+.logo-ecotec{
+    color: var(--color-ecotec);
+    font-size: 20px;
+}
+
 .logo-empresa {
   display: inline-flex;
   align-items: center;
@@ -56,7 +68,7 @@ header .scroll-reveal {
 }
 
 .logo-empresa:hover {
-  opacity: 0.7; /* solo cambia la opacidad */
+  opacity: 0.7; 
 }
 
 .logo-icono {
@@ -94,9 +106,6 @@ header .scroll-reveal {
   opacity: 0.8;
 }
 
-.navbar {
-    background-color: #01579B;
-}
 
 .navbar .nav-link,
 .navbar-brand {
@@ -105,7 +114,7 @@ header .scroll-reveal {
 
 .navbar .nav-link:hover {
   text-decoration: none;
-  color: #1F193D;
+  color: var(--color-alternativas);
 }
 
 .alt-text {
@@ -124,7 +133,7 @@ header .scroll-reveal {
 
 
 .navbar .btn-cta {
-  background: linear-gradient(90deg, #0288D1, #03A9F4);
+  background: var(--color-boton);
   color: #fff;
   border-radius: 20px;
   padding: 6px 16px;
@@ -133,12 +142,13 @@ header .scroll-reveal {
 }
 
 .navbar .btn-cta:hover {
-   background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end));
+   background: var(--color-boton);
+   outline:1px solid #fff ;
    transform: scale(1.05);
 }
 
 .dropdown-item:hover{
-  background-color: #003CFF;
+  background-color: var(--color-sub-menu);
   color: #ffffff;
 }
 
@@ -158,7 +168,6 @@ header .scroll-reveal {
   opacity: 1;
   transform: translateY(0);
 }
-
 .icono-logo img{
     height: 40px;
     width: 40px;
@@ -180,17 +189,16 @@ header .scroll-reveal {
 .wave-container {
     position: relative;
     width: 100%;
-    height: 200px; /* O el alto que desees para la onda */
+    height: 200px; 
     overflow: hidden;
-    background: linear-gradient(to top, #007bff, #0056b3); /* Colores de agua */
 }
 
 .wave {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 200%; /* Para que la onda se mueva sin interrupción */
-    height: 100px; /* Altura de la parte visible de la onda */
+    width: 200%; 
+    height: 100px;
     background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" fill-opacity="1" d="M0,192L80,176C160,160,320,128,480,133.3C640,139,800,181,960,181.3C1120,181,1280,139,1360,117.3L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>');
     background-size: cover;
     animation: wave-movement 10s linear infinite;
@@ -219,7 +227,7 @@ header .scroll-reveal {
 }
 
 .card-title{
-    color: #006A99;
+    color: var(--color-sub-menu);
     font-size: 22px;
 }
 
@@ -229,7 +237,7 @@ header .scroll-reveal {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
-    height: 100%; /* Asegura que todas las tarjetas tengan la misma altura */
+    height: 100%; 
 }
 
 .service-card:hover {
@@ -248,8 +256,9 @@ header .scroll-reveal {
     flex-direction: column;
     justify-content: center;
 }
+
 .btn-card{
-    background: #00B0FF;
+    background: var(--color-boton);
     color: white;
     border: none;
     padding: 10px 25px;
@@ -259,6 +268,7 @@ header .scroll-reveal {
     transition: transform 0.2s ease;
 }
 .btn-card:hover{
+    background-color: var(--color-alternativas);
     transform: scale(1.05);
     color: #000;
 }
@@ -271,27 +281,42 @@ header .scroll-reveal {
     margin: 10px;
 }
 
+/* CTA */
 .cta-section {
-  background: linear-gradient(90deg, var(--color-cta-start), var(--color-cta-end));
   color: #fff;
   padding: 3rem 1rem;
 }
 
-.cta-section .btn-cta {
+.cta-section{
   font-size: 20px;
-  background: linear-gradient(to right, var(--color-btn-start), var(--color-btn-end));
+  background: var(--color-footer-icon);
+  padding: 12px 30px;
+  color: #fff;
+}
+
+.btn-cta{
+  background-color: var(--color-boton);
+  font-size:20px;
+  color: #fff;
   border: none;
   border-radius: 30px;
   padding: 12px 30px;
-  color: #fff;
   transition: transform 0.2s ease-in-out;
-}
 
-.cta-section .btn-cta:hover {
+}
+ 
+.btn-cta:hover {
+  background-color: var(--color-boton);
+   filter: contrast(150%);
   transform: scale(1.05);
 }
 
-/* Footer personalizado */
+/* Footer*/
+.footer{
+  background-color: var(--color-ecotec) !important;
+}
+
+
 .footer h5 {
   font-size: 1.2rem;
   font-weight: 600;
@@ -306,13 +331,15 @@ header .scroll-reveal {
 
 .social-link:hover {
   transform: scale(1.2);
-  color: #66ccff !important;
+  color: var(--color-footer-icon) !important;
 }
 
 /* Botón contacto */
 .footer .btn-info {
   border-radius: 12px;
+  border: none;
   padding: 8px 16px;
+  background-color: var(--color-alternativas);
   transition: background 0.3s ease;
 }
 .icon-footer img{
@@ -321,12 +348,8 @@ header .scroll-reveal {
 }
 
 .footer .btn-info:hover {
-  background-color: #0d6efd; /* azul más intenso */
-}
-
-/* Línea legal */
-.footer .border-top {
-  border-color: rgba(255, 255, 255, 0.3) !important;
+  background-color: var(--color-ecotec); 
+  outline: solid 1px #fff;
 }
 
 #loader {

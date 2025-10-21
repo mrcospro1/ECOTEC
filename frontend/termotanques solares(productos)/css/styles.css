@@ -1,25 +1,63 @@
 @import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-
 :root {
-    --color-header-footer: #01579B;
-    --color-ecotec: #1F193D;
-    --color-alternativas: #F0BC00;
-    --color-btn-start: #00B0FF;
-    --color-btn-end: #006A99;
+    --color-header:rgba(31, 25, 61, 0.8);
+    --color-boton: #efa600;
+    --color-ecotec:#1F193D;
+    --color-alternativas:#F0BC00;
+    --color-footer-icon:#8591b8;
+    --color-card-background: #ffffff;
     --color-cta-start: #1F193D;
     --color-cta-end: #003CFF;
+    --color-sub-menu:#1A0F6B;
+    --color-text-dark: #333;
+    --color-text-muted: #6c757d;
 }
 
+/* Base */
 body {
-    font-family: K2D;
+    font-family: K2D, arial;
 }
 .text-ptsans{
     font-family: PT Sans;
 }
 
+
+html {
+    scroll-behavior: smooth;
+}
+
+.scroll-reveal.reveal-hidden {
+    opacity: 0;
+    transform: translateY(30px); 
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+header .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+
 /* Header */
+header{
+  background-color:var(--color-header);
+
+}
+
+.logo-ecotec{
+    color: var(--color-ecotec);
+    font-size: 20px;
+}
+
 .logo-empresa {
   display: inline-flex;
   align-items: center;
@@ -30,7 +68,7 @@ body {
 }
 
 .logo-empresa:hover {
-  opacity: 0.7; /* solo cambia la opacidad */
+  opacity: 0.7; 
 }
 
 .logo-icono {
@@ -68,9 +106,6 @@ body {
   opacity: 0.8;
 }
 
-.navbar {
-    background-color: #01579B;
-}
 
 .navbar .nav-link,
 .navbar-brand {
@@ -79,7 +114,7 @@ body {
 
 .navbar .nav-link:hover {
   text-decoration: none;
-  color: #1F193D;
+  color: var(--color-alternativas);
 }
 
 .alt-text {
@@ -98,7 +133,7 @@ body {
 
 
 .navbar .btn-cta {
-  background: linear-gradient(90deg, #0288D1, #03A9F4);
+  background: var(--color-boton);
   color: #fff;
   border-radius: 20px;
   padding: 6px 16px;
@@ -107,12 +142,13 @@ body {
 }
 
 .navbar .btn-cta:hover {
-   background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end));
+   background: var(--color-boton);
+   outline:1px solid #fff ;
    transform: scale(1.05);
 }
 
 .dropdown-item:hover{
-  background-color: #003CFF;
+  background-color: var(--color-sub-menu);
   color: #ffffff;
 }
 
@@ -132,16 +168,14 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
-
 .icono-logo img{
     height: 40px;
     width: 40px;
 }
 
-
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/termotanque\ solar.jpg') no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/termotanque solar.jpg') no-repeat center center/cover;
     height: 60vh;
     display: flex;
     justify-content: center;
@@ -168,7 +202,7 @@ body {
 
 .btn-cta {
     margin: auto;
-    background: linear-gradient(to bottom, var(--color-btn-start) 0%, var(--color-btn-end) 100%);
+    background: var(--color-boton);
     color: white;
     border: none;
     padding: 10px 30px;
@@ -177,17 +211,19 @@ body {
 }
 
 .btn-cta:hover {
+    background-color: var(--color-alternativas);
     transform: scale(1.05);
 }
 
 /* Beneficios Section */
-.title-card{
-    color: #00B0FF;
+.title{
+    color: var(--color-sub-menu);
 }
 
-.title{
-    color: #006A99;
+.title-card{
+    color: var(--color-alternativas);
 }
+
 
 .feature-card {
     height: 100%;
@@ -250,13 +286,13 @@ body {
     height: 100%; 
     object-fit: cover; 
     display: block;
-    border-radius: 20px 0 0 20px;
+    border-radius: 20px 0 0 20px; 
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); 
 }
 
 .description-content-wrapper {
     flex: 1; 
-    background-color: #00B0FF; 
+    background-color: var(--color-ecotec);
     color: white;
     padding: 2.5rem; 
     border-radius: 0 20px 20px 0; 
@@ -308,10 +344,9 @@ body {
     }
 }
 
-
 /* Descarga de Precios Section */
 .btn-descarga {
-    background-color: #0d6efd;
+    background-color: var(--color-boton);
     color: white;
     border: none;
     padding: 10px 40px;
@@ -325,14 +360,19 @@ body {
     width: 40px;
 }
 
+
 .btn-descarga:hover {
     transform: scale(1.03);
-    background-color: #003CFF;
+    background-color: var(--color-alternativas);
     color: #fff;
     transition: transform 0.2s ease;
 }
 
 /* Galería de Instalaciones Section */
+.mb-4{
+  color: var(--color-sub-menu);
+}
+
 .galeria-infinita{
     background-color: #f8f9fa;
     overflow: hidden;
@@ -405,30 +445,35 @@ body {
     }
 }
 
-/* Footer personalizado */
+/* Footer*/
+.footer{
+  background-color: var(--color-ecotec) !important;
+}
+
+
 .footer h5 {
   font-size: 1.2rem;
   font-weight: 600;
 }
 
-.footer p {
+.footer p{
   font-size: 0.95rem;
 }
-
-/* Íconos sociales con efecto */
 .social-link {
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .social-link:hover {
   transform: scale(1.2);
-  color: #66ccff !important;
+  color: var(--color-footer-icon) !important;
 }
 
 /* Botón contacto */
 .footer .btn-info {
   border-radius: 12px;
+  border: none;
   padding: 8px 16px;
+  background-color: var(--color-alternativas);
   transition: background 0.3s ease;
 }
 .icon-footer img{
@@ -437,12 +482,8 @@ body {
 }
 
 .footer .btn-info:hover {
-  background-color: #0d6efd; /* azul más intenso */
-}
-
-/* Línea legal */
-.footer .border-top {
-  border-color: rgba(255, 255, 255, 0.3) !important;
+  background-color: var(--color-ecotec); 
+  outline: solid 1px #fff;
 }
 
 #loader {
@@ -517,9 +558,6 @@ body {
     border-width: 5px;
   }
 }
-
-
-
 
 
 

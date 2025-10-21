@@ -216,6 +216,7 @@ header{
 
 /* Botones */
 .btn-card {
+    justify-content: center;
     background-color: var(--color-boton);
     color: white;
     border: none;

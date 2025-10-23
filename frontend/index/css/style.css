@@ -19,11 +19,6 @@
 body {
     font-family: K2D, arial;
 }
-.text-ptsans{
-    font-family: PT Sans;
-}
-
-
 html {
     scroll-behavior: smooth;
 }
@@ -105,8 +100,6 @@ header{
 .logo-empresa:hover {
   opacity: 0.8;
 }
-
-
 .navbar .nav-link,
 .navbar-brand {
   color: #fff ;

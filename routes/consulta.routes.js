@@ -2,6 +2,7 @@ const prisma = require('../prismaModulo');
 const express = require('express');
 const router = express.Router();
 const cors = require('cors');
+const fetch = require('node-fetch'); // 👈 necesario para validar el captcha
 const { Resend } = require('resend');
 
 const resend = new Resend(process.env.RESEND_KEY_API);
@@ -11,10 +12,10 @@ router.use(cors({
 }));
 
 router.post("/registro", async (req, res) => {
-  const { nombre, apellido, asunto, mail } = req.body;
+  const { nombre, apellido, asunto, mail, "g-recaptcha-response": token } = req.body;
 
-  if (!nombre || !apellido || !asunto || !mail) {
-    return res.status(400).json({ error: "Faltan datos obligatorios" });
+  if (!nombre || !apellido || !asunto || !mail || !token) {
+    return res.status(400).json({ error: "Faltan datos obligatorios o token del captcha" });
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -23,13 +24,25 @@ router.post("/registro", async (req, res) => {
   }
 
   try {
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY; 
+    const respuesta = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `secret=${secretKey}&response=${token}`,
+    });
+
+    const data = await respuesta.json();
+
+    if (!data.success || data.score < 0.5) {
+      return res.status(400).json({ error: "Fallo la verificación del reCAPTCHA" });
+    }
+
     const nuevaConsulta = await prisma.consulta.create({
       data: { nombre, apellido, asunto, mail },
     });
 
-    // Envío del correo con Resend
     const response = await resend.emails.send({
-      from: 'Formulario Web <onboarding@resend.dev>', 
+      from: 'Formulario Web <onboarding@resend.dev>',
       to: process.env.EMAIL_USER,
       subject: '📩 Nueva consulta',
       html: `
@@ -77,18 +90,8 @@ router.post("/registro", async (req, res) => {
       consulta: nuevaConsulta,
     });
   } catch (error) {
-    console.error("Error al crear consulta:", error);
+    console.error("Error en el proceso:", error);
     res.status(500).json({ error: "Error interno del servidor" });
-  }
-});
-
-router.get("/ver", async (req, res) => {
-  try {
-    const consultas = await prisma.consulta.findMany();
-    res.json(consultas);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Error al obtener consultas" });
   }
 });
 

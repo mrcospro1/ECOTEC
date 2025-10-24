@@ -166,6 +166,7 @@ header{
 
 .navbar .btn-cta {
   background: var(--color-boton);
+  font-size: 20px;
   color: #fff;
   border-radius: 20px;
   padding: 6px 16px;
@@ -590,6 +591,7 @@ header{
     border-width: 5px;
   }
 }
+
 
 
 

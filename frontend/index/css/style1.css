@@ -1,0 +1,160 @@
+/*
+ * General Styles
+ */
+body {
+    font-family: 'PT Sans', sans-serif; /* Asegúrate de que esta fuente esté enlazada si la usas */
+}
+
+/*
+ * Header
+ */
+.navbar {
+    background-color: #0f60f7;
+    padding: 1rem;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.logo-ecotec {
+    color: #fff;
+}
+
+.logo-alternativos {
+    color: #e9da11; /* Azul claro */
+}
+
+.nav-link {
+    color: white;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #33aaff;
+}
+
+.nav-link.active {
+    color: #33aaff !important;
+}
+
+.btn-contactate {
+    background-color: #33aaff;
+    border-color: #33aaff;
+    color: white;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    transition: background-color 0.3s;
+}
+
+.btn-contactate:hover {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/*
+ * Hero Section for Services Page
+ */
+.hero-section-servicios {
+    position: relative;
+    height: 400px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden; /* Asegura que la imagen no se salga del contenedor */
+}
+
+.hero-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta y escala la imagen para llenar el contenedor */
+    z-index: -1; /* Envía la imagen detrás del contenido */
+}
+
+.hero-section-servicios::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Capa oscura para mejorar la legibilidad */
+    z-index: 0; /* Asegura que la capa esté entre la imagen y el texto */
+}
+
+.hero-content {
+    z-index: 1; /* Asegura que el texto esté por encima de todo */
+}
+
+/*
+ * Feature Cards Section
+ */
+.feature-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    height: 100%;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card .icon img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+}
+
+/*
+ * Project and Card Section
+ */
+.btn-card {
+    background-color: #33aaff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    transition: background-color 0.3s;
+}
+
+.btn-card:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/*
+ * Partner Section
+ */
+.partner-logo {
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.partner-logo:hover {
+    opacity: 1;
+}
+
+/*
+ * Footer
+ */
+footer {
+    background-color: #002244;
+}

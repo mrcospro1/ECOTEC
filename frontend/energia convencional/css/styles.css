@@ -273,7 +273,6 @@ header{
 .text-armado{
     font-size: 38px;
     font-weight: bold;
-    font-family: PT sans;
     color: var(--color-sub-menu);
 }
 

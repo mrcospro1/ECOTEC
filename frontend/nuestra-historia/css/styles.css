@@ -31,6 +31,37 @@ html {
     scroll-behavior: smooth;
 }
 
+.hover-underline {
+  font-size: 2rem;
+  color: #ffffff;
+  position: relative;
+  display: inline-block;
+}
+
+.hover-underline::after,
+.hover-underline::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #F0BC00, #1F193D);
+  bottom: -5px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease-out;
+}
+
+.hover-underline::before {
+  top: -5px;
+  transform-origin: left;
+}
+
+.hover-underline:hover::after,
+.hover-underline:hover::before {
+  transform: scaleX(1);
+}
+
 .scroll-reveal.reveal-hidden {
     opacity: 0;
     transform: translateY(30px); 
@@ -374,6 +405,7 @@ header{
     border-width: 5px;
   }
 }
+
 
 
 

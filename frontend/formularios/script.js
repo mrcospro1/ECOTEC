@@ -2,12 +2,15 @@ const hostUrl = window.ENV.HOST;
 const formulario = document.getElementById("registroConsulta");
 const boton = document.querySelector("#btnFormulario");
 const emailInput = document.getElementById("mail");
-const error = document.getElementById("error"); 
+const error = document.getElementById("error");
 
 formulario.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  // INICIO: Activar el estado de carga
   boton.disabled = true;
   boton.innerText = "Enviando...";
+  boton.classList.add("loading"); // ✨ Nuevo: Agregamos una clase para estilos de carga
 
   const email = emailInput.value.trim();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -15,10 +18,13 @@ formulario.addEventListener("submit", async (e) => {
   if (!emailRegex.test(email)) {
     error.textContent = "Por favor ingresa un correo válido.";
     emailInput.style.borderColor = "red";
+    
+    // FIN (ERROR): Desactivar el estado de carga
     boton.disabled = false;
     boton.innerText = "Enviar";
+    boton.classList.remove("loading"); // ✨ Nuevo: Removemos la clase
     return;
-  } 
+  }
 
   error.textContent = "";
   emailInput.style.borderColor = "green";
@@ -53,9 +59,10 @@ formulario.addEventListener("submit", async (e) => {
       console.error(error);
       alert("Hubo un problema al enviar la consulta.");
     } finally {
+      // FIN: Desactivar el estado de carga (siempre se ejecuta)
       boton.disabled = false;
       boton.innerText = "Enviar";
+      boton.classList.remove("loading"); // ✨ Nuevo: Removemos la clase
     }
   });
 });
-

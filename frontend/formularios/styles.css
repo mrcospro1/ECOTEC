@@ -355,3 +355,42 @@ main{
     border-radius: 1rem;
   }
 }
+
+/* Estilo base para el botón si no lo tienes */
+#btnFormulario {
+    position: relative;
+    /* Asegúrate de que el texto esté visible si no está cargando */
+    /* ... otros estilos de botón ... */
+}
+
+/* 1. Estilos cuando el botón está en estado de carga */
+#btnFormulario.loading {
+    /* Oculta el texto "Enviando..." si quieres que solo se vea el spinner */
+    color: transparent; 
+    pointer-events: none; /* Evita cualquier interacción */
+}
+
+/* 2. Crear el spinner con un pseudo-elemento */
+#btnFormulario.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px; /* Tamaño del spinner */
+    height: 20px; /* Tamaño del spinner */
+    margin-top: -10px; /* Centrar verticalmente (mitad del alto) */
+    margin-left: -10px; /* Centrar horizontalmente (mitad del ancho) */
+    
+    /* Estilos para el spinner */
+    border: 3px solid rgba(255, 255, 255, 0.3); /* Color de fondo del anillo */
+    border-top-color: #ffffff; /* Color de la parte giratoria (blanco en este caso) */
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite; /* Aplica la animación */
+}
+
+/* 3. Definición de la animación de giro */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

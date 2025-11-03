@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="Logos-Ecotec.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <title>Inicio de Sesion</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand fw-bold logo-empresa" href="../../index.html">
+            <i class="icono-logo"><img src="Logos-Ecotec.png" alt="logo"></i>
+            <span class="logo-ecotec">Ecotec</span>
+            <span class="logo-alternativas">Alternativas</span>
+          </a>
+          <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="../proyectos/proyectos.html">Proyectos</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="../productos/productos.html">Productos</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="../termotanques solares(productos)/termotanque solar.html">Termotanques solares</a></li>
+                  <li><a class="dropdown-item" href="../luminarias solares(productos)/luminarias solares.html">Luminarias solares</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="../servicios/servicios.html" role="button">Servicios</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="../Energia fotovoltaica/energia fotovoltaica.html">Energía fotovoltaica</a></li>
+                  <li><a class="dropdown-item" href="../energia convencional/energia convencional.html">Energía convencional</a></li>
+                  <li><a class="dropdown-item" href="../termotanques solares(servicios)/termotanques solares.html">Termotanques solares</a></li>
+                  <li><a class="dropdown-item" href="../climatizacion solar/climatizacion solar.html">Climatización solar</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../nuestra-historia/Nuestra historia.html">Nuestra Historia</a>
+              </li>
+              <li class="nav-item">
+                <a class="btn btn-cta ms-2" href="#">Contáctate</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="d-flex align-items-center justify-content-center min-vh-100">
+      <div class="card p-3 shadow-lg custom-card">
+        <div class="row g-0 card-contenido">
+            <div class="col-md-6 d-none d-md-block p-4 custom-bg-left">
+              
+            <h2 class="mb-3 text-center title-consulta"><i class="icono-logo"><img src="Logos-Ecotec.png" alt="logo"></i>Ecotec Alternativas</h2>
+            <p class="text-center text-consulta">Soluciones sustentables para un futuro limpio</p>
+            <p class="text-consulta-subtitle">
+            <span class="icono-form"><img src="dom-energia.png" alt="logo"></span>
+               Ahorro y eficiencia con energía solar
+            </p>
+            <p class="text-consulta-subtitle">
+            <span class="icono-form"><img src="paneles-solares.png" alt="logo"></span>
+              Instalaciones de paneles solares, termotanques y climatización para un futuro más limpio
+            </p>
+            <p class="text-consulta-subtitle">
+            <span class="icono-form"><img src="paso-del-tiempo (1).png" alt="logo"></span>
+              Para un futuro más limpio
+            </p>
+          </div>
+          
+          <div class="col-12 col-md-6 p-4">
+            <div class="text-center mb-4">
+              <h3 class="mb-1 title-formulario">Accede a tu cuenta y gestiona tu energía</h3>
+                <i class="icon"><img src="usuario.png" alt="usuario"></i>
+            </div>
+            <form id="registroConsulta">
+              <div class="mb-3">
+                <input type="text" id="nombre" class="form-control custom-input" placeholder="Nombre Usuario">
+              </div>
+              <div class="mb-3">
+                <input type="password" id="Contraseña" class="form-control custom-input" placeholder="Contraseña">
+              </div>
+              <div class="d-grid gap-2">
+                <button type="submit" id="btnFormulario" class="btn btn-primary custom-btn">Enviar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="../config.js"></script>
+    <script type="module" src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>

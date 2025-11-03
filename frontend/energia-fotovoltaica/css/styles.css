@@ -1,0 +1,475 @@
+@import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+    --color-header:rgba(31, 25, 61, 0.8);
+    --color-boton: #efa600;
+    --color-ecotec:#1F193D;
+    --color-alternativas:#F0BC00;
+    --color-footer-icon:#8591b8;
+    --color-card-background: #ffffff;
+    --color-cta-start: #1F193D;
+    --color-cta-end: #003CFF;
+    --color-sub-menu:#1A0F6B;
+    --color-text-dark: #333;
+    --color-text-muted: #6c757d;
+}
+
+/* Base */
+body {
+    font-family: K2D, arial;
+}
+.text-ptsans{
+    font-family: PT Sans;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+.scroll-reveal.reveal-hidden {
+    opacity: 0;
+    transform: translateY(30px); 
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+header .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+
+.hover-underline {
+  font-size: 2rem;
+  color: #ffffff;
+  position: relative;
+  display: inline-block;
+}
+
+.hover-underline::after,
+.hover-underline::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #F0BC00, #1F193D);
+  bottom: -5px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease-out;
+}
+
+.hover-underline::before {
+  top: -5px;
+  transform-origin: left;
+}
+
+.hover-underline:hover::after,
+.hover-underline:hover::before {
+  transform: scaleX(1);
+}
+
+
+/* Header */
+header{
+  background-color:var(--color-header);
+
+}
+
+.logo-ecotec{
+    color: var(--color-ecotec);
+    font-size: 20px;
+}
+
+.logo-empresa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  opacity: 1;
+}
+
+.logo-empresa:hover {
+  opacity: 0.7; 
+}
+
+.logo-icono {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.logo-texto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1;
+}
+
+.logo-ecotec {
+  color: var(--color-ecotec);
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.logo-alternativas {
+  color: var(--color-alternativas);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+
+.logo-empresa:hover {
+  opacity: 0.8;
+}
+
+
+.navbar .nav-link,
+.navbar-brand {
+  color: #fff ;
+}
+
+.navbar .nav-link:hover {
+  text-decoration: none;
+  color: var(--color-alternativas);
+}
+
+.alt-text {
+  color: var(--color-alternativas);
+}
+
+.logo-ecotec span{
+    color: var(--color-ecotec);
+}
+
+
+.navbar .dropdown-menu {
+  border-radius: 0.5rem;
+  transition: 0.2s ease;;
+}
+
+
+.navbar .btn-cta {
+  background: var(--color-boton);
+  color: #fff;
+  border-radius: 20px;
+  padding: 6px 16px;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.navbar .btn-cta:hover {
+   background: var(--color-boton);
+   outline:1px solid #fff ;
+   transform: scale(1.05);
+}
+
+.dropdown-item:hover{
+  background-color: var(--color-boton);
+  color: #ffffff;
+}
+
+.navbar .dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+.navbar .dropdown-menu {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navbar .dropdown:hover > .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+.icono-logo img{
+    height: 40px;
+    width: 40px;
+}
+
+.display-4 {
+    font-family: K2D;
+    font-weight: bold;
+}
+
+.title-pagina{
+    color: var(--color-alternativas);
+}
+
+.text-armado{
+    font-size: 38px;
+    font-weight: bold;
+    font-family: PT sans;
+    color: var(--color-sub-menu);
+}
+
+.icono img{
+    height: 60px;
+    width: 60px;
+}
+
+.card-sistemas:hover{
+    transform: translateY(-10px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-family: K2D;
+    font-weight: 600;
+    color: var(--color-alternativas);
+}
+
+/*
+ * Hero Section
+ */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/energia\ fotovoltaica.jpg') no-repeat center center/cover;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Botón flotante estilo chatbot */
+.chatbot-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color-ecotec);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 1050;
+}
+
+.chatbot-btn:hover {
+  background-color: var(--color-alternativas);
+  outline:1.5px solid var(--color-ecotec);
+  transform: scale(1.1);
+  transition: 0.2s ease;
+}
+
+.icono-presupuesto img{
+  height: 60px;
+  width: 60px;
+}
+
+/*
+ * Service Section
+ */
+.text-armado{
+    font-size: 20pz;
+    font-family: PT sans;
+}
+
+.service-grid {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap; 
+}
+
+.service-grid .service-col { 
+    display: flex;
+}
+
+.service-item {
+    height: 100%; 
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.icono{
+  padding: 10px;
+}
+
+/* CTA */
+.cta-section {
+  color: #fff;
+  padding: 3rem 1rem;
+}
+
+.cta-section{
+  font-size: 20px;
+  background: var(--color-footer-icon);
+  padding: 12px 30px;
+  color: #fff;
+}
+
+.btn-cta{
+  background-color: var(--color-boton);
+  font-size:20px;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 30px;
+  transition: transform 0.2s ease-in-out;
+
+}
+ 
+.btn-cta:hover {
+  background-color: var(--color-boton);
+   filter: contrast(150%);
+  transform: scale(1.05);
+}
+
+
+/* Footer*/
+.footer{
+  background-color: var(--color-ecotec) !important;
+}
+
+
+.footer h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.footer p{
+  font-size: 0.95rem;
+}
+.social-link {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-link:hover {
+  transform: scale(1.2);
+  color: var(--color-footer-icon) !important;
+}
+
+/* Botón contacto */
+.footer .btn-info {
+  border-radius: 12px;
+  border: none;
+  padding: 8px 16px;
+  background-color: var(--color-alternativas);
+  transition: background 0.3s ease;
+}
+.icon-footer img{
+    height: 30px;
+    width: 30px;
+}
+
+.footer .btn-info:hover {
+  background-color: var(--color-ecotec); 
+  outline: solid 1px #fff;
+}
+
+/* Línea legal */
+.footer .border-top {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#loader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-logo {
+  width: 400px;
+  height: auto;
+  margin-bottom: 30px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.spinner {
+  border: 6px solid rgba(0, 0, 0, 0.1);
+  border-top: 6px solid #0f172a;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .loader-logo {
+    width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-logo {
+    width: 180px;
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 5px;
+  }
+}
+
+
+
+
+
+
+
+
+
+

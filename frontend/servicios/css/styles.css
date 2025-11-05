@@ -270,6 +270,8 @@ header{
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
     height: 100%; 
+    display: flex; /* Para asegurar que el contenido se estire dentro de la tarjeta */
+    flex-direction: column;
 }
 
 .service-card:hover {
@@ -286,8 +288,17 @@ header{
 .service-card .card-body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between; /* Distribuye el espacio entre los elementos y empuja el botón hacia abajo */
+    flex-grow: 1; /* Permite que el cuerpo de la tarjeta crezca y ocupe el espacio restante */
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
 }
+/* Asegura que el párrafo ocupe el espacio sin forzar un salto, dejando el botón abajo */
+.service-card .card-text {
+    flex-grow: 1; 
+    margin-bottom: 1rem;
+}
+
 
 .btn-card{
     background: var(--color-boton);
@@ -305,15 +316,27 @@ header{
     color: #000;
 }
 
-.icon img {
-    height: 50px;
-    width: 50px;
-}
-.icon{
-    margin: 10px;
+/* Estilo para los iconos de Font Awesome en CTA y Footer */
+.cta-section h2 i.fa-solid {
+    font-size: 2.5rem; /* Tamaño grande para el icono en el CTA */
+    vertical-align: middle;
+    margin-right: 15px;
 }
 
+.icon-footer {
+    font-size: 1.5rem; /* Tamaño para los iconos en el footer */
+    vertical-align: middle;
+    margin-right: 8px;
+    color: var(--color-alternativas); /* Color para destacarlos, si se desea */
+}
+
+
 /* CTA */
+.icon img{
+  height: 40px;
+  width: 40px;
+}
+
 .cta-section {
   color: #fff;
   padding: 3rem 1rem;
@@ -348,6 +371,10 @@ header{
   background-color: var(--color-ecotec) !important;
 }
 
+.icon-footer img{
+  height: 30px;
+  width: 30px;
+}
 
 .footer h5 {
   font-size: 1.2rem;
@@ -363,7 +390,7 @@ header{
 
 .social-link:hover {
   transform: scale(1.2);
-  color: var(--color-footer-icon) !important;
+  color: var(--color-footer-icon) !important; 
 }
 
 /* Botón contacto */
@@ -374,14 +401,10 @@ header{
   background-color: var(--color-alternativas);
   transition: background 0.3s ease;
 }
-.icon-footer img{
-    height: 30px;
-    width: 30px;
-}
 
 .footer .btn-info:hover {
   background-color: var(--color-ecotec); 
-  outline: solid 1px #fff;
+  outline: solid 1px var(--color-alternativas);
 }
 
 #loader {
@@ -444,6 +467,8 @@ header{
   .loader-logo {
     width: 250px;
   }
+  /* En tablet (md) usamos 2 columnas, por lo que este estilo es opcional, ya que Bootstrap lo maneja */
+  /* .col-md-6 hace que haya 2 tarjetas por fila */
 }
 
 @media (max-width: 480px) {
@@ -455,38 +480,5 @@ header{
     height: 40px;
     border-width: 5px;
   }
+  /* En móvil (sm) usamos 1 columna, por lo que .col-sm-12 hace que haya 1 tarjeta por fila */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

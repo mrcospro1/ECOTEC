@@ -58,12 +58,12 @@ class Steps {
 class Panels {
   constructor(wizard) {
     this.wizard = wizard;
-    this.panelsContainer = this.getPanelsContainer();
-    this.panels = this.getPanels();
-    this.currentStep = 0;
+    this.panelsContainer = this.getPanelsContainer();
+    this.panels = this.getPanels();
+    this.currentStep = 0;
     // Inicializacion: dejar el primer panel visible
     this.updatePanelsPosition(this.currentStep);
-   // this.updatePanelsContainerHeight();
+    // this.updatePanelsContainerHeight();
   }
 
   getPanelsContainer() {
@@ -75,16 +75,16 @@ class Panels {
   }
 
 
-//  getCurrentPanelHeight() {
-//    const p = this.panels[this.currentStep];
-//    return p ? `${p.offsetHeight}px` : '0px';
-//  }
+  //  getCurrentPanelHeight() {
+  //    const p = this.panels[this.currentStep];
+  //    return p ? `${p.offsetHeight}px` : '0px';
+  //  }
 
-//  updatePanelsContainerHeight() {
-//    if (this.panelsContainer) {
-//      this.panelsContainer.style.height = this.getCurrentPanelHeight();
-//    }
-//  }
+  //  updatePanelsContainerHeight() {
+  //    if (this.panelsContainer) {
+  //      this.panelsContainer.style.height = this.getCurrentPanelHeight();
+  //    }
+  //  }
 
 
   // Actualiza clases para animación entre panels
@@ -109,7 +109,7 @@ class Panels {
       }
     }
 
-  //  this.updatePanelsContainerHeight();
+    //  this.updatePanelsContainerHeight();
   }
 
   setCurrentStep(currentStep) {
@@ -154,8 +154,8 @@ class Wizard {
     this.updateButtonsStatus();
 
     // Respeta re-dimension cuando cambie tamaño (evita que el contenedor quede chico)
-   
-   // window.addEventListener('resize', () => this.panels.updatePanelsContainerHeight());
+
+    // window.addEventListener('resize', () => this.panels.updatePanelsContainerHeight());
   }
 
   addControls(previousControl, nextControl) {
@@ -273,6 +273,9 @@ class Wizard {
       this.handleWizardConclusion();
       return;
     }
+    if (nextPanelID && nextPanelID.startsWith('panel-resumen')) {
+  this.updateResumen(nextPanelID);
+}
 
     // 3) Si determinamos nextPanelID, ubicamos su índice en panels y navegamos
     if (nextPanelID) {
@@ -296,6 +299,33 @@ class Wizard {
       }
     } else {
       console.warn(`No hay regla de navegación para el panel "${currentPanelID}"`);
+    }
+  }
+  // ===============================
+  // Captura y muestra de datos
+  // ===============================
+  collectFormData() {
+    const personas = document.querySelector('#form-personas input[name="personas"]')?.value || '';
+    const tipoAgua = document.querySelector('#form-agua input[name="agua"]:checked')?.value || '';
+    const altura = document.querySelector('#form-altura input[name="altura"]')?.value || '';
+    const automatizado = document.querySelector('input[name="automatizado"]:checked')?.value || '';
+
+    return { personas, tipoAgua, altura, automatizado };
+  }
+
+  updateResumen(panelId) {
+    const data = this.collectFormData();
+
+    if (panelId === 'panel-resumen-presurizado') {
+      const resumenPanel = document.getElementById('panel-resumen-presurizado');
+      resumenPanel.querySelector('p').innerText =
+        `Personas: ${data.personas || '-'}, Tipo: Presurizado, Automatizado: ${data.automatizado || '-'}`;
+    }
+    else if (panelId === 'panel-resumen-atmosferico') {
+      const resumenPanel = document.getElementById('panel-resumen-atmosferico');
+      resumenPanel.querySelector('p').innerText =
+        `Personas: ${data.personas || '-'}, Tipo: ${data.tipoAgua === 'tanque' ? 'Atmosférico' : 'Red'}, ` +
+        `Altura tanque: ${data.altura || '-'} m, Automatizado: ${data.automatizado || '-'}`;
     }
   }
 }

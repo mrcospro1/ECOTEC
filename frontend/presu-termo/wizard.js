@@ -211,7 +211,7 @@ class Wizard {
   const data = this.collectFormData();
 
   // Enviar al servidor Node
-  fetch('http://localhost:3000/presupuesto-termotanques/calculo', {
+  fetch(`${hostUrl}/presupuesto-termotanques/calculo`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)

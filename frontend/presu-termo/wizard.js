@@ -3,6 +3,7 @@
 // ===============================
 // Clase Steps (indicadores arriba)
 // ===============================
+const hostUrl = window.ENV.HOST;
 class Steps {
   constructor(wizard) {
     this.wizard = wizard;

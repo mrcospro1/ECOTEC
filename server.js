@@ -18,6 +18,8 @@ const usuariosRoutes = require("./routes/usuarios.routes");
 app.use("/usuarios", usuariosRoutes);
 const consultaRoutes= require("./routes/consulta.routes");
 app.use("/consulta", consultaRoutes);
+const presupuestoTermotanquesRoutes=("./routes/presupuesto-termotanques.routes");
+app.use("presupuesto-termotanques", presupuestoTermotanquesRoutes);
 
 
 // Levantar servidor

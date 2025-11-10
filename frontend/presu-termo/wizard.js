@@ -203,13 +203,29 @@ class Wizard {
     this.steps.completeAll();
   }
 
-  handleWizardConclusion() {
-    // Forzar los 4 círculos encendidos y mostrar mensaje final
-    this.steps.completeAll();
-    this.wizard.classList.add('completed');
-    alert('¡Presupuesto completado! (Aquí se enviaría la información)');
-  }
+  handleWizardConclusion() {    
+  this.steps.completeAll();
+  this.wizard.classList.add('completed');
 
+  // Recolectar datos del wizard
+  const data = this.collectFormData();
+
+  // Enviar al servidor Node
+  fetch('http://localhost:3000/presupuesto-termotanques/calculo', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+    .then(res => res.json())
+    .then(respuesta => {
+      alert(`Presupuesto estimado: ${respuesta.presupuesto}`);
+      console.log('Respuesta del servidor:', respuesta);
+    })
+    .catch(err => {
+      console.error('Error al enviar los datos:', err);
+      alert('Hubo un error al enviar los datos al servidor.');
+    });
+}
   // Actualiza el estado cuando avanzás o retrocedes por índices (suma o resta 1)
   updateCurrentStepByIndex(newIndex) {
     if (newIndex < 0 || newIndex >= this.panels.panels.length) return;

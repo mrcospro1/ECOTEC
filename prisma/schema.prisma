@@ -22,3 +22,11 @@ model Consulta {
   mail     String
   fecha    DateTime @default(now())
 }
+model PresupuestoTermotanques {
+  id           Int     @id @default(autoincrement())
+  personas     Int
+  agua         String
+  automatizado Boolean
+  altura       Float
+}
+

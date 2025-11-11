@@ -21,7 +21,7 @@ router.post("/registro", async (req, res) => {
     // Renombramos el token para mayor claridad
     const { nombre, apellido, asunto, mail, "g-recaptcha-response": recaptchaToken } = req.body;
 
-    // 1. Validación de campos obligatorios
+    // 1. Validación de campos 
     if (!nombre || !apellido || !asunto || !mail || !recaptchaToken) {
         return res.status(400).json({ error: "Faltan datos obligatorios o token del captcha" });
     }

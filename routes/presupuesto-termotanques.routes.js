@@ -13,21 +13,32 @@ router.get("/", (req, res) => {
   res.send("OK");
 });
 
-router.post("/calculo", async (req, res) =>{
+router.post("/calculo", async (req, res) => {
+  try {
+    let { personas, agua, automatizado, altura } = req.body;
 
- const { personas, agua, automatizado, altura } = req.body;
+    // Validar datos básicos
+    if (personas == null || agua == null || automatizado == null || altura == null) {
+      return res.status(400).json({ error: "Faltan datos obligatorios para el cálculo" });
+    }
 
-if(!personas || !agua || !automatizado || !altura){
-    return res.status(400).json({ error: "Faltan datos obligatorios para el calculo" });
-}
-const nuevaConsulta = await prisma.Presupuesto-termotanques.create({
-    data: { personas, agua, automatizado, altura },
+    // Convertir a tipos correctos (por si vienen como string desde el frontend)
+    personas = parseInt(personas);
+    altura = parseFloat(altura);
+    automatizado = automatizado === true || automatizado === "true"; // convierte "true" o true en booleano real
+
+    // Crear el registro
+    const nuevoPresupuesto = await prisma.presupuestoTermotanques.create({
+      data: { personas, agua, automatizado, altura },
+    });
+
+    console.log(nuevoPresupuesto);
+    res.json(nuevoPresupuesto);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error en el servidor" });
+  }
 });
- console.log(personas,agua,automatizado, altura);
-}
-res.json(mensaje);
-});
+
+
 module.exports = router;
-  
-    
-

@@ -31,7 +31,7 @@ router.post("/calculo", async (req, res) => {
     const nuevoPresupuesto = await prisma.presupuestoTermotanques.create({
       data: { personas, agua, automatizado, altura },
     });
-
+    
     console.log(nuevoPresupuesto);
     res.json(nuevoPresupuesto);
   } catch (error) {

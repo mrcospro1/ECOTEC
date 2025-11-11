@@ -323,11 +323,10 @@ class Wizard {
   // ===============================
   collectFormData() {
     const personas = document.querySelector('#form-personas input[name="personas"]')?.value || '';
-    const tipoAgua = document.querySelector('#form-agua input[name="agua"]:checked')?.value || '';
+    const agua = document.querySelector('#form-agua input[name="agua"]:checked')?.value || '';
     const altura = document.querySelector('#form-altura input[name="altura"]')?.value || '';
     const automatizado = document.querySelector('input[name="automatizado"]:checked')?.value || '';
-
-    return { personas, tipoAgua, altura, automatizado };
+    return { personas, agua, altura, automatizado };
   }
 
   updateResumen(panelId) {

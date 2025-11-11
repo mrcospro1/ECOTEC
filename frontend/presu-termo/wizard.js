@@ -3,6 +3,7 @@
 // ===============================
 // Clase Steps (indicadores arriba)
 // ===============================
+const hostUrl = window.ENV.HOST;
 class Steps {
   constructor(wizard) {
     this.wizard = wizard;
@@ -203,13 +204,29 @@ class Wizard {
     this.steps.completeAll();
   }
 
-  handleWizardConclusion() {
-    // Forzar los 4 círculos encendidos y mostrar mensaje final
-    this.steps.completeAll();
-    this.wizard.classList.add('completed');
-    alert('¡Presupuesto completado! (Aquí se enviaría la información)');
-  }
+  handleWizardConclusion() {    
+  this.steps.completeAll();
+  this.wizard.classList.add('completed');
 
+  // Recolectar datos del wizard
+  const data = this.collectFormData();
+
+  // Enviar al servidor Node
+  fetch(`${hostUrl}/presupuesto-termotanques/calculo`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+    .then(res => res.json())
+    .then(respuesta => {
+      alert(`Presupuesto estimado: ${respuesta.presupuesto}`);
+      console.log('Respuesta del servidor:', respuesta);
+    })
+    .catch(err => {
+      console.error('Error al enviar los datos:', err);
+      alert('Hubo un error al enviar los datos al servidor.');
+    });
+}
   // Actualiza el estado cuando avanzás o retrocedes por índices (suma o resta 1)
   updateCurrentStepByIndex(newIndex) {
     if (newIndex < 0 || newIndex >= this.panels.panels.length) return;
@@ -333,6 +350,9 @@ class Wizard {
 // ===============================
 // INICIALIZACIÓN al DOM cargado
 // ===============================
+// ===============================
+// INICIALIZACIÓN al DOM cargado
+// ===============================
 document.addEventListener('DOMContentLoaded', () => {
   const wizardElement = document.getElementById('wizard');
   if (!wizardElement) {
@@ -341,33 +361,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Crear instancia del Wizard
-  const wizard = new Wizard(wizardElement);
-
-  const personas = document.querySelector('input[name="personas"]').value;
-  const agua = document.querySelector('input[name="agua"]:checked')?.value || '';
-  const automatizado = document.querySelector('input[name="automatizado"]:checked')?.value || '';
-  const altura = document.querySelector('input[name="altura"]')?.value || '';
-
-  const datos = { personas, agua, automatizado, altura };
-
-  // Enviar los datos al servidor
-  fetch('http://localhost:3000/presupuesto-termotanques/calculo', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(datos)
-  })
-    .then(res => res.json())
-    .then(data => {
-      alert(`Presupuesto estimado: ${data.presupuesto}`);
-      console.log('Respuesta del servidor:', data);
-    })
-    .catch(err => {
-      console.error('Error al enviar los datos:', err);
-      alert('Hubo un error al enviar los datos.');
-    });
+  new Wizard(wizardElement);
 
   // OPTIONAL: debugging rápido (descomentar para ver el panel actual en la consola)
   // wizardElement.addEventListener('transitionend', () => {
   //   console.log(`Panel activo: ${wizard.panels.panels[wizard.currentStep].id}`);
   // });
 });
+

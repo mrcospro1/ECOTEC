@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: process.env.CORS_ORIGIN,
+  origin: [process.env.CORS_ORIGIN, "http://127.0.0.1:5500", "http://localhost:5500"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
@@ -18,8 +18,8 @@ const usuariosRoutes = require("./routes/usuarios.routes");
 app.use("/usuarios", usuariosRoutes);
 const consultaRoutes= require("./routes/consulta.routes");
 app.use("/consulta", consultaRoutes);
-const presupuestoTermotanquesRoutes=("./routes/presupuesto-termotanques.routes");
-app.use("presupuesto-termotanques", presupuestoTermotanquesRoutes);
+const presupuestoTermotanquesRoutes=require("./routes/presupuesto-termotanques.routes");
+app.use("/presupuesto-termotanques", presupuestoTermotanquesRoutes);
 
 
 // Levantar servidor

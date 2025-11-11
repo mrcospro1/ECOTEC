@@ -4,8 +4,14 @@ const router = express.Router();
 const cors = require('cors');
 
 router.use(cors({
-    origin: process.env.CORS_ORIGIN
+  origin: [process.env.CORS_ORIGIN, "http://127.0.0.1:5500", "http://localhost:5500"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+router.get("/", (req, res) => {
+  res.send("OK");
+});
 
 router.post("/calculo", async (req, res) =>{
 
@@ -19,7 +25,9 @@ const nuevaConsulta = await prisma.Presupuesto-termotanques.create({
 });
  console.log(personas,agua,automatizado, altura);
 }
-);
+res.json(mensaje);
+});
+module.exports = router;
   
     
 

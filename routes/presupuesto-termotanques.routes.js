@@ -16,11 +16,14 @@ router.get("/", (req, res) => {
 router.post("/calculo", async (req, res) =>{
 
  const { personas, agua, automatizado, altura } = req.body;
- const mensaje={
-    "personas :":personas,
-    "tipo de agua: ":agua,
-    "quiere automatizado: ": automatizado,
-    "altura: ":altura,
+
+if(!personas || !agua || !automatizado || !altura){
+    return res.status(400).json({ error: "Faltan datos obligatorios para el calculo" });
+}
+const nuevaConsulta = await prisma.Presupuesto-termotanques.create({
+    data: { personas, agua, automatizado, altura },
+});
+ console.log(personas,agua,automatizado, altura);
 }
 res.json(mensaje);
 });

@@ -330,20 +330,30 @@ class Wizard {
   }
 
   updateResumen(panelId) {
-    const data = this.collectFormData();
+  const data = this.collectFormData();
 
-    if (panelId === 'panel-resumen-presurizado') {
-      const resumenPanel = document.getElementById('panel-resumen-presurizado');
-      resumenPanel.querySelector('p').innerText =
-        `Personas: ${data.personas || '-'}, Tipo: Presurizado, Automatizado: ${data.automatizado || '-'}`;
-    }
-    else if (panelId === 'panel-resumen-atmosferico') {
-      const resumenPanel = document.getElementById('panel-resumen-atmosferico');
-      resumenPanel.querySelector('p').innerText =
-        `Personas: ${data.personas || '-'}, Tipo: ${data.tipoAgua === 'tanque' ? 'Atmosférico' : 'Red'}, ` +
-        `Altura tanque: ${data.altura || '-'} m, Automatizado: ${data.automatizado || '-'}`;
-    }
+  if (panelId === 'panel-resumen-presurizado') {
+    const resumenPanel = document.getElementById('panel-resumen-presurizado');
+    resumenPanel.querySelector('p').innerHTML = `
+      <ul>
+        <li><strong>Personas:</strong> ${data.personas || '-'}</li>
+        <li><strong>Tipo:</strong> Presurizado</li>
+        <li><strong>Automatizado:</strong> ${data.automatizado || '-'}</li>
+      </ul>
+    `;
+  } 
+  else if (panelId === 'panel-resumen-atmosferico') {
+    const resumenPanel = document.getElementById('panel-resumen-atmosferico');
+    resumenPanel.querySelector('p').innerHTML = `
+      <ul>
+        <li><strong>Personas:</strong> ${data.personas || '-'}</li>
+        <li><strong>Tipo:</strong> ${data.tipoAgua === 'tanque' ? 'Atmosférico' : 'Red'}</li>
+        <li><strong>Altura tanque:</strong> ${data.altura || '-'} m</li>
+        <li><strong>Automatizado:</strong> ${data.automatizado || '-'}</li>
+      </ul>
+    `;
   }
+}
 }
 
 // ===============================
@@ -367,4 +377,5 @@ document.addEventListener('DOMContentLoaded', () => {
   //   console.log(`Panel activo: ${wizard.panels.panels[wizard.currentStep].id}`);
   // });
 });
+
 

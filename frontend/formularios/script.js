@@ -24,7 +24,7 @@ formulario.addEventListener("submit", async (e) => {
   emailInput.style.borderColor = "green";
   grecaptcha.ready(async function() {
     try {
-      const token = await grecaptcha.execute('6Lep0vMrAAAAAC1sCKjcCCzs-rZ_wF4-F1_LlB-8', { action: 'submit' });
+      const token = await grecaptcha.execute('6LdS0wosAAAAAFA6oHV9rizbxPcbduP4Ib05PZ_G', { action: 'submit' });
 
       const data = {
         nombre: document.getElementById("nombre").value.trim(),

@@ -190,14 +190,12 @@ header{
   background-size: cover;
 }
 
-
-
-
 .card-title-main {
     font-size: 2rem;
     font-weight: 700;
     text-align: center;
     background: var(--color-alternativas);
+    text-shadow: 0px 1px 16px rgba(240,188,0,1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 1.5rem;
@@ -514,5 +512,6 @@ input.form-control:focus {
     border-width: 5px;
   }
 }
+
 
 

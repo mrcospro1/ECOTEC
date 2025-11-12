@@ -185,6 +185,10 @@ header{
     width: 40px;
 }
 
+main{
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('fondo-presu.png') no-repeat center center;
+  background-size: cover;
+}
 
 
 
@@ -509,4 +513,5 @@ input.form-control:focus {
     border-width: 5px;
   }
 }
+
 

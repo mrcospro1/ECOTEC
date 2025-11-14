@@ -6,7 +6,10 @@ const hostUrl = window.ENV.HOST;
 const SERVICE_ID = 'service_rcforg8'; 
 const TEMPLATE_ID = 'template_d1enr3h'; 
 
-// ... (Tu código de validación de formulario y botón deshabilitado) ...
+const formulario = document.getElementById("registroConsulta");
+const boton = document.querySelector("#btnFormulario");
+const emailInput = document.getElementById("mail");
+const error = document.getElementById("error"); 
 
 formulario.addEventListener("submit", async (e) => {
     e.preventDefault();

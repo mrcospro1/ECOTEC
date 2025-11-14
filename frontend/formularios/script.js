@@ -1,11 +1,15 @@
 const hostUrl = window.ENV.HOST;
-const formulario = document.getElementById("registroConsulta");
-const boton = document.querySelector("#btnFormulario");
-const emailInput = document.getElementById("mail");
-const error = document.getElementById("error"); 
+// Asegúrate de tener:
+// emailjs.init('YOUR_PUBLIC_KEY');
+
+// 🔑 CONFIGURACIÓN DE EMAILJS
+const SERVICE_ID = 'service_rcforg8'; 
+const TEMPLATE_ID = 'template_d1enr3h'; 
+
+// ... (Tu código de validación de formulario y botón deshabilitado) ...
 
 formulario.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    e.preventDefault();
   boton.disabled = true;
   boton.innerText = "Enviando...";
 
@@ -22,40 +26,61 @@ formulario.addEventListener("submit", async (e) => {
 
   error.textContent = "";
   emailInput.style.borderColor = "green";
-  grecaptcha.ready(async function() {
+
     try {
-      const token = await grecaptcha.execute('6LdS0wosAAAAAFA6oHV9rizbxPcbduP4Ib05PZ_G', { action: 'submit' });
+        // --- PASO 1: GUARDAR EN SUPABASE (Backend) ---
+        const dataToSend = {
+            nombre: document.getElementById("nombre").value.trim(),
+            apellido: document.getElementById("apellido").value.trim(),
+            mail: email,
+            asunto: document.getElementById("asunto").value.trim(),
+        };
 
-      const data = {
-        nombre: document.getElementById("nombre").value.trim(),
-        apellido: document.getElementById("apellido").value.trim(),
-        mail: email,
-        asunto: document.getElementById("asunto").value.trim(),
-        "g-recaptcha-response": token
-      };
+        const res = await fetch(`${hostUrl}/consulta/registro`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dataToSend),
+        });
 
-      const ruta = "/consulta/registro";
-      const res = await fetch(`${hostUrl}${ruta}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+        if (!res.ok) {
+            throw new Error("Error al guardar en la base de datos.");
+        }
+        
+        const backendData = await res.json();
+        const nuevaConsulta = backendData.consulta; // Aquí están id, fecha, etc.
 
-      if (res.ok) {
-        formulario.reset();
-        const toastEl = document.getElementById("toastConsulta");
-        const toast = new bootstrap.Toast(toastEl);
-        toast.show();
-      } else {
-        throw new Error("Error en la respuesta del servidor.");
-      }
+        // --- PASO 2: ENVIAR CORREO (Frontend con EmailJS) ---
+        
+        // Creamos los parámetros para EmailJS usando los datos del backend
+        const emailjsParams = {
+            id: nuevaConsulta.id,
+            fecha: new Date(nuevaConsulta.fecha).toLocaleString(), // Formateamos la fecha
+            nombre: nuevaConsulta.nombre,
+            apellido: nuevaConsulta.apellido,
+            email: nuevaConsulta.mail, // Usamos 'email' como Reply-To o variable
+            asunto: nuevaConsulta.asunto,
+            // Si necesitas el email del cliente en el botón "Responder" del correo
+            // ¡asegúrate de que tu plantilla de EmailJS use {{email}} o {{mail}}!
+        };
+
+        const emailRes = await emailjs.send(SERVICE_ID, TEMPLATE_ID, emailjsParams);
+
+        if (emailRes.status === 200) {
+            // Éxito total: Guardado en BD y envío de email
+            formulario.reset();
+            const toastEl = document.getElementById("toastConsulta");
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        } else {
+            console.warn("Consulta guardada, pero falló el envío del email.");
+            alert("Consulta guardada, pero hubo un problema con la notificación por correo.");
+        }
+
     } catch (error) {
-      console.error(error);
-      alert("Hubo un problema al enviar la consulta.");
+        console.error(error);
+        alert("Hubo un problema. Revisa la consola.");
     } finally {
-      boton.disabled = false;
-      boton.innerText = "Enviar";
+        boton.disabled = false;
+        boton.innerText = "Enviar";
     }
-  });
 });
-

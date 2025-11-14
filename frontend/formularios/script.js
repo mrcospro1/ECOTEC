@@ -35,8 +35,8 @@ formulario.addEventListener("submit", async (e) => {
         const dataToSend = {
             nombre: document.getElementById("nombre").value.trim(),
             apellido: document.getElementById("apellido").value.trim(),
-            mail: email,
             asunto: document.getElementById("asunto").value.trim(),
+            mail: email,
         };
 
         const res = await fetch(`${hostUrl}/consulta/registro`, {
@@ -44,7 +44,6 @@ formulario.addEventListener("submit", async (e) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dataToSend),
         });
-
         if (!res.ok) {
             throw new Error("Error al guardar en la base de datos.");
         }
@@ -67,6 +66,12 @@ formulario.addEventListener("submit", async (e) => {
         };
 
         const emailRes = await emailjs.send(SERVICE_ID, TEMPLATE_ID, emailjsParams);
+
+        const confirmacionParam={
+            nombre:nombre,
+            email:email
+        }
+        const envioUsuario = emailjs.send("service_rcforg8","template_qzdvxjm", confirmacionParam);
 
         if (emailRes.status === 200) {
             // Éxito total: Guardado en BD y envío de email

@@ -68,8 +68,8 @@ formulario.addEventListener("submit", async (e) => {
         const emailRes = await emailjs.send(SERVICE_ID, TEMPLATE_ID, emailjsParams);
 
         const confirmacionParam={
-            nombre:nombre,
-            email:email
+            nombre:nuevaConsulta.nombre,
+            email:nuevaConsulta.mail
         }
         const envioUsuario = emailjs.send("service_rcforg8","template_qzdvxjm", confirmacionParam);
 

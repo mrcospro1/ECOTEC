@@ -204,29 +204,29 @@ class Wizard {
     this.steps.completeAll();
   }
 
-  handleWizardConclusion() {    
-  this.steps.completeAll();
-  this.wizard.classList.add('completed');
+  handleWizardConclusion() {
+    this.steps.completeAll();
+    this.wizard.classList.add('completed');
 
-  // Recolectar datos del wizard
-  const data = this.collectFormData();
+    // Recolectar datos del wizard
+    const data = this.collectFormData();
 
-  // Enviar al servidor Node
-  fetch(`${hostUrl}/presupuesto-termotanques/calculo`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  })
-    .then(res => res.json())
-    .then(respuesta => {
-      alert(`Presupuesto estimado: ${respuesta.presupuesto}`);
-      console.log('Respuesta del servidor:', respuesta);
+    const calculoRuta = "/presupuesto-termotanques/calculo"
+    // Enviar al servidor Node
+    fetch(`${hostUrl}${calculoRura}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
     })
-    .catch(err => {
-      console.error('Error al enviar los datos:', err);
-      alert('Hubo un error al enviar los datos al servidor.');
-    });
-}
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("resultado").innerText = JSON.stringify(data);
+      })
+      .catch(err => {
+        console.error('Error al enviar los datos:', err);
+        alert('Hubo un error al enviar los datos al servidor.');
+      });
+  }
   // Actualiza el estado cuando avanzás o retrocedes por índices (suma o resta 1)
   updateCurrentStepByIndex(newIndex) {
     if (newIndex < 0 || newIndex >= this.panels.panels.length) return;
@@ -291,8 +291,8 @@ class Wizard {
       return;
     }
     if (nextPanelID && nextPanelID.startsWith('panel-resumen')) {
-  this.updateResumen(nextPanelID);
-}
+      this.updateResumen(nextPanelID);
+    }
 
     // 3) Si determinamos nextPanelID, ubicamos su índice en panels y navegamos
     if (nextPanelID) {
@@ -324,27 +324,27 @@ class Wizard {
   collectFormData() {
     const personas = document.querySelector('#form-personas input[name="personas"]')?.value || '';
     const agua = document.querySelector('#form-agua input[name="agua"]:checked')?.value || '';
+    const automatizado = document.querySelector('input[name="automatizado"]:checked')?.value || '';
     const altura = document.querySelector('#form-altura input[name="altura"]')?.value || '';
-    const automatizado = document.querySelector('input[name="automatizado"]:checked')?.value|| '';
-    return { personas, agua, automatizado,altura };
+    return { personas, agua, automatizado, altura };
   }
 
   updateResumen(panelId) {
-  const data = this.collectFormData();
+    const data = this.collectFormData();
 
-  if (panelId === 'panel-resumen-presurizado') {
-    const resumenPanel = document.getElementById('panel-resumen-presurizado');
-    resumenPanel.querySelector('p').innerHTML = `
+    if (panelId === 'panel-resumen-presurizado') {
+      const resumenPanel = document.getElementById('panel-resumen-presurizado');
+      resumenPanel.querySelector('p').innerHTML = `
       <ul>
         <li><strong>Personas:</strong> ${data.personas || '-'}</li>
         <li><strong>Tipo:</strong> Presurizado</li>
         <li><strong>Automatizado:</strong> ${data.automatizado || '-'}</li>
       </ul>
     `;
-  } 
-  else if (panelId === 'panel-resumen-atmosferico') {
-    const resumenPanel = document.getElementById('panel-resumen-atmosferico');
-    resumenPanel.querySelector('p').innerHTML = `
+    }
+    else if (panelId === 'panel-resumen-atmosferico') {
+      const resumenPanel = document.getElementById('panel-resumen-atmosferico');
+      resumenPanel.querySelector('p').innerHTML = `
       <ul>
         <li><strong>Personas:</strong> ${data.personas || '-'}</li>
         <li><strong>Tipo:</strong> ${data.tipoAgua === 'tanque' ? 'Atmosférico' : 'Red'}</li>
@@ -352,8 +352,8 @@ class Wizard {
         <li><strong>Automatizado:</strong> ${data.automatizado || '-'}</li>
       </ul>
     `;
+    }
   }
-}
 }
 
 // ===============================

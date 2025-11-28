@@ -147,12 +147,6 @@
                         </form>
                     </div>
 
-                    <!-- PANEL 4A -->
-                    <div class="panel card-body p-4" id="panel-resumen-presurizado">
-                        <h2 class="text-center mb-4">Resumen de Configuración</h2>
-                        <p>Personas: X, Litros: Y, Tipo: Presurizado. ¡Confirmar!</p>
-                    </div>
-
                     <!-- PANEL 3B -->
                     <div class="panel card-body p-4" id="panel-tanque-altura">
                         <h2 class="text-center mb-4">Altura de su tanque de agua</h2>
@@ -185,15 +179,19 @@
                     </div>
                     <!-- Aquí necesito que me aparesca el resultado de la obtencion de datos -->
                     <!-- PANEL 4B -->
-                    <div class="panel card-body p-4" id="panel-resumen-atmosferico">
+                    <div class="panel card-body p-4" id="panel-resultado-final">
                         <h2 class="text-center mb-4">Resumen de Configuración</h2>
+
+                        <div class="resumen-preliminar-container mb-4">
+                            <p class="text-muted">Cargando resumen...</p>
+                        </div>
+
+                        <h3 class="text-center mb-4">Resultado del Presupuesto:</h3>
 
                         <div id="resultado-resumen" class="border rounded p-3"
                             style="background: #fafafa; border-color: var(--color-border);">
-                            <!-- Aquí JS inserta los datos -->
-                            <p class="text-muted">Cargando datos...</p>
+                            <p class="text-muted">Presiona **Confirmar** para obtener el cálculo final.</p>
                         </div>
-
                     </div>
 
                 </div>

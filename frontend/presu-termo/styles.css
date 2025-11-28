@@ -368,6 +368,8 @@ input.form-control:focus {
     position: relative;
     overflow: hidden;
     height: 300px;
+    transition: height 0.5s ease-in-out; 
+    overflow: hidden;
 }
 
 .panel {
@@ -383,6 +385,7 @@ input.form-control:focus {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow-y: auto;
 }
 
 .panel.movingIn {

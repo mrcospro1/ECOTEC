@@ -54,6 +54,9 @@ class Steps {
 }
 function mostrarResumen(datos) {
     const cont = document.getElementById("resultado-resumen");
+    
+    // Traducir el booleano guardado a texto para mostrar
+    const automatizadoTexto = datos.datosGuardados.automatizado ? "Sí" : "No";
 
     cont.innerHTML = `
         <h5 class="mb-3 fw-bold">${datos.modelo}</h5>
@@ -74,7 +77,7 @@ function mostrarResumen(datos) {
 
         <p><strong>Personas:</strong> ${datos.datosGuardados.personas}</p>
         <p><strong>Tipo de agua:</strong> ${datos.datosGuardados.agua}</p>
-        <p><strong>Automatizado:</strong> ${datos.datosGuardados.automatizado ? "Sí" : "No"}</p>
+        <p><strong>Automatizado:</strong> ${automatizadoTexto}</p>
         <p><strong>Altura:</strong> ${datos.datosGuardados.altura} m</p>
     `;
 }
@@ -100,20 +103,21 @@ class Panels {
   getPanels() {
     return Array.from(this.wizard.getElementsByClassName('panel'));
   }
+  getCurrentPanelHeight() {
+    const p = this.panels[this.currentStep];
+    // Asegúrate de que el panel es visible (o moviéndose) antes de obtener la altura
+    return p ? `${p.scrollHeight}px` : '0px'; 
+}
 
-
-  //  getCurrentPanelHeight() {
-  //    const p = this.panels[this.currentStep];
-  //    return p ? `${p.offsetHeight}px` : '0px';
-  //  }
-
-  //  updatePanelsContainerHeight() {
-  //    if (this.panelsContainer) {
-  //      this.panelsContainer.style.height = this.getCurrentPanelHeight();
-  //    }
-  //  }
-
-
+updatePanelsContainerHeight() {
+    // Usamos requestAnimationFrame para asegurar que el DOM esté renderizado antes de medir
+    window.requestAnimationFrame(() => {
+        if (this.panelsContainer) {
+            this.panelsContainer.style.height = this.getCurrentPanelHeight();
+        }
+    });
+}
+  
   // Actualiza clases para animación entre panels
   updatePanelsPosition(currentStep) {
     const panels = this.panels;
@@ -135,8 +139,7 @@ class Panels {
         panels[prevStep].classList.add('movingOutBackward');
       }
     }
-
-    //  this.updatePanelsContainerHeight();
+    this.updatePanelsContainerHeight();
   }
 
   setCurrentStep(currentStep) {
@@ -183,6 +186,8 @@ class Wizard {
     // Respeta re-dimension cuando cambie tamaño (evita que el contenedor quede chico)
 
     // window.addEventListener('resize', () => this.panels.updatePanelsContainerHeight());
+    this.updatePanelsPosition(this.currentStep);
+    this.updatePanelsContainerHeight();
   }
 
   addControls(previousControl, nextControl) {
@@ -239,7 +244,7 @@ class Wizard {
 
     const calculoRuta = "/presupuesto-termotanques/calculo"
     // Enviar al servidor Node
-    fetch(`${hostUrl}${calculoRuta}`, {
+    fetch(`http://localhost:3000${calculoRuta}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -265,13 +270,13 @@ class Wizard {
   }
 
   // movement: -1 (atrás) o 1 (adelante con branching)
-  moveStep(movement) {
+ moveStep(movement) {
     // RETROCEDER: simplemente disminuye índice si es posible
     if (movement < 0) {
-      if (this.currentStep > 0) {
-        this.updateCurrentStepByIndex(this.currentStep - 1);
-      }
-      return;
+        if (this.currentStep > 0) {
+            this.updateCurrentStepByIndex(this.currentStep - 1);
+        }
+        return;
     }
 
     // AVANZAR (ramificado)
@@ -283,41 +288,49 @@ class Wizard {
     // 1) Validación del formulario del panel actual (si existe)
     const currentForm = currentPanelElement.querySelector('form');
     if (currentForm && !currentForm.checkValidity()) {
-      alert('Por favor, completa los campos requeridos.');
-      currentForm.reportValidity();
-      return;
+        alert('Por favor, completa los campos requeridos.');
+        currentForm.reportValidity();
+        return;
     }
 
     // 2) Lógica ramificada según el panel actual (coincide con tu HTML)
     if (currentPanelID === 'panel-personas') {
-      nextPanelID = 'panel-agua';
+        nextPanelID = 'panel-agua';
     } else if (currentPanelID === 'panel-agua') {
-      // Buscar la opción seleccionada
-      const selectedOption = currentPanelElement.querySelector('input[name="agua"]:checked');
-      if (!selectedOption) {
-        alert('Por favor, selecciona una opción de agua.');
-        return;
-      }
-      // Obtener el data-target-panel desde el contenedor (div.form-check)
-      nextPanelID = selectedOption.closest('[data-target-panel]')?.dataset.targetPanel;
-      if (!nextPanelID) {
-        console.error('No se encontró data-target-panel para la opción seleccionada.');
-        return;
-      }
+        // Buscar la opción seleccionada
+        const selectedOption = currentPanelElement.querySelector('input[name="agua"]:checked');
+        if (!selectedOption) {
+            alert('Por favor, selecciona una opción de agua.');
+            return;
+        }
+        // Obtener el data-target-panel
+        nextPanelID = selectedOption.closest('[data-target-panel]')?.dataset.targetPanel;
+        if (!nextPanelID) {
+            console.error('No se encontró data-target-panel para la opción seleccionada.');
+            return;
+        }
     } else if (currentPanelID === 'panel-tanque-altura') {
-      nextPanelID = 'panel-atmosferico-auto';
+        nextPanelID = 'panel-atmosferico-auto';
     } else if (currentPanelID === 'panel-presurizado-auto') {
-      nextPanelID = 'panel-resumen-presurizado';
+        // *** CAMBIO CLAVE 1: Usar un solo panel de resultados si es posible ***
+        // Apuntamos al panel de resumen único (ver corrección HTML abajo)
+        nextPanelID = 'panel-resultado-final'; 
     } else if (currentPanelID === 'panel-atmosferico-auto') {
-      nextPanelID = 'panel-resumen-atmosferico';
-    } else if (currentPanelID.startsWith('panel-resumen')) {
-      // Si estamos en un resumen y presionamos siguiente, tratamos como confirmación
-      this.handleConcludeStep();
-      this.handleWizardConclusion();
-      return;
+        // *** CAMBIO CLAVE 2: Usar un solo panel de resultados si es posible ***
+        nextPanelID = 'panel-resultado-final';
+    } 
+    
+    // El panel de resultado final DEBE llamar a la conclusión
+    if (currentPanelID === 'panel-resultado-final') {
+        // Si estamos en el resumen final y presionamos siguiente (Confirmar)
+        this.handleConcludeStep(); // Marca todos los steps como completados
+        this.handleWizardConclusion(); // Llama a la API y muestra el resultado
+        return;
     }
-    if (nextPanelID && nextPanelID.startsWith('panel-resumen')) {
-      this.updateResumen(nextPanelID);
+    
+    // Si el siguiente panel es el resumen final, primero actualizamos el contenido visual
+    if (nextPanelID === 'panel-resultado-final') {
+        this.updateResumen(); // Lógica para previsualizar los datos recogidos
     }
 
     // 3) Si determinamos nextPanelID, ubicamos su índice en panels y navegamos
@@ -347,39 +360,80 @@ class Wizard {
   // ===============================
   // Captura y muestra de datos
   // ===============================
-  collectFormData() {
+collectFormData() {
+    // 1. Personas: Siempre en el mismo campo
     const personas = document.querySelector('#form-personas input[name="personas"]')?.value || '';
+    
+    // 2. Agua: Siempre en el mismo campo
     const agua = document.querySelector('#form-agua input[name="agua"]:checked')?.value || '';
-    const automatizado = document.querySelector('input[name="automatizado"]:checked')?.value || '';
-    const altura = document.querySelector('#form-altura input[name="altura"]')?.value || '';
-    return { personas, agua, automatizado, altura };
-  }
-
-  updateResumen(panelId) {
-    const data = this.collectFormData();
-
-    if (panelId === 'panel-resumen-presurizado') {
-      const resumenPanel = document.getElementById('panel-resumen-presurizado');
-      resumenPanel.querySelector('p').innerHTML = `
-      <ul>
-        <li><strong>Personas:</strong> ${data.personas || '-'}</li>
-        <li><strong>Tipo:</strong> Presurizado</li>
-        <li><strong>Automatizado:</strong> ${data.automatizado || '-'}</li>
-      </ul>
-    `;
+    
+    // 3. Automatizado: Buscar en AMBOS formularios de automatización. 
+    // Solo uno debería tener un valor 'checked' según la navegación.
+    let automatizado = document.querySelector('#form-presurizado-auto input[name="automatizado"]:checked')?.value;
+    if (!automatizado) {
+        automatizado = document.querySelector('#form-atmosferico-auto input[name="automatizado"]:checked')?.value;
     }
-    else if (panelId === 'panel-resumen-atmosferico') {
-      const resumenPanel = document.getElementById('panel-resumen-atmosferico');
-      resumenPanel.querySelector('p').innerHTML = `
-      <ul>
-        <li><strong>Personas:</strong> ${data.personas || '-'}</li>
-        <li><strong>Tipo:</strong> ${data.tipoAgua === 'tanque' ? 'Atmosférico' : 'Red'}</li>
-        <li><strong>Altura tanque:</strong> ${data.altura || '-'} m</li>
-        <li><strong>Automatizado:</strong> ${data.automatizado || '-'}</li>
-      </ul>
-    `;
+    // Convertir 'si'/'no' a booleano o cadena vacía si no se encontró
+    automatizado = automatizado === 'si' ? true : (automatizado === 'no' ? false : '');
+
+    // 4. Altura: Buscar en el formulario de altura (solo se usa en flujo atmosférico/red)
+    const altura = document.querySelector('#form-altura input[name="altura"]')?.value || '0';
+    
+    return { 
+        personas: personas, 
+        agua: agua, 
+        automatizado: automatizado, // Enviamos el booleano al backend
+        altura: altura 
+    };
+}
+
+ // Actualiza los datos que se ven ANTES de enviar (solo para el usuario)
+updateResumen() {
+    const data = this.collectFormData(); 
+
+    // Traducir 'agua' a un texto legible para el usuario
+    let tipoAguaTexto = data.agua;
+    if (data.agua === 'tanque') tipoAguaTexto = 'Tanque (Atmosférico)';
+    else if (data.agua === 'red') tipoAguaTexto = 'Red (Atmosférico)';
+    else if (data.agua === 'bomba') tipoAguaTexto = 'Bomba (Presurizado)';
+
+    // Traducir 'automatizado' a un texto legible
+    const automatizadoTexto = data.automatizado === true ? 'Sí' : (data.automatizado === false ? 'No' : '-');
+    
+    // Obtener el panel donde se muestra el resumen preliminar
+    const resumenPanel = document.getElementById('panel-resultado-final'); 
+    if (!resumenPanel) return;
+    
+    // Mostrar el resumen preliminar
+    let contenidoHTML;
+
+    if (data.agua === 'bomba') {
+        // Resumen para flujo Presurizado
+        contenidoHTML = `
+            <h5 class="mb-3 fw-bold">Configuración Presurizada</h5>
+            <ul>
+                <li><strong>Personas:</strong> ${data.personas || '-'}</li>
+                <li><strong>Tipo:</strong> ${tipoAguaTexto}</li>
+                <li><strong>Automatizado:</strong> ${automatizadoTexto}</li>
+            </ul>
+        `;
+    } else {
+        // Resumen para flujo Atmosférico/Red
+        contenidoHTML = `
+            <h5 class="mb-3 fw-bold">Configuración Atmosférica</h5>
+            <ul>
+                <li><strong>Personas:</strong> ${data.personas || '-'}</li>
+                <li><strong>Tipo:</strong> ${tipoAguaTexto}</li>
+                <li><strong>Altura tanque:</strong> ${data.altura || '-'} m</li>
+                <li><strong>Automatizado:</strong> ${automatizadoTexto}</li>
+            </ul>
+        `;
     }
-  }
+    
+    // Limpiar el contenido de resultado-resumen y mostrar el resumen preliminar
+    document.getElementById('resultado-resumen').innerHTML = `<p class="text-muted">Presiona **Confirmar** para calcular el presupuesto.</p>`;
+    resumenPanel.querySelector('.resumen-preliminar-container').innerHTML = contenidoHTML;
+}
 }
 
 // ===============================

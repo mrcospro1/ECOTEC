@@ -1,4 +1,5 @@
 // wizard.js - versión completa y corregida
+// IMPORTANTE: Asegúrate de tener la variable window.ENV.HOST definida en config.js
 
 // ===============================
 // Clase Steps (indicadores arriba)
@@ -109,11 +110,10 @@ class Panels {
         // Transiciones de entrada/salida para el panel actual y el anterior
         this.panels.forEach((panel, index) => {
             panel.classList.remove('movingIn', 'movingOut');
+            // Usamos un pequeño truco para la clase 'movingOut'
             if (index === currentStep) {
-                // El panel que entra
                 panel.classList.add('movingIn');
             } else if (index === this.wizard.currentStepHistory[this.wizard.currentStepHistory.length - 2]) {
-                // El panel que sale (basado en el historial de wizard)
                 panel.classList.add('movingOut');
             }
         });
@@ -127,18 +127,22 @@ class Panels {
 // Clase Wizard (lógica principal)
 // ===============================
 class Wizard {
-    constructor(wizardElement) {
+    // 🔑 CORRECCIÓN: Ahora acepta los botones como parámetros
+    constructor(wizardElement, nextButton, prevButton) { 
         this.wizardElement = wizardElement;
         this.steps = new Steps(wizardElement);
         this.panels = new Panels(this); 
         this.currentStep = 0; 
-        this.currentPanelId = this.panels.panels[0].id; // Inicializa con el primer panel
-        this.currentStepHistory = [0]; // Guarda el índice del panel actual
+        this.currentPanelId = this.panels.panels[0].id; 
+        this.currentStepHistory = [0]; 
+        
+        // 🔑 Guardar las referencias a los botones (para evitar el error de null)
+        this.nextButton = nextButton;
+        this.prevButton = prevButton; 
         
         this.handleInitialState();
 
-        // 🔑 CORRECCIÓN DEL ERROR "this.updatePanelsPosition is not a function"
-        // La función pertenece al objeto 'panels'
+        // Llamada corregida
         this.panels.updatePanelsPosition(this.currentStep);
     }
 
@@ -148,17 +152,22 @@ class Wizard {
     }
 
     updateButtons() {
-        const nextButton = this.wizardElement.querySelector('.next');
-        const prevButton = this.wizardElement.querySelector('.previous');
+        const nextButton = this.nextButton;
+        const prevButton = this.prevButton;
         
-        // El botón 'Anterior' se oculta en el primer paso (lógico)
-        prevButton.style.display = (this.steps.currentStep === 0) ? 'none' : 'block';
+        // 🔑 Solución al TypeError: prevButton no puede ser null aquí
+        if (prevButton) {
+            // El botón 'Anterior' se oculta en el primer paso (lógico)
+            prevButton.style.display = (this.steps.currentStep === 0) ? 'none' : 'block';
+        }
 
-        // El botón 'Siguiente' cambia de texto en el paso de resumen
-        if (this.currentPanelId === 'panel-resultado-final') {
-            nextButton.textContent = 'Confirmar';
-        } else {
-            nextButton.textContent = 'Siguiente';
+        if (nextButton) {
+            // El botón 'Siguiente' cambia de texto en el paso de resumen
+            if (this.currentPanelId === 'panel-resultado-final') {
+                nextButton.textContent = 'Confirmar';
+            } else {
+                nextButton.textContent = 'Siguiente';
+            }
         }
     }
     
@@ -218,7 +227,8 @@ class Wizard {
             `;
         } else {
             // Resumen para flujo Atmosférico/Red/Tanque
-            const alturaDisplay = data.agua === 'tanque' ? `${data.altura || '-'} m` : 'No aplica';
+            // Solo mostramos la altura si se seleccionó Tanque, de lo contrario 'N/A'.
+            const alturaDisplay = data.agua === 'tanque' && data.altura > 0 ? `${data.altura} m` : 'No aplica (Red o Altura Suficiente)';
 
             contenidoHTML = `
                 <h5 class="mb-3 fw-bold">Configuración Atmosférica</h5>
@@ -257,7 +267,7 @@ class Wizard {
             const result = await response.json();
             
             // Construir la tabla de accesorios
-            let accesoriosHtml = '<tr><td colspan="3" class="text-muted">Ningún accesorio necesario.</td></tr>';
+            let accesoriosHtml = '<tr><td colspan="2" class="text-muted text-start">Ningún accesorio adicional requerido.</td></tr>';
             if (result.accesorios && result.accesorios.length > 0) {
                 accesoriosHtml = result.accesorios.map(acc => `
                     <tr>
@@ -336,7 +346,7 @@ class Wizard {
             nextPanelID = 'panel-agua';
         } else if (currentPanelID === 'panel-agua') {
             const selectedOption = currentPanelElement.querySelector('input[name="agua"]:checked');
-            if (!selectedOption) return; // Ya validado por checkValidity, pero por seguridad
+            if (!selectedOption) return; 
             
             // Obtener el data-target-panel
             nextPanelID = selectedOption.closest('[data-target-panel]')?.dataset.targetPanel;
@@ -385,13 +395,16 @@ class Wizard {
 // ===============================
 document.addEventListener('DOMContentLoaded', () => {
     const wizardElement = document.getElementById('wizard');
+    const controlsContainer = wizardElement ? wizardElement.nextElementSibling : null; // Asume que .controls está justo después de #wizard
 
-    if (wizardElement) {
-        const wizard = new Wizard(wizardElement);
+    if (wizardElement && controlsContainer && controlsContainer.classList.contains('controls')) {
+        
+        // 🔑 Solución al error de TypeError: Seleccionar los botones fuera del #wizard
+        const nextButton = controlsContainer.querySelector('.next');
+        const prevButton = controlsContainer.querySelector('.previous');
 
-        // Agrega listeners a los botones
-        const nextButton = wizardElement.querySelector('.next');
-        const prevButton = wizardElement.querySelector('.previous');
+        // 🔑 Pasar los botones al constructor del Wizard
+        const wizard = new Wizard(wizardElement, nextButton, prevButton); 
 
         if (nextButton) {
             nextButton.addEventListener('click', () => wizard.moveStep(1));
@@ -405,6 +418,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', () => wizard.panels.updatePanelsContainerHeight());
 
     } else {
-        console.error('Elemento #wizard no encontrado.');
+        console.error('Elemento #wizard o contenedor .controls no encontrado.');
     }
 });

@@ -37,7 +37,7 @@ function calcularAccesorios({ automatizado, altura }) {
     precioAccesorios += 115270;
   }
 
-  if (altura < 1.7) {
+  if (altura >= 1.5) {
     accesorios.push({ nombre: "Tanque de prellenado", precio: 114148 });
     precioAccesorios += 114148;
   }

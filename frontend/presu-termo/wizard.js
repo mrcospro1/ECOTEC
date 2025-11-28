@@ -244,7 +244,7 @@ class Wizard {
 
     const calculoRuta = "/presupuesto-termotanques/calculo"
     // Enviar al servidor Node
-    fetch(`http://localhost:3000${calculoRuta}`, {
+    fetch(`${hostUrl}${calculoRuta}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -457,6 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //   console.log(`Panel activo: ${wizard.panels.panels[wizard.currentStep].id}`);
   // });
 });
+
 
 
 

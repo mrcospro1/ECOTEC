@@ -1,4 +1,4 @@
-const prisma=require('../prismaModulo')
+const prisma=require('../prismaModulo.js')
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');

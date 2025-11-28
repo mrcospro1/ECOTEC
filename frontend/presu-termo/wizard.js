@@ -213,7 +213,7 @@ class Wizard {
 
     const calculoRuta = "/presupuesto-termotanques/calculo"
     // Enviar al servidor Node
-    fetch(`${hostUrl}${calculoRura}`, {
+    fetch(`${hostUrl}${calculoRuta}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)

@@ -52,6 +52,32 @@ class Steps {
     this.steps.forEach(stepEl => stepEl.classList.add('-completed'));
   }
 }
+function mostrarResumen(datos) {
+    const cont = document.getElementById("resultado-resumen");
+
+    cont.innerHTML = `
+        <h5 class="mb-3 fw-bold">${datos.modelo}</h5>
+
+        <p><strong>Precio base:</strong> $${datos.precioBase}</p>
+
+        <p><strong>Accesorios:</strong></p>
+        <ul>
+            ${datos.accesorios.map(a => `
+                <li>${a.nombre}: $${a.precio}</li>
+            `).join("")}
+        </ul>
+
+        <p><strong>Precio accesorios:</strong> $${datos.precioAccesorios}</p>
+        <p><strong>Total final:</strong> <span class="fw-bold">$${datos.precioFinal}</span></p>
+
+        <hr>
+
+        <p><strong>Personas:</strong> ${datos.datosGuardados.personas}</p>
+        <p><strong>Tipo de agua:</strong> ${datos.datosGuardados.agua}</p>
+        <p><strong>Automatizado:</strong> ${datos.datosGuardados.automatizado ? "Sí" : "No"}</p>
+        <p><strong>Altura:</strong> ${datos.datosGuardados.altura} m</p>
+    `;
+}
 
 // ===============================
 // Clase Panels (control de panels y animaciones)
@@ -213,14 +239,14 @@ class Wizard {
 
     const calculoRuta = "/presupuesto-termotanques/calculo"
     // Enviar al servidor Node
-    fetch(`http://localhost:3000${calculoRuta}`, {
+    fetch(`${hostUrl}${calculoRuta}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     })
       .then(res => res.json())
       .then(data => {
-        document.getElementById("resultado").innerText = JSON.stringify(data);
+        mostrarResumen(data);
       })
       .catch(err => {
         console.error('Error al enviar los datos:', err);

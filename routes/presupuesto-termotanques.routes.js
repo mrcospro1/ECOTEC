@@ -11,7 +11,8 @@ router.use(cors({
 
 
 function seleccionarModelo(personas, agua) {
-  if (agua === "red") {
+  // Tanque y Red => mismos modelos atmosféricos
+  if (agua === "red" || agua === "tanque") {
     if (personas <= 2) return { modelo: "ATMS 100 RI", precio: 696900 };
     if (personas <= 3) return { modelo: "ATMS 150 RI", precio: 830500 };
     if (personas <= 4) return { modelo: "ATMS 200 RI", precio: 939280 };
@@ -19,7 +20,8 @@ function seleccionarModelo(personas, agua) {
     return { modelo: "ATMS 400 RI", precio: 1521025 };
   }
 
-  if (agua === "bombeado") {
+  // Bomba presurizadora
+  if (agua === "bomba") {
     return { modelo: "PRE-200 RI", precio: 1373765 };
   }
 
@@ -30,13 +32,11 @@ function calcularAccesorios({ automatizado, altura }) {
   let accesorios = [];
   let precioAccesorios = 0;
 
-  // Automatización = TK-8
   if (automatizado) {
     accesorios.push({ nombre: "Control TK-8", precio: 115270 });
     precioAccesorios += 115270;
   }
 
-  // Tanque de prellenado si altura < 1.7m
   if (altura < 1.7) {
     accesorios.push({ nombre: "Tanque de prellenado", precio: 114148 });
     precioAccesorios += 114148;
@@ -44,9 +44,6 @@ function calcularAccesorios({ automatizado, altura }) {
 
   return { accesorios, precioAccesorios };
 }
-router.get("/", (req, res) => {
-  res.send("OK");
-});
 
 router.post("/calculo", async (req, res) => {
   try {
@@ -56,19 +53,15 @@ router.post("/calculo", async (req, res) => {
     altura = parseFloat(altura);
     automatizado = automatizado === true || automatizado === "true";
 
-    // 1. Modelo y precio base
     const modelo = seleccionarModelo(personas, agua);
 
-    // 2. Accesorios según reglas
     const { accesorios, precioAccesorios } = calcularAccesorios({
       automatizado,
-      altura
+      altura,
     });
 
-    // 3. Precio final
     const precioFinal = modelo.precio + precioAccesorios;
 
-    // 4. Guardar en DB
     const nuevo = await prisma.presupuestoTermotanques.create({
       data: { personas, agua, automatizado, altura },
     });

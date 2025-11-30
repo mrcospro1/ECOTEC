@@ -39,7 +39,7 @@ function calcularAccesorios({ automatizado, altura, agua }) { // Se incluye 'agu
 
   // Solo aplicar la lógica de altura si el tipo de agua es 'tanque'.
   // La red de agua ('red') no requiere el tanque de prellenado, aunque la altura sea 0.
-  if (agua === "tanque" && altura < 1.7) {
+  if (agua === "tanque" && altura >= 1.5) {
     accesorios.push({ nombre: "Tanque de prellenado", precio: 114148 });
     precioAccesorios += 114148;
   }

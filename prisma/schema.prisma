@@ -26,9 +26,10 @@ model PresupuestoTermotanques {
   id                Int      @id @default(autoincrement())
   personas          Int
   agua              String
-  automatizado      Boolean
   altura            Float    @default(0)
   fechaCreacion     DateTime @default(now())
+
+  // <--- Estos 4 campos deben estar DEFINIDOS en tu archivo local --->
   modeloElegido     String
   precioBase        Float   
   precioAccesorios  Float    

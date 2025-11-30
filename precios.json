@@ -29,7 +29,6 @@
       "precio_base": 950000.00
     }
   ],
-
   "accesorios": {
     "tk8_automatizacion": {
       "nombre": "Controlador Automático TK8",
@@ -52,7 +51,6 @@
       "tipo": "universal"
     }
   },
-  
   "precios_adicionales": {
     "kit_altura_atmosferico": 25000.00,
     "precio_metro_adicional_altura": 10000.00 

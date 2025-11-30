@@ -23,10 +23,15 @@ model Consulta {
   fecha    DateTime @default(now())
 }
 model PresupuestoTermotanques {
-  id           Int     @id @default(autoincrement())
-  personas     Int
-  agua         String
-  automatizado Boolean
-  altura       Float
+  id                Int      @id @default(autoincrement())
+  personas          Int
+  agua              String
+  automatizado      Boolean
+  altura            Float    @default(0)
+  fechaCreacion     DateTime @default(now())
+  modeloElegido     String
+  precioBase        Float   
+  precioAccesorios  Float    
+  precioFinal       Float    
 }
 

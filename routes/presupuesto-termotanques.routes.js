@@ -6,7 +6,7 @@ const cors = require('cors');
 
 // Importar la base de datos de precios desde el archivo JSON
 // Ajusta la ruta si es necesario (ej: require('./prices.json') si está en la misma carpeta)
-const dataBase = require('./prices.json'); 
+const dataBase = require('../precios.json'); 
 
 // ======================================
 // Configuración de CORS

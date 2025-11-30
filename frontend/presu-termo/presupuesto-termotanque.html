@@ -12,73 +12,10 @@
 </head>
 
 <body>
-    <div id="loader">
-        <img src="logo-carga.png" alt="Logo Ecotec" class="loader-logo">
-        <div class="spinner"></div>
-    </div>
-
-    <header>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand fw-bold logo-empresa d-flex align-items-center" href="../../index.html">
-                    <img src="Logos-Ecotec.png" alt="Icono Ecotec" class="logo-icono me-2">
-                    <div class="logo-texto d-flex flex-column hover-underline">
-                        <span class="logo-ecotec">ECOTEC</span>
-                        <span class="logo-alternativas">ALTERNATIVAS</span>
-                    </div>
-                </a>
-                <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="../proyectos/proyectos.html">Proyectos</a>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="../servicios/servicios.html"
-                                role="button">Servicios</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item"
-                                        href="../energia-fotovoltaica/energia fotovoltaica.html">Energía
-                                        fotovoltaica</a></li>
-                                <li><a class="dropdown-item"
-                                        href="../energia-convencional/energia convencional.html">Energía
-                                        convencional</a></li>
-                                <li><a class="dropdown-item"
-                                        href="../termotanques-solares/termotanques solares.html">Termotanques
-                                        solares</a>
-                                </li>
-                                <li><a class="dropdown-item"
-                                        href="../climatizacion-solar/climatizacion solar.html">Climatización solar</a>
-                                </li>
-                                <li><a class="dropdown-item"
-                                        href="../luminarias-solares/luminarias solares.html">Luminarias solares</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="../nuestra-historia/Nuestra historia.html">Nuestra Historia</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-cta ms-2" href="../formularios/consulta.html">Contáctanos</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
     <main>
         <div class="container d-flex justify-content-center align-items-center vh-100 flex-column">
 
-
-            <h1 class="text-center mb-4 card-title-main">
-                Presupuesto
-            </h1>
+            <h1 class="text-center mb-4 card-title-main">Presupuesto</h1>
             <h2 class="card-title-main">termotanques solares</h2>
 
             <div id="wizard" class="card custom-wizard-container">
@@ -109,10 +46,12 @@
                                     required>
                                 <label class="form-check-label" for="bomba">Bomba Presurizadora</label>
                             </div>
+
                             <div class="form-check custom-radio-label mb-3" data-target-panel="panel-atmosferico-auto">
                                 <input class="form-check-input" type="radio" name="agua" id="red" value="red">
                                 <label class="form-check-label" for="red">Red de Agua</label>
                             </div>
+
                             <div class="form-check custom-radio-label mb-3" data-target-panel="panel-tanque-altura">
                                 <input class="form-check-input" type="radio" name="agua" id="tanque" value="tanque">
                                 <label class="form-check-label" for="tanque">Tanque de Agua</label>
@@ -120,19 +59,26 @@
                         </form>
                     </div>
 
+                    <div class="panel card-body p-4" id="panel-tanque-altura">
+                        <h2 class="text-center mb-4">Altura de su tanque de agua</h2>
+                        <form id="form-altura" data-target-panel="panel-atmosferico-auto">
+                            <label for="altura-input" class="form-label">Altura respecto al techo (m)</label>
+                            <input type="number" step="0.1" class="form-control" name="altura" id="altura-input"
+                                required>
+                        </form>
+                    </div>
+
                     <div class="panel card-body p-4" id="panel-presurizado-auto">
-                        <h2 class="text-center mb-4">¿Desea su termotanque solar automatizado?</h2>
+                        <h2 class="text-center mb-4">¿Desea su termotanque solar automatizado? (Presurizado)</h2>
                         <p class="text-center">El TK8 es un controlador automático que regula el nivel y la temperatura
                             del agua en el termotanque solar.</p>
                         <form id="form-presurizado-auto">
-                            <div class="form-check custom-radio-label mb-3"
-                                data-target-panel="panel-resultado-final">
+                            <div class="form-check custom-radio-label mb-3" data-target-panel="panel-resultado-final">
                                 <input class="form-check-input" type="radio" name="automatizado" id="auto-p-si"
                                     value="si" required>
                                 <label class="form-check-label" for="auto-p-si">Sí</label>
                             </div>
-                            <div class="form-check custom-radio-label mb-3"
-                                data-target-panel="panel-resultado-final">
+                            <div class="form-check custom-radio-label mb-3" data-target-panel="panel-resultado-final">
                                 <input class="form-check-input" type="radio" name="automatizado" id="auto-p-no"
                                     value="no">
                                 <label class="form-check-label" for="auto-p-no">No</label>
@@ -140,28 +86,17 @@
                         </form>
                     </div>
 
-                    <div class="panel card-body p-4" id="panel-tanque-altura">
-                        <h2 class="text-center mb-4">Altura de su tanque de agua</h2>
-                        <form id="form-altura">
-                            <label for="altura-input" class="form-label">Altura (en metros) del tanque respecto al techo</label>
-                            <input type="number" step="0.1" class="form-control" name="altura" id="altura-input"
-                                required>
-                        </form>
-                        </div>
-
                     <div class="panel card-body p-4" id="panel-atmosferico-auto">
-                        <h2 class="text-center mb-4">¿Desea su termotanque solar automatizado?</h2>
+                        <h2 class="text-center mb-4">¿Desea su termotanque solar automatizado? (Atmosférico)</h2>
                         <p class="text-center">El TK8 es un controlador automático que regula el nivel y la temperatura
                             del agua en el termotanque solar.</p>
                         <form id="form-atmosferico-auto">
-                            <div class="form-check custom-radio-label mb-3"
-                                data-target-panel="panel-resultado-final">
+                            <div class="form-check custom-radio-label mb-3" data-target-panel="panel-resultado-final">
                                 <input class="form-check-input" type="radio" name="automatizado" id="auto-a-si"
                                     value="si" required>
                                 <label class="form-check-label" for="auto-a-si">Sí</label>
                             </div>
-                            <div class="form-check custom-radio-label mb-3"
-                                data-target-panel="panel-resultado-final">
+                            <div class="form-check custom-radio-label mb-3" data-target-panel="panel-resultado-final">
                                 <input class="form-check-input" type="radio" name="automatizado" id="auto-a-no"
                                     value="no">
                                 <label class="form-check-label" for="auto-a-no">No</label>
@@ -171,10 +106,9 @@
 
                     <div class="panel card-body p-4" id="panel-resultado-final">
                         <h2 class="text-center mb-4">Resumen de Configuración</h2>
-                        
-                        <div class="resumen-preliminar-container border rounded p-3 mb-4"
-                            style="background: #e9ecef; border-color: #ced4da;">
-                            <p class="text-muted">Cargando resumen preliminar...</p>
+
+                        <div class="resumen-preliminar-container mb-4">
+                            <p class="text-muted">Cargando resumen...</p>
                         </div>
 
                         <h3 class="text-center mb-4">Resultado del Presupuesto:</h3>
@@ -183,7 +117,6 @@
                             style="background: #fafafa; border-color: var(--color-border);">
                             <p class="text-muted">Presiona **Confirmar** para obtener el cálculo final.</p>
                         </div>
-
                     </div>
 
                 </div>

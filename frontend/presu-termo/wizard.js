@@ -1,12 +1,14 @@
-// wizard.js - versión completa y corregida
-// IMPORTANTE: Asegúrate de tener la variable window.ENV.HOST definida en config.js
+// wizard.js - versión completa y final
+
+// ===============================
+// Variables y Configuración
+// ===============================
+// Asegúrate de que window.ENV.HOST esté definido en tu config.js
+const hostUrl = window.ENV.HOST; 
 
 // ===============================
 // Clase Steps (indicadores arriba)
 // ===============================
-// Usar una variable segura para el host
-const hostUrl = window.ENV ? window.ENV.HOST : 'http://localhost:3000/calculo'; 
-
 class Steps {
     constructor(wizard) {
         this.wizard = wizard;
@@ -33,93 +35,133 @@ class Steps {
             panelId === 'panel-tanque-altura' ||
             panelId === 'panel-atmosferico-auto'
         ) return 2;
-        // Cualquier resumen -> paso lógico 3
-        if (panelId && panelId.startsWith('panel-resultado-final')) return 3;
-        
+        // El resumen final -> paso lógico 3
+        if (panelId === 'panel-resultado-final') return 3;
         return 0;
     }
 
-    updateStepsState(panelId) {
+    // Marca los pasos 0..logicalIndex como completados y apaga los siguientes
+    updateVisual(panelId) {
         const logicalIndex = this.panelIdToLogicalIndex(panelId);
-        this.setCurrentStep(logicalIndex);
-
-        this.steps.forEach((step, index) => {
-            step.classList.remove('-completed');
-            step.classList.remove('-active');
-
-            if (index < logicalIndex) {
-                step.classList.add('-completed');
-            } else if (index === logicalIndex) {
-                step.classList.add('-active');
+        this.steps.forEach((stepEl, idx) => {
+            if (idx <= logicalIndex) {
+                stepEl.classList.add('-completed');
+            } else {
+                stepEl.classList.remove('-completed');
             }
         });
     }
 
-    // Marca todos los pasos como completados para la vista de resumen final
-    completeAllSteps() {
-        this.steps.forEach(step => {
-            step.classList.remove('-active');
-            step.classList.add('-completed');
-        });
+    // Enciende todos los steps (usado al confirmar)
+    completeAll() {
+        this.steps.forEach(stepEl => stepEl.classList.add('-completed'));
     }
 }
 
 // ===============================
-// Clase Panels (contenedores de contenido)
+// Función para mostrar el resultado final
+// ===============================
+function mostrarResumen(datos) {
+    const cont = document.getElementById("resultado-resumen");
+    
+    // Traducir el booleano guardado a texto para mostrar
+    const automatizadoTexto = datos.datosGuardados.automatizado ? "Sí" : "No";
+    const alturaM = datos.datosGuardados.altura > 0 ? `${datos.datosGuardados.altura} m` : 'No aplica';
+
+    cont.innerHTML = `
+        <h5 class="mb-3 fw-bold text-success">${datos.modelo}</h5>
+
+        <p><strong>Precio base:</strong> $${datos.precioBase.toLocaleString('es-AR')}</p>
+
+        <p><strong>Accesorios:</strong></p>
+        <ul class="list-unstyled">
+            ${datos.accesorios.map(a => `
+                <li>&bull; ${a.nombre}: $${a.precio.toLocaleString('es-AR')}</li>
+            `).join("")}
+        </ul>
+
+        <p><strong>Precio accesorios:</strong> $${datos.precioAccesorios.toLocaleString('es-AR')}</p>
+        <h4 class="mt-4"><strong>Total final:</strong> <span class="fw-bold text-primary">$${datos.precioFinal.toLocaleString('es-AR')}</span></h4>
+
+        <hr>
+
+        <p class="text-muted small-text">Detalles de la configuración:</p>
+        <ul class="list-unstyled small-text">
+            <li><strong>Personas:</strong> ${datos.datosGuardados.personas}</li>
+            <li><strong>Tipo de agua:</strong> ${datos.datosGuardados.agua}</li>
+            <li><strong>Automatizado:</strong> ${automatizadoTexto}</li>
+            <li><strong>Altura:</strong> ${alturaM}</li>
+        </ul>
+    `;
+}
+
+// ===============================
+// Clase Panels (control de panels y animaciones + ALTURA DINÁMICA)
 // ===============================
 class Panels {
     constructor(wizard) {
         this.wizard = wizard;
-        this.panelsContainer = this.wizard.wizardElement.querySelector('.panels');
-        // Asegúrate de que los paneles sean los hijos del contenedor con la clase .panel
-        this.panels = Array.from(this.panelsContainer.querySelectorAll('.panel')); 
+        this.panelsContainer = this.getPanelsContainer();
+        this.panels = this.getPanels();
         this.currentStep = 0;
         
-        // Inicializa la altura al tamaño del primer panel
+        // Inicializacion: dejar el primer panel visible y ajustar altura
+        this.updatePanelsPosition(this.currentStep);
         this.updatePanelsContainerHeight(); 
     }
 
-    setCurrentStep(index) {
-        if (index >= 0 && index < this.panels.length) {
-            this.currentStep = index;
-            return true;
-        }
-        return false;
+    getPanelsContainer() {
+        return this.wizard.querySelector('.panels');
+    }
+
+    getPanels() {
+        return Array.from(this.wizard.getElementsByClassName('panel'));
     }
 
     getCurrentPanelHeight() {
         const p = this.panels[this.currentStep];
-        // Usar scrollHeight para asegurar que se toma la altura completa del contenido
+        // Usamos scrollHeight para obtener la altura real de todo el contenido, incluyendo el padding/margin internos.
         return p ? `${p.scrollHeight}px` : '0px'; 
     }
 
     updatePanelsContainerHeight() {
+        // Usamos requestAnimationFrame para asegurar que el DOM esté renderizado antes de medir
         window.requestAnimationFrame(() => {
             if (this.panelsContainer) {
                 this.panelsContainer.style.height = this.getCurrentPanelHeight();
             }
         });
     }
-    
+
+    // Actualiza clases para animación entre panels
     updatePanelsPosition(currentStep) {
-        const panelsWidth = 100 / this.panels.length;
-        const offset = -currentStep * panelsWidth;
+        const panels = this.panels;
+        const prevStep = panels.findIndex(panel => panel.classList.contains('movingIn'));
 
-        this.panelsContainer.style.transform = `translateX(${offset}%)`;
+        // Limpiar clases de animación
+        panels.forEach(panel => panel.classList.remove('movingIn', 'movingOutBackward', 'movingOutFoward'));
 
-        // Transiciones de entrada/salida para el panel actual y el anterior
-        this.panels.forEach((panel, index) => {
-            panel.classList.remove('movingIn', 'movingOut');
-            // Usamos un pequeño truco para la clase 'movingOut'
-            if (index === currentStep) {
-                panel.classList.add('movingIn');
-            } else if (index === this.wizard.currentStepHistory[this.wizard.currentStepHistory.length - 2]) {
-                panel.classList.add('movingOut');
+        // Asegurar que el panel actual entre
+        if (panels[currentStep]) {
+            panels[currentStep].classList.add('movingIn');
+        }
+
+        // Si había un panel anterior distinto, marcar su salida según dirección
+        if (prevStep !== -1 && prevStep !== currentStep) {
+            if (currentStep > prevStep) {
+                panels[prevStep].classList.add('movingOutFoward');
+            } else {
+                panels[prevStep].classList.add('movingOutBackward');
             }
-        });
+        }
 
-        // Llamar a la actualización de altura después de la transición
-        this.updatePanelsContainerHeight();
+        this.updatePanelsContainerHeight(); // Llama a la actualización de altura tras la animación
+    }
+
+    setCurrentStep(currentStep) {
+        if (currentStep < 0 || currentStep >= this.panels.length) return;
+        this.currentStep = currentStep;
+        this.updatePanelsPosition(currentStep);
     }
 }
 
@@ -127,213 +169,146 @@ class Panels {
 // Clase Wizard (lógica principal)
 // ===============================
 class Wizard {
-    // 🔑 CORRECCIÓN: Ahora acepta los botones como parámetros
-    constructor(wizardElement, nextButton, prevButton) { 
-        this.wizardElement = wizardElement;
-        this.steps = new Steps(wizardElement);
-        this.panels = new Panels(this); 
-        this.currentStep = 0; 
-        this.currentPanelId = this.panels.panels[0].id; 
-        this.currentStepHistory = [0]; 
-        
-        // 🔑 Guardar las referencias a los botones (para evitar el error de null)
-        this.nextButton = nextButton;
-        this.prevButton = prevButton; 
-        
-        this.handleInitialState();
+    constructor(wizardElement) {
+        this.wizard = wizardElement;
+        this.panels = new Panels(this.wizard);
+        this.steps = new Steps(this.wizard);
 
-        // Llamada corregida
-        this.panels.updatePanelsPosition(this.currentStep);
+        this.previousControl = document.querySelector('.previous');
+        this.nextControl = document.querySelector('.next');
+
+        // bind de métodos para mantener el contexto 'this'
+        this.previousControlMoveStepMethod = this.moveStep.bind(this, -1);
+        this.nextControlMoveStepMethod = this.moveStep.bind(this, 1);
+        this.concludeControlMoveStepMethod = this.handleConcludeStep.bind(this);
+        this.wizardConclusionMethod = this.handleWizardConclusion.bind(this);
+
+        this.currentStep = 0;
+        this.steps.setCurrentStep(this.currentStep);
+        this.panels.setCurrentStep(this.currentStep);
+
+        this.addControls(this.previousControl, this.nextControl);
+
+        this.steps.updateVisual(this.panels.panels[this.currentStep].id);
+        this.handleNextStepButton();
+        this.updateButtonsStatus();
     }
 
-    handleInitialState() {
-        this.updateButtons();
-        this.steps.updateStepsState(this.currentPanelId);
+    addControls(previousControl, nextControl) {
+        this.previousControl = previousControl;
+        this.nextControl = nextControl;
+
+        previousControl.addEventListener('click', this.previousControlMoveStepMethod);
+        // Inicialmente, solo escuchamos el avance normal
+        nextControl.addEventListener('click', this.nextControlMoveStepMethod);
+
+        this.updateButtonsStatus();
     }
 
-    updateButtons() {
-        const nextButton = this.nextButton;
-        const prevButton = this.prevButton;
-        
-        // 🔑 Solución al TypeError: prevButton no puede ser null aquí
-        if (prevButton) {
-            // El botón 'Anterior' se oculta en el primer paso (lógico)
-            prevButton.style.display = (this.steps.currentStep === 0) ? 'none' : 'block';
-        }
-
-        if (nextButton) {
-            // El botón 'Siguiente' cambia de texto en el paso de resumen
-            if (this.currentPanelId === 'panel-resultado-final') {
-                nextButton.textContent = 'Confirmar';
-            } else {
-                nextButton.textContent = 'Siguiente';
-            }
-        }
-    }
-    
-    // Recoge datos de todos los formularios
-    collectFormData() {
-        const data = {};
-        const forms = this.wizardElement.querySelectorAll('form');
-        
-        forms.forEach(form => {
-            const formData = new FormData(form);
-            for (let [key, value] of formData.entries()) {
-                if (key === 'automatizado') {
-                    data[key] = (value === 'si'); // Convertir 'si'/'no' a booleano
-                } else if (value !== '') {
-                    data[key] = value;
-                }
-            }
-        });
-        
-        // Asegura que 'altura' tenga un valor si se saltó el panel
-        if (data.agua === 'red' || data.agua === 'bomba') {
-            data.altura = data.altura || 0;
-        }
-
-        return data;
-    }
-
-    // Actualiza el resumen preliminar
-    updateResumen() {
-        const data = this.collectFormData(); 
-
-        // Traducir 'agua' a un texto legible para el usuario
-        let tipoAguaTexto = data.agua;
-        if (data.agua === 'tanque') tipoAguaTexto = 'Tanque (Atmosférico)';
-        else if (data.agua === 'red') tipoAguaTexto = 'Red (Atmosférico)';
-        else if (data.agua === 'bomba') tipoAguaTexto = 'Bomba (Presurizado)';
-
-        // Traducir 'automatizado' a un texto legible
-        const automatizadoTexto = data.automatizado === true ? 'Sí (Incluye Control TK-8)' : (data.automatizado === false ? 'No' : '-');
-        
-        // Obtener el panel donde se muestra el resumen preliminar
-        const resumenPanel = document.getElementById('panel-resultado-final'); 
-        if (!resumenPanel) return;
-        
-        // Mostrar el resumen preliminar
-        let contenidoHTML;
-
-        if (data.agua === 'bomba') {
-            // Resumen para flujo Presurizado
-            contenidoHTML = `
-                <h5 class="mb-3 fw-bold">Configuración Presurizada</h5>
-                <ul>
-                    <li><strong>Personas:</strong> ${data.personas || '-'}</li>
-                    <li><strong>Tipo de Agua:</strong> ${tipoAguaTexto}</li>
-                    <li><strong>Automatizado:</strong> ${automatizadoTexto}</li>
-                </ul>
-            `;
+    updateButtonsStatus() {
+        // Desactivar "Anterior" en el primer panel
+        if (this.currentStep === 0) {
+            this.previousControl.setAttribute('disabled', 'true');
         } else {
-            // Resumen para flujo Atmosférico/Red/Tanque
-            // Solo mostramos la altura si se seleccionó Tanque, de lo contrario 'N/A'.
-            const alturaDisplay = data.agua === 'tanque' && data.altura > 0 ? `${data.altura} m` : 'No aplica (Red o Altura Suficiente)';
-
-            contenidoHTML = `
-                <h5 class="mb-3 fw-bold">Configuración Atmosférica</h5>
-                <ul>
-                    <li><strong>Personas:</strong> ${data.personas || '-'}</li>
-                    <li><strong>Tipo de Agua:</strong> ${tipoAguaTexto}</li>
-                    <li><strong>Altura tanque:</strong> ${alturaDisplay}</li>
-                    <li><strong>Automatizado:</strong> ${automatizadoTexto}</li>
-                </ul>
-            `;
+            this.previousControl.removeAttribute('disabled');
         }
-        
-        // Limpiar el contenido de resultado-resumen y mostrar el resumen preliminar
-        document.getElementById('resultado-resumen').innerHTML = `<p class="text-muted">Presiona **Confirmar** para calcular el presupuesto.</p>`;
-        resumenPanel.querySelector('.resumen-preliminar-container').innerHTML = contenidoHTML;
     }
-    
-    // Llama al API, recibe el resultado y lo muestra
-    async handleWizardConclusion() {
-        const finalData = this.collectFormData();
-        const resultadoDiv = document.getElementById('resultado-resumen');
-        
-        resultadoDiv.innerHTML = `<p class="text-center text-primary fw-bold">Calculando presupuesto...</p>`;
 
-        try {
-            const response = await fetch(hostUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(finalData)
-            });
+    // Maneja el texto y los listeners del botón "Siguiente" / "Confirmar"
+    handleNextStepButton() {
+        const currentPanelID = this.panels.panels[this.currentStep]?.id || '';
+        const isSummaryPanel = currentPanelID === 'panel-resultado-final';
 
-            if (!response.ok) {
-                throw new Error(`Error en el servidor: ${response.statusText}`);
-            }
+        // Limpiar listeners previos para evitar duplicados
+        this.nextControl.removeEventListener('click', this.nextControlMoveStepMethod);
+        this.nextControl.removeEventListener('click', this.wizardConclusionMethod);
 
-            const result = await response.json();
-            
-            // Construir la tabla de accesorios
-            let accesoriosHtml = '<tr><td colspan="2" class="text-muted text-start">Ningún accesorio adicional requerido.</td></tr>';
-            if (result.accesorios && result.accesorios.length > 0) {
-                accesoriosHtml = result.accesorios.map(acc => `
-                    <tr>
-                        <td class="text-start">${acc.nombre}</td>
-                        <td class="text-end">$${acc.precio.toLocaleString('es-AR')}</td>
-                    </tr>
-                `).join('');
-            }
-            
-            // Mostrar resultado final
-            resultadoDiv.innerHTML = `
-                <h5 class="text-center fw-bold">Modelo Sugerido: ${result.modelo}</h5>
-                <p class="text-center mb-4">Precio Base: $${result.precioBase.toLocaleString('es-AR')}</p>
-
-                <table class="table table-sm table-striped">
-                    <thead>
-                        <tr>
-                            <th colspan="2" class="text-center">Accesorios</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${accesoriosHtml}
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td class="fw-bold text-start">Subtotal Accesorios:</td>
-                            <td class="fw-bold text-end">$${result.precioAccesorios.toLocaleString('es-AR')}</td>
-                        </tr>
-                    </tfoot>
-                </table>
-
-                <h4 class="text-center mt-4">Precio Final Estimado:</h4>
-                <h3 class="text-center text-success fw-bold">$${result.precioFinal.toLocaleString('es-AR')}</h3>
-            `;
-            
-        } catch (error) {
-            console.error('Error al calcular presupuesto:', error);
-            resultadoDiv.innerHTML = `<p class="text-danger text-center fw-bold">Error al obtener presupuesto. Intente más tarde.</p>`;
+        if (isSummaryPanel) {
+            this.nextControl.innerHTML = 'Confirmar!';
+            // Al hacer click, ejecuta la lógica de conclusión
+            this.nextControl.addEventListener('click', this.wizardConclusionMethod);
+        } else {
+            this.nextControl.innerHTML = 'Siguiente';
+            this.nextControl.addEventListener('click', this.nextControlMoveStepMethod);
         }
+    }
+
+    // Se ejecuta al confirmar (marcar paso concluido - compatibilidad)
+    handleConcludeStep() {
+        this.steps.completeAll();
+    }
+
+    // Llama al backend y muestra el resultado
+    handleWizardConclusion() {
+        this.nextControl.setAttribute('disabled', 'true'); // Desactivar botón mientras carga
+
+        // Recolectar datos del wizard
+        const data = this.collectFormData();
+        
+        // Marcar todos los pasos como completados
+        this.steps.completeAll();
+        
+        const calculoRuta = "/presupuesto-termotanques/calculo"
+        
+        // Mensaje de carga
+        document.getElementById("resultado-resumen").innerHTML = `<p class="text-info">Calculando presupuesto, espere por favor...</p>`;
+        this.panels.updatePanelsContainerHeight(); 
+
+        // Enviar al servidor Node
+        fetch(`${hostUrl}${calculoRuta}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+            .then(res => {
+                 if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            })
+            .then(data => {
+                mostrarResumen(data);
+                // Ajustar altura del panel final después de cargar el contenido
+                this.panels.updatePanelsContainerHeight(); 
+            })
+            .catch(err => {
+                console.error('Error al enviar los datos:', err);
+                document.getElementById("resultado-resumen").innerHTML = `<p class="text-danger">Error: No se pudo conectar con el servidor o el cálculo falló. ${err.message}</p>`;
+                this.panels.updatePanelsContainerHeight();
+            })
+            .finally(() => {
+                this.nextControl.removeAttribute('disabled'); // Reactivar botón
+            });
+    }
+
+    // Actualiza el estado cuando avanzás o retrocedes por índices (suma o resta 1)
+    updateCurrentStepByIndex(newIndex) {
+        if (newIndex < 0 || newIndex >= this.panels.panels.length) return;
+        this.currentStep = newIndex;
+        this.steps.setCurrentStep(this.currentStep);
+        this.panels.setCurrentStep(this.currentStep);
+        this.steps.updateVisual(this.panels.panels[this.currentStep].id);
+        this.handleNextStepButton();
+        this.updateButtonsStatus();
     }
 
     // movement: -1 (atrás) o 1 (adelante con branching)
     moveStep(movement) {
+        // RETROCEDER: simplemente disminuye índice si es posible
+        if (movement < 0) {
+            if (this.currentStep > 0) {
+                this.updateCurrentStepByIndex(this.currentStep - 1);
+            }
+            return;
+        }
+
+        // AVANZAR (ramificado)
         const currentPanelElement = this.panels.panels[this.currentStep];
         if (!currentPanelElement) return;
         const currentPanelID = currentPanelElement.id;
         let nextPanelID = null;
 
-        // 1) Lógica de Retroceso
-        if (movement < 0) {
-            if (this.currentStepHistory.length > 1) {
-                this.currentStepHistory.pop(); // Elimina el paso actual
-                const newStepIndex = this.currentStepHistory[this.currentStepHistory.length - 1]; // Recupera el anterior
-                this.currentPanelId = this.panels.panels[newStepIndex].id;
-                this.currentStep = newStepIndex;
-                this.panels.setCurrentStep(this.currentStep);
-                this.panels.updatePanelsPosition(this.currentStep);
-                this.steps.updateStepsState(this.currentPanelId);
-                this.updateButtons();
-            }
-            return;
-        }
-
-        // 2) Lógica de Avance
-        
-        // Validación del formulario del panel actual (si existe)
+        // 1) Validación del formulario del panel actual (si existe)
         const currentForm = currentPanelElement.querySelector('form');
         if (currentForm && !currentForm.checkValidity()) {
             alert('Por favor, completa los campos requeridos.');
@@ -341,83 +316,147 @@ class Wizard {
             return;
         }
 
-        // Lógica ramificada (Branching)
+        // Si ya estamos en el resumen final y pulsamos Siguiente (que es Confirmar)
+        if (currentPanelID === 'panel-resultado-final') {
+            // Este caso es manejado por handleWizardConclusion, pero prevenimos un doble avance
+            return;
+        }
+        
+        // 2) Lógica ramificada según el panel actual
         if (currentPanelID === 'panel-personas') {
             nextPanelID = 'panel-agua';
         } else if (currentPanelID === 'panel-agua') {
+            // Buscar la opción seleccionada y su target
             const selectedOption = currentPanelElement.querySelector('input[name="agua"]:checked');
-            if (!selectedOption) return; 
-            
-            // Obtener el data-target-panel
-            nextPanelID = selectedOption.closest('[data-target-panel]')?.dataset.targetPanel;
-            
-        } else if (currentPanelID === 'panel-tanque-altura') {
-            // Flujo Tanque: Altura -> Atmosférico Auto
-            nextPanelID = 'panel-atmosferico-auto';
-        } else if (currentPanelID === 'panel-presurizado-auto' || currentPanelID === 'panel-atmosferico-auto') {
-            // Flujo Presurizado o Atmosférico: Auto -> Resumen Final
-            nextPanelID = 'panel-resultado-final'; 
-        } 
-        
-        // Caso final: Estamos en el resumen y presionamos "Confirmar"
-        if (currentPanelID === 'panel-resultado-final') {
-            this.steps.completeAllSteps(); // Estética final
-            this.handleWizardConclusion(); // Llama al API
-            return;
-        }
-
-        // 3) Navegar al siguiente panel
-        if (nextPanelID) {
-            const nextPanelIndex = this.panels.panels.findIndex(p => p.id === nextPanelID);
-            
-            if (nextPanelIndex !== -1) {
-                // Si el siguiente panel es el resumen final, primero actualizamos el contenido visual
-                if (nextPanelID === 'panel-resultado-final') {
-                    this.updateResumen();
-                }
-
-                this.currentStep = nextPanelIndex;
-                this.currentPanelId = nextPanelID;
-                this.panels.setCurrentStep(this.currentStep);
-                this.panels.updatePanelsPosition(this.currentStep);
-                this.steps.updateStepsState(this.currentPanelId);
-                this.currentStepHistory.push(this.currentStep); // Guarda el nuevo paso en el historial
-                this.updateButtons();
-            } else {
-                console.error(`No se encontró el panel con id "${nextPanelID}"`);
+            if (!selectedOption) {
+                alert('Por favor, selecciona una opción de agua.');
+                return;
             }
+            // Usa el data-target-panel definido en el HTML (manejando el salto de altura para 'red')
+            // Busca el data-target-panel en el contenedor padre del input, que es donde lo pusimos.
+            nextPanelID = selectedOption.closest('[data-target-panel]')?.dataset.targetPanel;
+            if (!nextPanelID) {
+                console.error('No se encontró data-target-panel para la opción seleccionada.');
+                return;
+            }
+        } else if (currentPanelID === 'panel-tanque-altura') {
+            nextPanelID = 'panel-atmosferico-auto'; // Después de Altura, siempre vamos a Automatización Atmosférica
+        } else if (currentPanelID === 'panel-presurizado-auto' || currentPanelID === 'panel-atmosferico-auto') {
+            // Ambos flujos de automatización van al resumen final
+            nextPanelID = 'panel-resultado-final';
         }
+        
+        // Si el siguiente panel es el resumen final, previsualizamos los datos ANTES de navegar
+        if (nextPanelID === 'panel-resultado-final') {
+            this.updateResumen();
+        }
+
+        // 3) Si determinamos nextPanelID, ubicamos su índice en panels y navegamos
+        if (nextPanelID) {
+            const panelsArray = this.panels.panels;
+            const newStepIndex = panelsArray.findIndex(panel => panel.id === nextPanelID);
+
+            if (newStepIndex !== -1) {
+                this.currentStep = newStepIndex;
+                this.steps.setCurrentStep(this.currentStep);
+                this.panels.setCurrentStep(this.currentStep);
+                this.steps.updateVisual(this.panels.panels[this.currentStep].id);
+                this.handleNextStepButton();
+                this.updateButtonsStatus();
+            } else {
+                console.warn(`No se encontró el panel con id "${nextPanelID}"`);
+            }
+        } else {
+            console.warn(`No hay regla de navegación para el panel "${currentPanelID}"`);
+        }
+    }
+    
+    // ===============================
+    // Captura y muestra de datos
+    // ===============================
+    collectFormData() {
+        const personas = document.querySelector('#form-personas input[name="personas"]')?.value || '';
+        const agua = document.querySelector('#form-agua input[name="agua"]:checked')?.value || '';
+        
+        // Buscar automatizado en AMBOS formularios (solo uno estará marcado)
+        let automatizado = document.querySelector('#form-presurizado-auto input[name="automatizado"]:checked')?.value;
+        if (!automatizado) {
+            automatizado = document.querySelector('#form-atmosferico-auto input[name="automatizado"]:checked')?.value;
+        }
+        // Convertir 'si'/'no' a booleano, o cadena vacía si no se encontró
+        automatizado = automatizado === 'si' ? true : (automatizado === 'no' ? false : '');
+
+        // Altura: si el formulario de altura no fue visitado, se envía '0'.
+        const altura = document.querySelector('#form-altura input[name="altura"]')?.value || '0'; 
+        
+        return { personas, agua, automatizado, altura: parseFloat(altura) };
+    }
+
+    updateResumen() {
+        const data = this.collectFormData(); 
+
+        // Traducir 'agua' a un texto legible para el usuario
+        let tipoAguaTexto = data.agua;
+        if (data.agua === 'tanque') tipoAguaTexto = 'Tanque (Atmosférico)';
+        else if (data.agua === 'red') tipoAguaTexto = 'Red de Agua (Atmosférico)';
+        else if (data.agua === 'bomba') tipoAguaTexto = 'Bomba Presurizadora (Presurizado)';
+
+        // Traducir 'automatizado' a un texto legible
+        const automatizadoTexto = data.automatizado === true ? 'Sí' : (data.automatizado === false ? 'No' : '-');
+        
+        // Obtener el contenedor para la previsualización
+        const resumenContainer = document.querySelector('#panel-resultado-final .resumen-preliminar-container');
+        if (!resumenContainer) return;
+        
+        let contenidoHTML;
+
+        // Se usa data.agua para determinar si el campo de Altura debe aparecer en el resumen preliminar
+        if (data.agua === 'bomba') {
+            // Resumen para flujo Presurizado
+            contenidoHTML = `
+                <h5 class="mb-3 fw-bold">Configuración Presurizada</h5>
+                <ul>
+                    <li><strong>Personas:</strong> ${data.personas || '-'}</li>
+                    <li><strong>Tipo:</strong> ${tipoAguaTexto}</li>
+                    <li><strong>Automatizado:</strong> ${automatizadoTexto}</li>
+                </ul>
+            `;
+        } else {
+            // Resumen para flujo Atmosférico/Red
+            contenidoHTML = `
+                <h5 class="mb-3 fw-bold">Configuración Atmosférica</h5>
+                <ul>
+                    <li><strong>Personas:</strong> ${data.personas || '-'}</li>
+                    <li><strong>Tipo:</strong> ${tipoAguaTexto}</li>
+                    ${data.agua === 'tanque' ? `<li><strong>Altura tanque:</strong> ${data.altura || 0} m</li>` : ''}
+                    <li><strong>Automatizado:</strong> ${automatizadoTexto}</li>
+                </ul>
+            `;
+        }
+        
+        // Mostrar el resumen preliminar
+        resumenContainer.innerHTML = contenidoHTML;
+        
+        // Limpiar el resultado final (por si el usuario retrocedió)
+        document.getElementById('resultado-resumen').innerHTML = `<p class="text-muted">Presiona **Confirmar** para obtener el cálculo final.</p>`;
+        
+        this.panels.updatePanelsContainerHeight(); // Asegura que la altura se ajuste al nuevo contenido
     }
 }
 
 // ===============================
-// Inicialización
+// INICIALIZACIÓN al DOM cargado
 // ===============================
 document.addEventListener('DOMContentLoaded', () => {
     const wizardElement = document.getElementById('wizard');
-    const controlsContainer = wizardElement ? wizardElement.nextElementSibling : null; // Asume que .controls está justo después de #wizard
-
-    if (wizardElement && controlsContainer && controlsContainer.classList.contains('controls')) {
-        
-        // 🔑 Solución al error de TypeError: Seleccionar los botones fuera del #wizard
-        const nextButton = controlsContainer.querySelector('.next');
-        const prevButton = controlsContainer.querySelector('.previous');
-
-        // 🔑 Pasar los botones al constructor del Wizard
-        const wizard = new Wizard(wizardElement, nextButton, prevButton); 
-
-        if (nextButton) {
-            nextButton.addEventListener('click', () => wizard.moveStep(1));
-        }
-
-        if (prevButton) {
-            prevButton.addEventListener('click', () => wizard.moveStep(-1));
-        }
-
-        // Manejo de resize para la altura dinámica
-        window.addEventListener('resize', () => wizard.panels.updatePanelsContainerHeight());
-
-    } else {
-        console.error('Elemento #wizard o contenedor .controls no encontrado.');
+    if (!wizardElement) {
+        console.error('No se encontró el elemento #wizard en el DOM.');
+        return;
     }
+
+    // Crear instancia del Wizard
+    const wizard = new Wizard(wizardElement);
+
+    // Respeta re-dimension cuando cambie tamaño de la ventana
+    window.addEventListener('resize', () => wizard.panels.updatePanelsContainerHeight());
 });

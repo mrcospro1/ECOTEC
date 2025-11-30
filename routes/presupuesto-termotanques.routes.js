@@ -28,12 +28,7 @@ function seleccionarModelo(personas, agua) {
   throw new Error("Tipo de agua inválido");
 }
 
-/**
- * Calcula los accesorios necesarios (Control TK-8 y Tanque de Prellenado).
- * El Tanque de Prellenado solo se añade si es 'tanque' Y la altura es < 1.7m.
- * Para 'red' o 'bomba', la altura no importa para este accesorio.
- */
-function calcularAccesorios({ automatizado, altura, agua }) { // Se recibe 'agua'
+function calcularAccesorios({ automatizado, altura, agua }) { // Se incluye 'agua' para la lógica
   let accesorios = [];
   let precioAccesorios = 0;
 
@@ -41,17 +36,13 @@ function calcularAccesorios({ automatizado, altura, agua }) { // Se recibe 'agua
     accesorios.push({ nombre: "Control TK-8", precio: 115270 });
     precioAccesorios += 115270;
   }
-  
-  // 🔑 CORRECCIÓN DE LÓGICA: 
-  // El Tanque de prellenado se necesita solo para 'tanque' si la altura es baja.
-  // La condición anterior (agua === "red" || agua === "tanque") estaba mal.
-  // Queremos: SOLO si es 'tanque' Y altura es menor a 1.7.
+
+  // Solo aplicar la lógica de altura si el tipo de agua es 'tanque'.
+  // La red de agua ('red') no requiere el tanque de prellenado, aunque la altura sea 0.
   if (agua === "tanque" && altura < 1.7) {
     accesorios.push({ nombre: "Tanque de prellenado", precio: 114148 });
     precioAccesorios += 114148;
   }
-  // NOTA: Si la altura de tanque debe ser >= 1.7m, la condición debe ser: altura < 1.7.
-  // Usé 1.7m ya que es el estándar común.
 
   return { accesorios, precioAccesorios };
 }
@@ -61,19 +52,21 @@ router.post("/calculo", async (req, res) => {
     let { personas, agua, automatizado, altura } = req.body;
 
     personas = parseInt(personas);
-    altura = parseFloat(altura) || 0; 
-    automatizado = automatizado === true || automatizado === "true";
+    altura = parseFloat(altura);
+    // Aseguramos que 'automatizado' es booleano para el cálculo y guardado
+    automatizado = automatizado === true || automatizado === "true"; 
 
     const modelo = seleccionarModelo(personas, agua);
 
     const { accesorios, precioAccesorios } = calcularAccesorios({
       automatizado,
       altura,
-      agua, // <-- ¡Añadido!
+      agua, // Se pasa 'agua' a la función de accesorios
     });
 
     const precioFinal = modelo.precio + precioAccesorios;
 
+    // Se asume que 'prisma.presupuestoTermotanques' existe y es correcto
     const nuevo = await prisma.presupuestoTermotanques.create({
       data: { personas, agua, automatizado, altura },
     });
@@ -89,7 +82,7 @@ router.post("/calculo", async (req, res) => {
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error en el servidor" });
+    res.status(500).json({ error: "Error en el servidor", detalle: error.message });
   }
 });
 

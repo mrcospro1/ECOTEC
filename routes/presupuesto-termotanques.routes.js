@@ -4,7 +4,7 @@ const router = express.Router();
 const cors = require('cors');
 
 // Importar la base de datos de precios desde el archivo JSON
-const dataBase = require('../precios.js'); 
+const dataBase = require('../precios.json'); 
 
 // Configuración de CORS
 

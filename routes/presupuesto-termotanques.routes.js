@@ -5,8 +5,8 @@ const router = express.Router();
 const cors = require('cors');
 
 // Importar la base de datos de precios desde el archivo JSON
-// Ajusta la ruta si es necesario (ej: require('./prices.json') si está en la misma carpeta)
-const dataBase = require('../precios.json'); 
+// ¡Asegúrate de que la ruta sea correcta!
+const dataBase = require('./prices.json'); 
 
 // ======================================
 // Configuración de CORS
@@ -18,66 +18,67 @@ router.use(cors({
 }));
 
 // ======================================
-// Lógica de Modelo (Consulta prices.json)
+// Lógica de Modelo (Fortalecida contra errores de precio)
 // ======================================
 function seleccionarModelo(personas, agua) {
     let modelos = dataBase.modelos_termotanques;
     let modeloSeleccionado = null;
 
     if (agua === "bomba") {
-        // Asumimos que hay un modelo presurizado específico para 'bomba'
+        // Buscar el modelo presurizado por nombre (PRE-200) o tipo
         modeloSeleccionado = modelos.find(m => m.modelo.includes("PRE-200"));
         
+        // --- SOLUCIÓN CLAVE PARA EL ERROR NaN ---
+        // Si no se encuentra en el JSON, devolvemos un valor conocido (fallback)
         if (!modeloSeleccionado) {
-            // Fallback para el modelo presurizado si no está en la lista JSON
-            return { modelo: "PRE-200 RI", precio_base: 1373765 }; 
+            // Precio conocido del modelo presurizado si no está en el JSON
+            return { modelo: "PRE-200 RI", precio: 1373765.00 }; 
         }
         
     } else if (agua === "red" || agua === "tanque") {
-        // Tanque y Red => modelos atmosféricos (ATMS)
+        // Modelos atmosféricos (ATMS o TS)
         modeloSeleccionado = modelos.find(m => 
             personas >= m.personas_min && personas <= m.personas_max
         );
     }
     
+    // Si se encontró el modelo o se usó el fallback, devolvemos el objeto
     if (modeloSeleccionado) {
+        // Aseguramos que el precio base sea un número antes de devolverlo
+        const precioBase = parseFloat(modeloSeleccionado.precio_base) || 0;
         return { 
             modelo: modeloSeleccionado.modelo, 
-            precio: modeloSeleccionado.precio_base // Usamos 'precio' como clave de retorno
+            precio: precioBase 
         };
     }
 
-    // Caso de capacidad no encontrada
-    return { modelo: "Capacidad no estándar", precio: 0 };
+    // Si no se encuentra NINGÚN modelo (capacidad > 9 personas)
+    return { modelo: "Capacidad no estándar", precio: 0.00 };
 }
 
 // ======================================
-// Lógica de Accesorios (Consulta prices.json)
+// Lógica de Accesorios
 // ======================================
 function calcularAccesorios({ automatizado, altura, agua }) { 
     let accesorios = [];
-    let precioAccesorios = 0;
+    let precioAccesorios = 0.00;
     const preciosAdicionales = dataBase.precios_adicionales;
     const accDataBase = dataBase.accesorios;
 
     // 1. Controlador Automático (TK-8)
     if (automatizado) {
         const tk8 = accDataBase.tk8_automatizacion;
-        precioAccesorios += tk8.precio;
+        precioAccesorios += parseFloat(tk8.precio) || 0;
         accesorios.push({ nombre: tk8.nombre, precio: tk8.precio });
     }
 
     // 2. Kit/Tanque de Altura (Solo si es Tanque de Agua)
-    if (agua === "tanque" && altura > 0.5) {
-        const kitBasePrecio = preciosAdicionales.kit_altura_atmosferico || 0;
-        const precioMetroAdicional = preciosAdicionales.precio_metro_adicional_altura || 0;
+    if (agua === "tanque" && altura > 0) {
+        const kitBasePrecio = parseFloat(preciosAdicionales.kit_altura_atmosferico) || 0;
+        const precioMetroAdicional = parseFloat(preciosAdicionales.precio_metro_adicional_altura) || 0;
 
-        let costoTotalAltura = 0;
+        let costoTotalAltura = kitBasePrecio; 
         
-        // Asumimos que el kit base (kit_altura_atmosferico) cubre el primer metro (o es el tanque de prellenado)
-        costoTotalAltura += kitBasePrecio;
-        
-        // Calcular metros adicionales por encima de 1 metro
         const metrosAdicionales = Math.max(0, altura - 1); 
         const costoAdicional = metrosAdicionales * precioMetroAdicional;
         
@@ -100,12 +101,11 @@ router.post("/calculo", async (req, res) => {
   try {
     let { personas, agua, automatizado, altura } = req.body;
 
-    // Asegurar tipos de datos correctos para el cálculo y Prisma
+    // 1. Asegurar tipos de datos correctos
     personas = parseInt(personas) || 1;
     altura = parseFloat(altura) || 0.0;
-    automatizado = automatizado === true || automatizado === "true"; // Asegura booleano
+    automatizado = automatizado === true || automatizado === "true"; 
 
-    // 1. Validaciones básicas
     if (!['red', 'tanque', 'bomba'].includes(agua)) {
          return res.status(400).json({ error: "Tipo de agua inválido." });
     }
@@ -118,21 +118,27 @@ router.post("/calculo", async (req, res) => {
       agua,
     });
 
-    const precioFinal = modelo.precio + precioAccesorios;
+    // --- PUNTO DE CONTROL DE NaN (Solución Adicional) ---
+    // Aunque la función seleccionarModelo fue corregida, siempre aseguramos que los precios sean Float válidos
+    const precioBase = parseFloat(modelo.precio) || 0.00;
+    const precioTotalAccesorios = parseFloat(precioAccesorios) || 0.00;
 
-    // 3. Preparar el objeto para Prisma (Debe COINCIDIR con el schema)
+    const precioFinal = precioBase + precioTotalAccesorios;
+
+    // 3. Preparar el objeto para Prisma (Debe COINCIDIR con tu schema)
     const prismaData = {
         personas, 
         agua, 
         automatizado, 
         altura,
-        modeloElegido: modelo.modelo, // <--- CAMPO NUEVO
-        precioBase: modelo.precio,   // <--- CAMPO NUEVO
-        precioAccesorios: precioAccesorios, // <--- CAMPO NUEVO
-        precioFinal: precioFinal        // <--- CAMPO NUEVO
+        modeloElegido: modelo.modelo, 
+        precioBase: precioBase,   
+        precioAccesorios: precioTotalAccesorios, 
+        precioFinal: precioFinal        
     };
     
     // 4. Guardar en la BD
+    // Esto funcionará ahora que los precios son números válidos (no NaN) y las columnas existen en la BD.
     const nuevo = await prisma.presupuestoTermotanques.create({
       data: prismaData,
     });
@@ -140,21 +146,16 @@ router.post("/calculo", async (req, res) => {
     // 5. Devolver el resultado al cliente
     return res.json({
       modelo: modelo.modelo,
-      precioBase: modelo.precio,
+      precioBase: precioBase,
       accesorios,
-      precioAccesorios,
-      precioFinal,
+      precioAccesorios: precioTotalAccesorios,
+      precioFinal: precioFinal,
       datosGuardados: nuevo, 
     });
 
   } catch (error) {
     console.error("Error al procesar el cálculo:", error);
-    // En caso de un error de lógica de modelo, devolvemos 404/400
-    if (error.message.includes('No se encontró un modelo')) {
-         return res.status(404).json({ error: error.message });
-    }
-    // Para otros errores (conexión DB, etc.)
-    res.status(500).json({ error: "Error interno del servidor.", detalle: error.message });
+    res.status(500).json({ error: "Error interno del servidor al calcular el presupuesto.", detalle: error.message });
   }
 });
 
